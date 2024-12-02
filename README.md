@@ -23,25 +23,6 @@ Button styling with ease. This package offers pre-configured options to change t
 
 ---
 
-## Code 
-
-### Description  
-
-Short description.
-
-### Options  
-
-1. Shape: round | square (Default: square)
-2. Style: flat | 3d. (Default: flat)
-3. Width: px | % | em | rem | vw (Default: 100%)
-4. Height: px | % | em | rem | vh (Default: 50px)
-5. Fill Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: red to green gradient)
-6. Theme: See [theme list](#themes). (Default: none)
-
-### Examples  
-
----
-
 ## Meters 
 
 ### Description  
