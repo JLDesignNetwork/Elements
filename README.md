@@ -1,4 +1,4 @@
-# <span style="font-variant:small-caps;text-align:center;display:block;color:#444;text-decoration:underline rgb(189,0,1);text-shadow:0 1px 1px #111,0 2px 2px #222,0 3px 3px #333;font-size:150%;font-family:'Consolas',serif">JLDN : <span style="color:rgb(189,0,1);text-decoration:unset;">Elements</span></span>
+# <span style="font-variant:small-caps;text-align:center;display:block;color:#444;text-decoration:underline rgb(189,0,1);text-shadow:0 0.25px #333,0 1px 1px rgb(40,40,40),0 2px 2px rgb(35,35,35),0 3px 3px rgb(20,20,20);font-size:150%;font-family:'Consolas',serif">JLDN : <span style="color:rgb(189,0,1);text-decoration:unset;">Elements</span></span>
 
 Short introduction.
 
