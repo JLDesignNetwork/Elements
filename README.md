@@ -1,12 +1,12 @@
 # JLDN : Elements
 
-Short introduction.
+JLDN : Elements is a plugin package for rendering and styling customized elements. This package consists of CSS and jquery. The jquery script reads the content of your html file, looking for specific class attributes in your HTML tags.  It then re-writes the source code to render stylish elements using package provided CSS style rules.
 
 ## Buttons
 
 ### Description
 
-Short description.
+Button styling with ease. This package offers pre-configured options to change the style of your buttons, with endless possibilities. Buttons can be created with either a 'div' tag or a 'button' tag. You must include `class="button"` in your HTML tag.
 
 ### Options
 
@@ -17,7 +17,9 @@ Short description.
 5. Fill Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: red to green gradient)
 6. Theme: See [theme list](#themes). (Default: none)
 
-### Examples  
+### Examples
+
+1. Default: `<div id="b1" class="button" data-options:'{}'></div>` | `<button id="b2" class="button" data-options:'{}'></button>`
 
 ---
 
@@ -61,7 +63,7 @@ Short description.
 
 ### Examples  
 
-1. Default: `<div id="m1" data-options:'{}'></div>`
+1. Default: `<div id="m1" class="meter" data-options:'{}'></div>`
 
 ---
 
