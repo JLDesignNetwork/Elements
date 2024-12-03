@@ -108,3 +108,15 @@ Meter code example:
 1. Halloween
 1. Easter
 1. 4th of July
+
+### Todo
+
+- [ ] Add images of element examples
+- [ ] Code javascript (jQuery)
+- [ ] Code css (SASS)
+- [ ] Add license information
+- [ ] Add meta information
+- [ ] Setup GitHub IO page
+- [ ] Make repository public
+- [ ] Create additional themes
+- [ ] Create pre-configured elements for ease of use
