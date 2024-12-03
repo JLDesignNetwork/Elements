@@ -14,14 +14,17 @@ Button styling with ease. This package offers pre-configured options to change t
 > [!IMPORTANT]
 > Buttons must contain a `class="button"` attribute.
 
+> [!WARNING]
+> Each button must have its own unique identifier. Without this your buttons will not work as expected.
+
 ### Options
 
-1. Shape: round | square (Default: square)
-1. Style: flat | 3d. (Default: flat)
-1. Width: px | % | em | rem | vw (Default: 100%)
-1. Height: px | % | em | rem | vh (Default: 50px)
-1. Fill Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: red to green gradient)
-1. Theme: See [theme list](#themes). (Default: none)
+1. Shape: round | square (Default: square) `data-options='{"shape":"square"}'`
+1. Style: flat | 3d. (Default: flat) `data-options='{"style":"3d"}'`
+1. Width: px | % | em | rem | vw (Default: 100%) `data-options='{"width":"250px"}'`
+1. Height: px | % | em | rem | vh (Default: 50px) `data-options='{"height":"50px"}'`
+1. Fill Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: red to green gradient) `data-options='{"fill-color":"linear-gradient(90deg, red, orange, yellow, lime, green)"}'`
+1. Theme: See [theme list](#themes). (Default: none) `data-options='{"theme":"Christmas"}'`
 
 ### Examples
 
@@ -38,18 +41,23 @@ Custom alternative to the standard HTML meter and progress bar. These meters off
 > [!IMPORTANT]
 > Meters can only be created with a div tag and must contain a `class="meter"` attribute.
 
-### Options  
+> [!WARNING]
+> Each meter must have its own unique identifier. Without this your meters will not work as expected.
 
-1. Shape: round | square (Default: square)
-1. Style: flat | 3d. (Default: flat)
-1. Width: px | % | em | rem | vw (Default: 100%)
-1. Height: px | % | em | rem | vh (Default: 50px)
-1. Fill Size: 0%...`100% (Default: 100%)
-1. Fill Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: red to green gradient)
-1. Reveal Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: red)
-1. Animation Speed: slow | normal | fast (Default: null)
-1. Candystripe Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: transparent)
-1. Theme: See [theme list](#themes). (Default: null)
+### Options
+
+The following list of options are used to configure the meter. They are included in the `data-options` attribute.
+
+1. Shape: round | square (Default: square) `data-options='{"shape":"square"}'`
+1. Style: flat | 3d. (Default: flat) `data-options='{"style":"flat"}'`
+1. Width: px | % | em | rem | vw (Default: 100%) `data-options='{"width":"100%"}'`
+1. Height: px | % | em | rem | vh (Default: 50px) `data-options='{"height":"50px"}'`
+1. Fill Size: 0%...`100% (Default: 100%) `data-options='{"fill-size":"100%"}'`
+1. Fill Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: red to green gradient)`data-options='{"fill-color":"linear-gradient(90deg, red, orange, yellow, lime, green)"}'`
+1. Reveal Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: red) `data-options='{"reveal-color":"red"}'`
+1. Animation Speed: slow | normal | fast (Default: null) `data-options='{"animation-speed":"normal"}'`
+1. Candystripe Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: transparent) `data-options='{"candystripe-color":"transparent"}'`
+1. Theme: See [theme list](#themes). (Default: null) `data-options='{"theme":null}'`
 
 ### Examples  
 
@@ -76,7 +84,23 @@ Custom alternative to the standard HTML meter and progress bar. These meters off
   <script defer type="text/javascript" src="src/script.js"></script>
   ```
 
-### Usage  
+### Usage 
+After including this package into your document, simply include the elements that you want to use.
+
+Button code example:
+```html
+<!-- button format 1 -->
+<button id='b1' class='button' data-options='{}'>
+
+<!-- button format 2 -->
+<div id='b2' class='button' data-options='{}'>
+```
+
+Meter code example:
+```html
+<!-- meter format -->
+<div id='m1' class='meter' data-options='{}'>
+```
 
 ### Built-in Themes
 
