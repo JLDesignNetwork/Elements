@@ -24,6 +24,7 @@ Button styling with ease. This package offers pre-configured options to change t
 1. Width: px | % | em | rem | vw (Default: 100%) `data-options='{"width":"250px"}'`
 1. Height: px | % | em | rem | vh (Default: 50px) `data-options='{"height":"50px"}'`
 1. Fill Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: red to green gradient) `data-options='{"fill-color":"linear-gradient(90deg, red, orange, yellow, lime, green)"}'`
+1. Candystripe Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: transparent) `data-options='{"candystripe-color":"transparent"}'`
 1. Theme: See [theme list](#themes). (Default: none) `data-options='{"theme":"Christmas"}'`
 
 ### Examples
