@@ -1,0 +1,645 @@
+// JLDN : Elements Styling System
+// Multi-Layer Component Styling Architecture
+
+@use 'themes' as *
+
+
+// Default system tokens
+:root
+  --jldn-default-bg-color: #1e293b
+  --jldn-default-fill-color: linear-gradient(90deg, #ef4444, #f97316, #eab308, #22c55e)
+  --jldn-default-stripe-speed: 1.5s
+  --jldn-default-stripe-angle: 45deg
+  --jldn-default-stripe-color: rgba(255, 255, 255, 0.25)
+  --jldn-default-font-color: #ffffff
+  
+  // Custom 3D Shadow Colors
+  --jldn-btn-3d-shadow: #0f172a
+  --jldn-meter-3d-shadow: #0f172a
+  --jldn-code-3d-shadow: #080c16
+  --jldn-alert-3d-shadow: #080c16
+  --jldn-popup-3d-shadow: #080c16
+
+@keyframes stripes-move
+  from
+    background-position: 0 0
+  to
+    background-position: 40px 0
+
+// ==========================================
+// BASE STYLING (LAYER 1: BACKGROUND / CONTAINER)
+// ==========================================
+.jldn-button, .jldn-meter
+  box-sizing: border-box
+  display: inline-flex
+  position: relative
+  overflow: hidden
+  outline: none
+  border: none
+  padding: 0
+  user-select: none
+  
+  // Custom properties defaults
+  width: var(--jldn-width, auto)
+  height: var(--jldn-height, 50px)
+  background: var(--jldn-fill-color, var(--jldn-default-fill-color))
+  box-shadow: var(--jldn-shadow, none)
+  border-radius: var(--jldn-border-radius, 4px)
+  background-clip: padding-box
+
+  // Shape rules using data attributes
+  &[data-shape="round"]
+    --jldn-border-radius: 9999px
+  &[data-shape="square"]
+    --jldn-border-radius: 4px
+
+  // Flat vs 3D styles
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease, box-shadow 0.15s ease
+  
+  // 3D Style (Thicker solid extruded 3D shadow)
+  &[data-style="3d"]
+    background: var(--jldn-fill-color, var(--jldn-default-fill-color))
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25), var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 6px) 0 0 var(--jldn-btn-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 10px) 8px -4px rgba(0, 0, 0, 0.5)
+    transform: translateY(-4px)
+    
+    // Outer border/highlight
+    &::before
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      border-radius: inherit
+      box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.25)
+      pointer-events: none
+      z-index: 5
+
+    &:hover
+      filter: brightness(1.08)
+      transform: translateY(-6px)
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25), calc(var(--jldn-shadow-x, 0px) * 1.33) calc(var(--jldn-shadow-y, 6px) * 1.33) 0 0 var(--jldn-btn-3d-shadow), calc(var(--jldn-drop-shadow-x, 0px) * 1.4) calc(var(--jldn-drop-shadow-y, 10px) * 1.4) 10px -3px rgba(0, 0, 0, 0.55)
+
+    &:active
+      transform: translateY(1px)
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25), calc(var(--jldn-shadow-x, 0px) * 0.16) calc(var(--jldn-shadow-y, 6px) * 0.16) 0 0 var(--jldn-btn-3d-shadow), calc(var(--jldn-drop-shadow-x, 0px) * 0.2) calc(var(--jldn-drop-shadow-y, 10px) * 0.2) 3px -1px rgba(0, 0, 0, 0.45)
+      &::before
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15)
+
+// Button layout adjustments
+.jldn-button
+  cursor: pointer
+  min-width: 120px
+  
+  &:hover
+    filter: brightness(1.1)
+  &:active
+    transform: scale(0.98)
+
+// Meter layout adjustments
+.jldn-meter
+  display: flex
+  width: var(--jldn-width, 100%)
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), var(--jldn-shadow, none)
+  
+  &[data-style="3d"]
+    background: var(--jldn-fill-color, var(--jldn-default-fill-color))
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(0,0,0,0.3), var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 5px) 0 0 var(--jldn-meter-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 8px) 8px -4px rgba(0, 0, 0, 0.45)
+    transform: translateY(-3px)
+
+// ==========================================
+// LAYER 2: FILL
+// ==========================================
+.jldn-fill
+  display: flex
+  align-items: center
+  width: var(--jldn-fill-size, 100%)
+  height: 100%
+  background: transparent
+  border-radius: inherit
+  position: relative
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15)
+  // Transition duration uses the custom property directly
+  transition: width var(--jldn-animation-speed, var(--jldn-transition-duration, 1.2s)) cubic-bezier(0.4, 0, 0.2, 1)
+
+  // Universal Convex Overlay
+  &::after
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.12) 25%, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0.45) 100%)
+    pointer-events: none
+    z-index: 3
+    border-radius: inherit
+    display: none
+
+    .jldn-button[data-style="3d"] &, .jldn-meter[data-style="3d"] &
+      display: block
+
+  // 3D fill style details
+  .jldn-meter[data-style="3d"] &
+    box-shadow: inset 0 -4px 0 rgba(0,0,0,0.25), inset 0 3px 0 rgba(255,255,255,0.2)
+
+.jldn-unfill
+  height: calc(100% + 2px)
+  background: var(--jldn-reveal-color, var(--jldn-bar-color, var(--jldn-bg-color, var(--jldn-default-bg-color))))
+  position: absolute
+  top: -1px
+  bottom: -1px
+  right: -1px
+  left: calc(var(--jldn-fill-size, 100%) - 1px)
+  z-index: 1
+  transition: left var(--jldn-animation-speed, var(--jldn-transition-duration, 1.2s)) cubic-bezier(0.4, 0, 0.2, 1)
+
+// ==========================================
+// LAYER 3: CANDYSTRIPES
+// ==========================================
+.jldn-stripes
+  display: none
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background-image: linear-gradient(var(--jldn-stripe-angle, var(--jldn-default-stripe-angle)), var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 25%, var(--jldn-stripe-accent, transparent) 25%, var(--jldn-stripe-accent, transparent) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 75%, var(--jldn-stripe-accent, transparent) 75%, var(--jldn-stripe-accent, transparent))
+  background-size: 40px 40px
+  border-radius: inherit
+  opacity: 0.8
+  z-index: 2
+  pointer-events: none
+
+  // Display stripes when candystripe-color is set or element has theme
+  [style*="--jldn-candystripe-color"] &, [data-theme] &
+    display: block
+
+  // Animation speed mapping
+  animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
+
+// ==========================================
+// LAYER 4: TEXT (ABSOLUTELY CENTERED)
+// ==========================================
+.jldn-text
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  display: flex
+  align-items: center
+  justify-content: center
+  z-index: 10
+  font-family: inherit
+  font-weight: 600
+  font-size: var(--jldn-font-size, 1rem)
+  color: var(--jldn-font-color, var(--jldn-default-font-color))
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 0 2px rgba(0, 0, 0, 0.95), 0 0 5px rgba(0, 0, 0, 0.8)
+  pointer-events: none // click pass-through
+  white-space: nowrap
+
+// ==========================================
+// CODE ELEMENTS (.jldn-code)
+// ==========================================
+code.jldn-code
+  box-sizing: border-box
+  display: block
+  position: relative
+  overflow: hidden
+  margin: 1.5rem 0
+  
+  // Base configuration (Layer 1)
+  width: var(--jldn-width, 100%)
+  height: var(--jldn-height, auto)
+  background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, #384252))) // outer border/base color
+  padding: var(--jldn-border-width, 2px) // spacing acting as border thickness
+  box-shadow: var(--jldn-shadow, none)
+  
+  // Shapes
+  border-radius: var(--jldn-border-radius, 8px) // default rounded
+  &[data-shape="rounded"]
+    --jldn-border-radius: 8px
+  &[data-shape="square"]
+    --jldn-border-radius: 0px
+
+  // Flat vs 3D styles
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s ease
+
+  &[data-style="3d"]
+    box-shadow: var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 6px) 0 0 var(--jldn-code-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 10px) 12px -3px rgba(0, 0, 0, 0.45)
+    transform: translateY(-4px)
+
+    &:hover
+      transform: translateY(-5px)
+      box-shadow: calc(var(--jldn-shadow-x, 0px) * 1.16) calc(var(--jldn-shadow-y, 6px) * 1.16) 0 0 var(--jldn-code-3d-shadow), calc(var(--jldn-drop-shadow-x, 0px) * 1.2) calc(var(--jldn-drop-shadow-y, 10px) * 1.2) 16px -2px rgba(0, 0, 0, 0.5)
+
+  // Candystripes Layer (Layer 2)
+  .jldn-code-stripes
+    display: none
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-image: linear-gradient(var(--jldn-stripe-angle, var(--jldn-default-stripe-angle)), var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 25%, var(--jldn-stripe-accent, transparent) 25%, var(--jldn-stripe-accent, transparent) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 75%, var(--jldn-stripe-accent, transparent) 75%, var(--jldn-stripe-accent, transparent))
+    background-size: 40px 40px
+    border-radius: inherit
+    opacity: 0.5
+    z-index: 2
+    pointer-events: none
+    animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
+
+  &[style*="--jldn-candystripe-color"] .jldn-code-stripes, &[data-theme] .jldn-code-stripes
+    display: block
+
+  // Snippet Content Container (Layer 3)
+  .jldn-code-snippet
+    background: #0f172a
+    border-radius: inherit
+    position: relative
+    z-index: 5
+    width: 100%
+    height: 100%
+    box-sizing: border-box
+    padding: 1.2rem
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5)
+    overflow-x: auto
+
+    &::after
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0.03) 75%, rgba(255, 255, 255, 0) 100%)
+      pointer-events: none
+      z-index: 1
+      border-radius: inherit
+      display: none
+
+    @at-root code.jldn-code[data-style="3d"] .jldn-code-snippet::after
+      display: block
+
+    .jldn-code-pre
+      position: relative
+      z-index: 2
+      margin: 0
+      padding: 0
+      list-style: none
+      line-height: 1.6
+
+    // Alternate Line Styling
+    .jldn-code-line
+      display: flex
+      flex-direction: row
+      align-items: stretch
+      min-height: 1.6rem
+      padding: 0 0.5rem
+
+      &:nth-child(even)
+        background: color-mix(in srgb, var(--jldn-candystripe-color, #38bdf8) 7%, transparent)
+
+      // Line Numbers
+      .jldn-code-ln
+        display: inline-block
+        width: 2.5rem
+        flex-shrink: 0
+        box-sizing: border-box
+        text-align: right
+        padding-right: 0.8rem
+        color: #475569
+        border-right: 1px solid rgba(255, 255, 255, 0.08)
+        margin-right: 0.8rem
+        font-family: monospace
+        font-size: 0.9rem
+        user-select: none
+
+      // Code content text
+      .jldn-code-txt
+        font-family: 'Courier New', Courier, monospace
+        font-size: 0.95rem
+        color: #e2e8f0
+        white-space: pre-wrap
+        flex-grow: 1
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9)
+
+    // Copy Button inside code container
+    .jldn-code-copy
+      position: absolute
+      z-index: 10
+      top: 10px
+      right: 10px
+      background: rgba(255, 255, 255, 0.08)
+      color: #94a3b8
+      border: 1px solid rgba(255, 255, 255, 0.1)
+      border-radius: 4px
+      padding: 0.25rem 0.6rem
+      font-size: 0.75rem
+      font-weight: 600
+      cursor: pointer
+      transition: all 0.2s ease
+      outline: none
+
+      &:hover
+        background: rgba(255, 255, 255, 0.15)
+        color: #f1f5f9
+        border-color: rgba(255, 255, 255, 0.2)
+
+      &:active
+        transform: scale(0.96)
+
+// ==========================================
+// 3-LAYER ALERT ELEMENTS (.jldn-alert)
+// ==========================================
+.jldn-alert
+  box-sizing: border-box
+  display: block
+  position: relative
+  overflow: hidden
+  margin-bottom: 1.25rem
+  
+  // Base Container (Layer 1)
+  width: var(--jldn-width, 100%)
+  height: var(--jldn-height, auto)
+  padding: 0
+  box-shadow: var(--jldn-shadow, none)
+  
+  // Default Border Background color mappings by type
+  background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, #3b82f6)))
+  &[data-type="success"]
+    --default-accent: #10b981
+    background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, var(--default-accent))))
+  &[data-type="error"]
+    --default-accent: #ef4444
+    background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, var(--default-accent))))
+  &[data-type="warning"]
+    --default-accent: #f59e0b
+    background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, var(--default-accent))))
+  &[data-type="info"]
+    --default-accent: #3b82f6
+    background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, var(--default-accent))))
+
+  // Shapes
+  border-radius: var(--jldn-border-radius, 8px)
+  &[data-shape="rounded"]
+    --jldn-border-radius: 8px
+  &[data-shape="square"]
+    --jldn-border-radius: 0px
+
+  // Flat vs 3D styles
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s ease
+  
+  &[data-style="3d"]
+    box-shadow: var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 6px) 0 0 var(--jldn-alert-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 10px) 12px -3px rgba(0, 0, 0, 0.35)
+    transform: translateY(-4px)
+    
+    &:hover
+      transform: translateY(-5px)
+      box-shadow: calc(var(--jldn-shadow-x, 0px) * 1.16) calc(var(--jldn-shadow-y, 6px) * 1.16) 0 0 var(--jldn-alert-3d-shadow), calc(var(--jldn-drop-shadow-x, 0px) * 1.2) calc(var(--jldn-drop-shadow-y, 10px) * 1.2) 16px -2px rgba(0, 0, 0, 0.4)
+
+  // Candystripes Layer (Layer 2)
+  .jldn-alert-stripes
+    display: none
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-image: linear-gradient(var(--jldn-stripe-angle, var(--jldn-default-stripe-angle)), var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 25%, var(--jldn-stripe-accent, transparent) 25%, var(--jldn-stripe-accent, transparent) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 75%, var(--jldn-stripe-accent, transparent) 75%, var(--jldn-stripe-accent, transparent))
+    background-size: 40px 40px
+    border-radius: inherit
+    opacity: 0.5
+    z-index: 2
+    pointer-events: none
+    animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
+
+  &[style*="--jldn-candystripe-color"] .jldn-alert-stripes, &[data-theme] .jldn-alert-stripes, [style*="--jldn-candystripe-color"] .jldn-alert-stripes, [data-theme] .jldn-alert-stripes
+    display: block
+
+  // Content Area Layer (Layer 3)
+  .jldn-alert-content
+    display: flex
+    align-items: center
+    background: rgba(30, 41, 59, 0.95)
+    border-radius: inherit
+    margin-top: 0
+    margin-bottom: 0
+    margin-right: 0
+    margin-left: var(--jldn-border-width, 4px)
+    padding: 1rem 1.25rem
+    position: relative
+    z-index: 5
+    backdrop-filter: blur(10px)
+    color: #f1f5f9
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4)
+    min-height: 50px
+    box-sizing: border-box
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
+    
+    &::after
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0.03) 75%, rgba(255, 255, 255, 0) 100%)
+      pointer-events: none
+      z-index: 1
+      border-radius: inherit
+      display: none
+
+    @at-root .jldn-alert[data-style="3d"] .jldn-alert-content::after
+      display: block
+
+    .jldn-alert-icon
+      position: relative
+      z-index: 2
+      display: inline-flex
+      align-items: center
+      justify-content: center
+      width: 24px
+      height: 24px
+      border-radius: 50%
+      font-weight: 700
+      font-size: 0.8rem
+      margin-right: 0.75rem
+      flex-shrink: 0
+      background: rgba(255, 255, 255, 0.08)
+      color: var(--jldn-base-color, var(--default-accent, #3b82f6))
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9)
+
+    .jldn-alert-text
+      position: relative
+      z-index: 2
+      flex-grow: 1
+      padding-right: 1.5rem
+      font-size: 0.95rem
+      font-weight: 500
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9)
+
+    .jldn-alert-close
+      position: absolute
+      z-index: 3
+      background: none
+      border: none
+      color: #94a3b8
+      font-size: 1.3rem
+      line-height: 1
+      cursor: pointer
+      padding: 0
+      margin: 0
+      right: 12px
+      top: 50%
+      transform: translateY(-50%)
+      transition: color 0.15s ease
+      outline: none
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9)
+
+      &:hover
+        color: #f1f5f9
+
+// ==========================================
+// 3-LAYER POPUP ELEMENTS (.jldn-popup)
+// ==========================================
+.jldn-popup
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  z-index: 1000
+  display: flex
+  align-items: center
+  justify-content: center
+  opacity: 0
+  pointer-events: none
+  transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)
+
+  &.jldn-active
+    opacity: 1
+    pointer-events: auto
+    
+    .jldn-popup-content
+      transform: scale(1)
+
+    .jldn-popup-stripes
+      animation-play-state: running
+
+  // Backdrop overlay background
+  .jldn-popup-overlay
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: rgba(15, 23, 42, 0.6)
+    backdrop-filter: blur(8px)
+
+  // Modal box (Layer 1: Base Container & border)
+  .jldn-popup-content
+    position: relative
+    box-sizing: border-box
+    z-index: 1001
+    transform: scale(0.9)
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+    overflow: hidden
+    
+    width: var(--jldn-width, 90%)
+    max-width: 500px
+    height: var(--jldn-height, auto)
+    padding: var(--jldn-border-width, 3px) // border thickness
+    background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, #384252))) // border background color
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4)
+
+    // Shapes
+    border-radius: var(--jldn-border-radius, 16px)
+    &[data-shape="rounded"]
+      --jldn-border-radius: 16px
+    &[data-shape="square"]
+      --jldn-border-radius: 0px
+
+    // 3D Extruded popup shadow
+    @at-root
+      .jldn-popup[data-style="3d"] .jldn-popup-content
+        box-shadow: var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 10px) 0 0 var(--jldn-popup-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 20px) 20px -4px rgba(0, 0, 0, 0.5)
+
+  // Candystripes Layer (Layer 2)
+  .jldn-popup-stripes
+    display: none
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-image: linear-gradient(var(--jldn-stripe-angle, var(--jldn-default-stripe-angle)), var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 25%, var(--jldn-stripe-accent, transparent) 25%, var(--jldn-stripe-accent, transparent) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 75%, var(--jldn-stripe-accent, transparent) 75%, var(--jldn-stripe-accent, transparent))
+    background-size: 40px 40px
+    border-radius: inherit
+    opacity: 0.5
+    z-index: 2
+    pointer-events: none
+    animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
+    animation-play-state: paused
+
+  &[style*="--jldn-candystripe-color"] .jldn-popup-stripes, &[data-theme] .jldn-popup-stripes, [style*="--jldn-candystripe-color"] .jldn-popup-stripes, [data-theme] .jldn-popup-stripes
+    display: block
+
+  // Body Container (Layer 3: Inset content dialog box)
+  .jldn-popup-body
+    background: #1e293b
+    border-radius: inherit
+    padding: 2.2rem 2rem
+    color: #f8fafc
+    position: relative
+    z-index: 5
+    box-sizing: border-box
+    width: 100%
+    height: 100%
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5)
+
+    &::after
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0.03) 75%, rgba(255, 255, 255, 0) 100%)
+      pointer-events: none
+      z-index: 1
+      border-radius: inherit
+      display: none
+
+    @at-root .jldn-popup[data-style="3d"] .jldn-popup-body::after
+      display: block
+
+    .jldn-popup-text
+      position: relative
+      z-index: 2
+      font-size: 1rem
+      line-height: 1.5
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9)
+
+    // Dismiss close button
+    .jldn-popup-close
+      background: none
+      border: none
+      color: #94a3b8
+      font-size: 1.5rem
+      cursor: pointer
+      position: absolute
+      top: 12px
+      right: 16px
+      padding: 0
+      margin: 0
+      transition: color 0.15s ease
+      outline: none
+      z-index: 3
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9)
+
+      &:hover
+        color: #f1f5f9
+
