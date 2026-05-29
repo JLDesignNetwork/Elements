@@ -281,8 +281,7 @@ window.JLDN.createPopup($('#my-popup'), { trigger: 'my-btn', theme: 'Celtics' })
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
 ### Todo
 
 - [ ] Add images of element examples
