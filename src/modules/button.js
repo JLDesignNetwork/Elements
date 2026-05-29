@@ -1,6 +1,6 @@
 if (window.JLDN_Elements) {
   window.JLDN_Elements.register('button', {
-    selector: 'button.jldn-button, div.jldn-button',
+    selector: 'button.jldn-button, div.jldn-button, button[class*="jldn-button-"], div[class*="jldn-button-"]',
     defaults: {
       style: "flat",
       shape: "square",

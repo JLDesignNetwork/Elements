@@ -1,6 +1,6 @@
 if (window.JLDN_Elements) {
   window.JLDN_Elements.register('popup', {
-    selector: 'div.jldn-popup',
+    selector: 'div.jldn-popup, div[class*="jldn-popup-"]',
     defaults: {
       style: "flat",
       shape: "rounded",

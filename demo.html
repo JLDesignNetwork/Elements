@@ -13,8 +13,8 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;600;800&display=swap"
     rel="stylesheet">
 
-  <!-- JLDN: Elements CSS -->
-  <link href="src/style.css?v=1.0.18" rel="stylesheet">
+  <!-- JLDN: Elements CSS (automatically loaded via core.js unified loader) -->
+  <!-- <link href="src/style.css?v=1.0.19" rel="stylesheet"> -->
 
   <style>
     body {
@@ -335,6 +335,56 @@ user.use(Force.LightSide);</code>
       <p>This modal updates its theme and shows 3D effects dynamically.</p>
     </div>
 
+    <h2>Shorthand Helpers Showcase</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Shorthand Buttons</h3>
+        <div class="showcase">
+          <div class="showcase-row">
+            <span class="label">class="jldn-button-cyberpunk-3d"</span>
+            <button class="jldn-button-cyberpunk-3d">Cyberpunk 3D</button>
+          </div>
+          <div class="showcase-row">
+            <span class="label">class="jldn-button-starwars"</span>
+            <button class="jldn-button-starwars">Star Wars Flat</button>
+          </div>
+          <div class="showcase-row">
+            <span class="label">class="jldn-button-christmas-3d" (div)</span>
+            <div class="jldn-button-christmas-3d">Christmas 3D Div</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Shorthand Meters</h3>
+        <div class="showcase">
+          <div class="showcase-row">
+            <span class="label">class="jldn-meter-matrix" (fill: 80%)</span>
+            <div class="jldn-meter-matrix" data-options='{"fill-size":"80%"}'>Matrix Flat 80%</div>
+          </div>
+          <div class="showcase-row">
+            <span class="label">class="jldn-meter-halloween-3d" (fill: 40%)</span>
+            <div class="jldn-meter-halloween-3d" data-options='{"fill-size":"40%"}'>Halloween 3D 40%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="grid-column: span 2;">
+        <h3>Shorthand Code & Alert</h3>
+        <div class="showcase">
+          <div class="showcase-row">
+            <span class="label">class="jldn-code-cyberpunk-3d"</span>
+            <code class="jldn-code-cyberpunk-3d">const shorthand = "Cyberpunk Code 3D";
+console.log(shorthand);</code>
+          </div>
+          <div class="showcase-row">
+            <span class="label">class="jldn-alert-thanksgiving"</span>
+            <div class="jldn-alert-thanksgiving">Thanksgiving Flat Alert (Dismissible info by default)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h2>Interactive Dynamic Updates (API Test)</h2>
     <div class="grid">
       <div class="card">
@@ -501,14 +551,17 @@ user.use(Force.LightSide);</code>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-  <!-- JLDN: Elements JS -->
-  <script defer src="src/modules/core.js?v=1.0.18"></script>
-  <script defer src="src/modules/button.js?v=1.0.18"></script>
-  <script defer src="src/modules/meter.js?v=1.0.18"></script>
-  <script defer src="src/modules/code.js?v=1.0.18"></script>
-  <script defer src="src/modules/alert.js?v=1.0.18"></script>
-  <script defer src="src/modules/popup.js?v=1.0.18"></script>
-  <script defer src="src/script.js?v=1.0.18"></script>
+  <!-- JLDN: Elements JS (Unified Single-Link Loader) -->
+  <script defer src="src/modules/core.js?modules=button,meter,code,alert,popup"></script>
+  <!--
+  <script defer src="src/modules/core.js?v=1.0.19"></script>
+  <script defer src="src/modules/button.js?v=1.0.19"></script>
+  <script defer src="src/modules/meter.js?v=1.0.19"></script>
+  <script defer src="src/modules/code.js?v=1.0.19"></script>
+  <script defer src="src/modules/alert.js?v=1.0.19"></script>
+  <script defer src="src/modules/popup.js?v=1.0.19"></script>
+  <script defer src="src/script.js?v=1.0.19"></script>
+  -->
 
   <script>
     window.addEventListener('load', () => {

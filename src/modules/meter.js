@@ -1,6 +1,6 @@
 if (window.JLDN_Elements) {
   window.JLDN_Elements.register('meter', {
-    selector: 'div.jldn-meter',
+    selector: 'div.jldn-meter, div[class*="jldn-meter-"]',
     defaults: {
       style: "flat",
       shape: "square",

@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.19] - 2026-05-29
+
+### Added
+- **Unified Single-Link Script Loader** — Added a dynamic loader in `core.js` that checks for `?modules=...` in the script tag's query string. When used, it automatically injects `style.css` relative to `core.js`, dynamically loads the requested components (e.g. `button,meter,code,alert,popup`) in parallel, and loads the main initialization entry point `script.js` last.
+- **Pre-configured Shorthand CSS Classes** — Components can now be written using class-based shorthand names directly (e.g. `<button class="jldn-button-cyberpunk-3d">` or `<div class="jldn-meter-matrix">`) without requiring data-options attributes. The engine matches theme names case-insensitively and extracts the style configuration.
+- **Programmatic JS Creation APIs** — Exposed programmatic initialization helper methods on `window.JLDN` (`createButton`, `createMeter`, `createCode`, `createAlert`, `createPopup`) allowing components to be initialized or upgraded on the fly.
+- **Shorthand Helpers Showcase** in `demo.html` and `index.html` — Added a new demo section demonstrating class-based shorthand styling and programmatic creation.
+
 ## [1.0.18] - 2026-05-29
 
 ### Added

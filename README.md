@@ -1,7 +1,7 @@
 # JLDN : Elements
 
 [![CDN](https://img.shields.io/badge/CDN-jsDelivr-ff69b4.svg?style=flat-square)](https://www.jsdelivr.com/)
-[![Version](https://img.shields.io/badge/Version-1.0.18-blue.svg?style=flat-square)](https://github.com/JLDesignNetwork/Elements/releases)
+[![Version](https://img.shields.io/badge/Version-1.0.19-blue.svg?style=flat-square)](https://github.com/JLDesignNetwork/Elements/releases)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
 **JLDN : Elements** is a premium, lightweight client-side UI component engine powered by jQuery and SASS. It scans your markup at runtime, translating simple HTML elements into rich, animated components. 
@@ -111,32 +111,46 @@ Interactive popup overlays that stack above a high-blur backdrop overlay. They b
 There are two ways to load JLDN Elements into your web application:
 
 ### Option A: CDN Install (Recommended)
-Include the compiled CSS in your `<head>` and the JS script modules at the end of your `<body>`. Make sure jQuery is loaded first.
+Make sure jQuery is loaded first. You can load all modules, styling, and initialization automatically using the **Single-Link Loader**, or load files individually.
 
+#### 1. Single-Link Loader (Easiest)
+Specify the modules you need in the `modules` query parameter. Styling (`style.css`) and initialization (`script.js`) are handled automatically relative to the core path:
+```html
+<!-- Place near the bottom of your <body> -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/core.js?modules=button,meter,code,alert,popup"></script>
+```
+
+#### 2. Manual Multi-Link
 ```html
 <!-- Place inside <head> -->
-<link href="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/style.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/style.css" rel="stylesheet">
 
 <!-- Place near the bottom of your <body> -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/modules/core.js"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/modules/button.js"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/modules/meter.js"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/modules/code.js"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/modules/alert.js"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/modules/popup.js"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/script.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/core.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/button.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/meter.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/code.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/alert.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/popup.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/script.js"></script>
 ```
 
 ### Option B: Local Installation
-1. Clone this repository to your project directory.
-2. Link the stylesheet and scripts in your files:
+
+#### 1. Single-Link Loader
+```html
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script defer src="src/modules/core.js?modules=button,meter,code,alert,popup"></script>
+```
+
+#### 2. Manual Multi-Link
 ```html
 <link href="src/style.css" rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script defer src="src/modules/core.js"></script>
-<!-- Include only the component files you need -->
 <script defer src="src/modules/button.js"></script>
 <script defer src="src/modules/meter.js"></script>
 <script defer src="src/modules/code.js"></script>
@@ -144,6 +158,22 @@ Include the compiled CSS in your `<head>` and the JS script modules at the end o
 <script defer src="src/modules/popup.js"></script>
 <script defer src="src/script.js"></script>
 ```
+
+---
+
+## Pre-configured Shorthand CSS Classes
+
+Instead of writing verbose `data-options` attributes (like `data-options='{"theme":"Cyberpunk", "style":"3d"}'`), you can use shorthand class names directly. The structure is:
+`jldn-[component]-[themeName]` or `jldn-[component]-[themeName]-3d`.
+
+Themes names are parsed case-insensitively, ignoring hyphens/spaces.
+
+### Shorthand Examples:
+* **Buttons**: `<button class="jldn-button-cyberpunk-3d">`
+* **Meters**: `<div class="jldn-meter-matrix" data-options='{"fill-size":"80%"}'>`
+* **Alerts**: `<div class="jldn-alert-thanksgiving">`
+* **Code Snippets**: `<code class="jldn-code-christmas-3d">`
+* **Popups**: `<div class="jldn-popup-starwars-3d" data-options='{"trigger":"btn-id"}'>`
 
 ---
 
@@ -234,6 +264,19 @@ JLDN.updateElement($myMeter, {
 
 *Note: The update call validates inputs and enforces allowed options whitelists per component class to protect page styling stability.*
 
+### Programmatic Element Creation
+
+You can initialize plain HTML elements into components programmatically:
+
+```javascript
+// 1. Initialize elements programmatically using helpers
+window.JLDN.createButton($('#my-btn'), { theme: 'Cyberpunk', style: '3d' });
+window.JLDN.createMeter($('#my-meter'), { theme: 'Matrix', 'fill-size': '50%' });
+window.JLDN.createAlert($('#my-alert'), { theme: 'Valentine', type: 'success' });
+window.JLDN.createCode($('#my-code'), { theme: 'Halloween' });
+window.JLDN.createPopup($('#my-popup'), { trigger: 'my-btn', theme: 'Celtics' });
+```
+
 ---
 
 ## License
@@ -248,8 +291,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [x] Create additional themes (28 built-in themes)
 - [x] Implement option validation / whitelist enforcement
 - [x] Add dynamic element update API
-- [ ] Add license information
+- [x] Add license information
 - [ ] Add meta information
-- [ ] Setup GitHub IO page
-- [ ] Make repository public
-- [ ] Create pre-configured element shorthand helpers
+- [x] Setup GitHub IO page
+- [x] Make repository public
+- [x] Create pre-configured element shorthand helpers

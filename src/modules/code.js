@@ -1,6 +1,6 @@
 if (window.JLDN_Elements) {
   window.JLDN_Elements.register('code', {
-    selector: 'code.jldn-code, div.jldn-code',
+    selector: 'code.jldn-code, div.jldn-code, code[class*="jldn-code-"], div[class*="jldn-code-"]',
     defaults: {
       style: "flat",
       shape: "rounded",

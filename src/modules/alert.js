@@ -1,6 +1,6 @@
 if (window.JLDN_Elements) {
   window.JLDN_Elements.register('alert', {
-    selector: 'div.jldn-alert',
+    selector: 'div.jldn-alert, div[class*="jldn-alert-"]',
     defaults: {
       style: "flat",
       shape: "rounded",

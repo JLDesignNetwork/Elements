@@ -60,10 +60,43 @@ class Elements {
   }
 
   buildElement($el, el_options) {
-    const options = (el_options && typeof el_options === "object" && !Array.isArray(el_options)) ? el_options : {}
+    let options = (el_options && typeof el_options === "object" && !Array.isArray(el_options)) ? el_options : {}
 
     // Remove data-options attribute to keep DOM clean
     $el.removeAttr("data-options")
+
+    // Extract shorthand configuration from class names
+    const classList = $el.attr("class") ? $el.attr("class").split(/\s+/) : [];
+    let shorthandOptions = {};
+    for (const className of classList) {
+      // Pattern: jldn-(button|meter|code|alert|popup)-(themeName) or jldn-(button|meter|code|alert|popup)-(themeName)-3d
+      const match = className.match(/^jldn-(button|meter|code|alert|popup)-([a-zA-Z0-9_-]+)$/);
+      if (match) {
+        let themeName = match[2];
+        let style = "flat";
+        if (themeName.endsWith("-3d")) {
+          themeName = themeName.slice(0, -3);
+          style = "3d";
+        }
+        
+        // Translate theme name from class parameter (e.g. "stpatrick" -> "St. Patrick")
+        const normalized = themeName.toLowerCase().replace(/[^a-z0-9]/g, "");
+        const themesList = [
+          "Christmas", "Halloween", "Easter", "4th of July", "St. Patrick", "Valentine", "Thanksgiving", "New Year",
+          "Spring", "Summer", "Autumn", "Winter", "Star Wars", "Matrix", "LOTR", "Star Trek", "Barbie", "Cyberpunk",
+          "Michigan", "Alabama", "Texas", "UNC", "LSU", "Celtics", "Seahawks", "SF49ers", "Miami Vice", "Cowboys"
+        ];
+        
+        const matchedTheme = themesList.find(t => t.toLowerCase().replace(/[^a-z0-9]/g, "") === normalized);
+        if (matchedTheme) {
+          shorthandOptions["theme"] = matchedTheme;
+        }
+        shorthandOptions["style"] = style;
+      }
+    }
+
+    // Merge options: data-options takes precedence over shorthand classes
+    options = $.extend({}, shorthandOptions, options);
 
     // Find matching registered component
     for (const component of this.registry) {
@@ -194,4 +227,95 @@ Elements.register = function (name, config) {
   Elements.registry.push(config);
 };
 
+// Programmatic creation helper APIs
+Elements.prototype.createButton = function ($el, options) {
+  $el.addClass("jldn-button");
+  this.buildElement($el, options);
+};
+
+Elements.prototype.createMeter = function ($el, options) {
+  $el.addClass("jldn-meter");
+  this.buildElement($el, options);
+};
+
+Elements.prototype.createCode = function ($el, options) {
+  $el.addClass("jldn-code");
+  this.buildElement($el, options);
+};
+
+Elements.prototype.createAlert = function ($el, options) {
+  $el.addClass("jldn-alert");
+  this.buildElement($el, options);
+};
+
+Elements.prototype.createPopup = function ($el, options) {
+  $el.addClass("jldn-popup");
+  this.buildElement($el, options);
+};
+
 window.JLDN_Elements = Elements;
+
+// Dynamic Single-Link Module Loader
+(function () {
+  const currentScript = document.currentScript || (() => {
+    const scripts = document.getElementsByTagName('script');
+    return scripts[scripts.length - 1];
+  })();
+
+  if (currentScript && currentScript.src) {
+    try {
+      const url = new URL(currentScript.src, window.location.href);
+      const modulesParam = url.searchParams.get("modules");
+      if (modulesParam) {
+        const basePath = currentScript.src.substring(0, currentScript.src.lastIndexOf('/') + 1);
+        const modules = modulesParam.split(",");
+        
+        // 1. Load style.css automatically relative to core.js path (replaces modules/ with style.css)
+        const cssUrl = basePath.replace(/modules\/$/, "style.css");
+        if (!document.querySelector(`link[href="${cssUrl}"]`)) {
+          const linkEl = document.createElement("link");
+          linkEl.rel = "stylesheet";
+          linkEl.href = cssUrl;
+          document.head.appendChild(linkEl);
+        }
+
+        // 2. Load JS component modules
+        let loadedCount = 0;
+        const totalModules = modules.length;
+        
+        const loadScript = (srcUrl, callback) => {
+          const scriptEl = document.createElement("script");
+          scriptEl.src = srcUrl;
+          scriptEl.defer = true;
+          if (callback) {
+            scriptEl.onload = callback;
+            scriptEl.onerror = callback; // continue even if one fails
+          }
+          document.body.appendChild(scriptEl);
+        };
+
+        const onModuleLoaded = () => {
+          loadedCount++;
+          if (loadedCount === totalModules) {
+            // 3. Load script.js (entry/init point) last after all modules are loaded
+            const initScriptUrl = basePath.replace(/modules\/$/, "script.js");
+            loadScript(initScriptUrl);
+          }
+        };
+
+        modules.forEach(modName => {
+          const cleanName = modName.trim().toLowerCase();
+          if (["button", "meter", "code", "alert", "popup"].includes(cleanName)) {
+            loadScript(`${basePath}${cleanName}.js`, onModuleLoaded);
+          } else {
+            // Count un-recognized modules as loaded so we don't hang
+            onModuleLoaded();
+          }
+        });
+      }
+    } catch (e) {
+      console.error("JLDN Elements: Unified loader encountered an error", e);
+    }
+  }
+})();
+
