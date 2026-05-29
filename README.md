@@ -1,123 +1,274 @@
-# <ins>JLDN : Elements</ins>
+# JLDN : Elements
 
-JLDN : Elements is a plugin package for rendering and styling customized elements. This package consists of CSS and jquery. The jquery script reads the content of your html file, looking for specific class attributes in your HTML tags.  It then re-writes the source code to render stylish elements using package provided CSS style rules.
+[![CDN](https://img.shields.io/badge/CDN-jsDelivr-ff69b4.svg?style=flat-square)](https://www.jsdelivr.com/)
+[![Version](https://img.shields.io/badge/Version-1.0.18-blue.svg?style=flat-square)](https://github.com/JLDesignNetwork/Elements/releases)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
-## Buttons
+**JLDN : Elements** is a premium, lightweight client-side UI component engine powered by jQuery and SASS. It scans your markup at runtime, translating simple HTML elements into rich, animated components. 
 
-### Description
+The library features a sophisticated **multi-layer rendering architecture** that supports both flat modern styling and advanced 3D convex extrusion aesthetics with dynamic light-source casting.
 
-Button styling with ease. This package offers pre-configured options to change the style of your buttons, with endless possibilities. 
+🔗 **[Live Component Showcase & Interactive Playground](https://jldesignnetwork.github.io/Elements/)**
+
+---
+
+## Key Features
+
+* 💎 **Premium 3D Aesthetics**: True 3D extrusion shadows that dynamically calculate direction relative to the screen center, accompanied by top-edge specular highlighting.
+* 🎨 **28 Built-In Themes**: Holiday, seasonal, cinematic, and sports presets with distinct color palettes and custom-designed matching candy-stripes.
+* 📦 **Modular Construction**: Load only the modules you need (core engine + individual button, meter, alert, code container, or popup handlers).
+* ⚙️ **Dynamic Update API**: Update themes, progress dimensions, or display options programmatically after render via JavaScript.
+* ♿ **Accessibility Ready**: Automated injection of ARIA attributes (`role="progressbar"`, `aria-valuenow`, `role="button"`, `tabindex`), keyboard navigation handlers, and high-legibility text contrast helpers.
+
+---
+
+## Component Reference
+
+JLDN Elements are initialized automatically based on CSS classes. Configure individual component behavior using the `data-options` JSON attribute.
+
+### 1. Buttons (`.jldn-button`)
+Provides smooth button styling on top of standard `<button>` tags or custom interactive `<div>` structures (keyboard navigation for space/enter is automatically injected).
+
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `style` | `string` | `"flat"` | Layout style: `"flat"` or `"3d"`. |
+| `shape` | `string` | `"square"` | Edge layout shape: `"square"` or `"round"`. |
+| `width` | `string` | `auto` | Custom CSS width (e.g., `"200px"`, `"50%"`). |
+| `height` | `string` | `"50px"` | Custom CSS height (e.g., `"60px"`). |
+| `fill-size` | `string` | `"100%"` | Fill progress indicator length (e.g. `"75%"`). |
+| `fill-color` | `string` | *rainbow* | Custom fill solid color or gradient. |
+| `candystripe-color` | `string` | `none` | Subtle stripe background layer color. |
+| `animation-speed` | `string` | `none` | Animated fill speed: `"slow"`, `"normal"`, or `"fast"`. |
+| `theme` | `string` | `none` | Pre-configured theme choice (case-sensitive). |
+
+---
+
+### 2. Meters (`.jldn-meter`)
+An replacement for the standard HTML progress bar, featuring fluid status transitions, animation speeds, and reveal tracks.
+
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `style` | `string` | `"flat"` | Layout style: `"flat"` or `"3d"`. |
+| `shape` | `string` | `"square"` | Edge layout shape: `"square"` or `"round"`. |
+| `width` | `string` | `"100%"` | Custom CSS width presets (e.g. `"long"`, `"medium"`, `"short"`). |
+| `height` | `string` | `"50px"` | Custom CSS height presets (e.g. `"thick"`, `"thin"`). |
+| `fill-size` | `string` | `"100%"` | Progress percentage length (e.g. `"50%"`). |
+| `fill-color` | `string` | *rainbow* | Solid color or gradient background of progress bar. |
+| `reveal-color` | `string` | `#1e293b` | Unfilled track background color. |
+| `candystripe-color` | `string` | `none` | alternating stripe background color. |
+| `animation-speed` | `string` | `none` | Animated progress speed: `"slow"`, `"normal"`, or `"fast"`. |
+| `theme` | `string` | `none` | Pre-configured theme choice (case-sensitive). |
+
+---
+
+### 3. Code Snippet Containers (`.jldn-code`)
+Elegant code display containers with automated line numbering, a copy-to-clipboard action button, and alternate line highlights.
+
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `style` | `string` | `"flat"` | Layout style: `"flat"` or `"3d"`. |
+| `shape` | `string` | `"rounded"` | Layout shape: `"rounded"` or `"square"`. |
+| `border-width` | `string` | `"2px"` | Border boundary thickness. |
+| `base-color` | `string` | `#384252` | Border background color/gradient frame. |
+| `font-size` | `string` | `"1rem"` | Font size configuration. |
+| `candystripe-color` | `string` | `none` | Background stripe highlight color. |
+| `theme` | `string` | `none` | Pre-configured theme choice (case-sensitive). |
 
 > [!NOTE]
-> Buttons can be created using a div tag or a button tag. 
-
-> [!IMPORTANT]
-> Buttons must contain a `class="button"` attribute.
-
-> [!WARNING]
-> Each button must have its own unique identifier. Without this your buttons will not work as expected.
-
-### Options
-
-1. Shape: round | square (Default: square) `data-options='{"shape":"square"}'`
-1. Style: flat | 3d. (Default: flat) `data-options='{"style":"3d"}'`
-1. Width: px | % | em | rem | vw (Default: 100%) `data-options='{"width":"250px"}'`
-1. Height: px | % | em | rem | vh (Default: 50px) `data-options='{"height":"50px"}'`
-1. Fill Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: red to green gradient) `data-options='{"fill-color":"linear-gradient(90deg, red, orange, yellow, lime, green)"}'`
-1. Candystripe Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: transparent) `data-options='{"candystripe-color":"transparent"}'`
-1. Theme: See [theme list](#themes). (Default: none) `data-options='{"theme":"Christmas"}'`
-
-### Examples
-
-1. Default: `<div id="b1" class="button" data-options:'{}'></div>` | `<button id="b2" class="button" data-options:'{}'></button>`
+> Even line rows automatically display a subtle background tint using a `7%` opacity alpha channel of the active theme's brand color (falling back to brand sky blue if no theme is specified).
 
 ---
 
-## Meters 
+### 4. Alert Notifications (`.jldn-alert`)
+Notification banners supporting custom message types, dismissible controls, and responsive styling.
 
-### Description  
-
-Custom alternative to the standard HTML meter and progress bar. These meters offer pre-configured options that allow for endless customization. When creating a new meter, use a div tag and include `class="meter"` in the tag. 
-
-> [!IMPORTANT]
-> Meters can only be created with a div tag and must contain a `class="meter"` attribute.
-
-> [!WARNING]
-> Each meter must have its own unique identifier. Without this your meters will not work as expected.
-
-### Options
-
-The following list of options are used to configure the meter. They are included in the `data-options` attribute.
-
-1. Shape: round | square (Default: square) `data-options='{"shape":"square"}'`
-1. Style: flat | 3d. (Default: flat) `data-options='{"style":"flat"}'`
-1. Width: px | % | em | rem | vw (Default: 100%) `data-options='{"width":"100%"}'`
-1. Height: px | % | em | rem | vh (Default: 50px) `data-options='{"height":"50px"}'`
-1. Fill Size: 0%...`100% (Default: 100%) `data-options='{"fill-size":"100%"}'`
-1. Fill Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: red to green gradient)`data-options='{"fill-color":"linear-gradient(90deg, red, orange, yellow, lime, green)"}'`
-1. Reveal Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: red) `data-options='{"reveal-color":"red"}'`
-1. Animation Speed: slow | normal | fast (Default: null) `data-options='{"animation-speed":"normal"}'`
-1. Candystripe Color: color word | hsl | hex | rgb(a) | transparent | gradient (Default: transparent) `data-options='{"candystripe-color":"transparent"}'`
-1. Theme: See [theme list](#themes). (Default: null) `data-options='{"theme":null}'`
-
-### Examples  
-
-1. Default: `<div id="m1" class="meter" data-options:'{}'></div>`
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `type` | `string` | `"info"` | Message severity level: `"info"`, `"success"`, `"warning"`, or `"error"`. |
+| `style` | `string` | `"flat"` | Layout style: `"flat"` or `"3d"`. |
+| `shape` | `string` | `"rounded"` | Edge shape: `"rounded"` or `"square"`. |
+| `dismissible` | `boolean` | `true` | Show/hide the close dismiss button tag. |
+| `border-width` | `string` | `"4px"` | Left accent-border thickness. |
+| `theme` | `string` | `none` | Pre-configured theme choice (case-sensitive). |
 
 ---
 
-## Extras 
+### 5. Modals & Popups (`.jldn-popup`)
+Interactive popup overlays that stack above a high-blur backdrop overlay. They bind automatically to their trigger buttons.
 
-### Installation
-1. Download the Elements package.
-1. Extract the archive and copy the 'src' folder into your project directory.
-1. Copy/paste the following into the &lt;head&gt; of your HTML document.
-  ```html
-  <!-- JLDN: Elements CSS -->
-  <link href="src/style.css" rel="stylesheet">
-  ```
-4. Copy/paste the following into the &lt;body&gt; near the end of your HTML document.
-  ```html 
-  <!-- jQuery -->
-  <script async src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `trigger` | `string` | *required* | The ID of the HTML button/element that launches the modal. |
+| `style` | `string` | `"flat"` | Layout style: `"flat"` or `"3d"`. |
+| `shape` | `string` | `"rounded"` | Edge shape: `"rounded"` or `"square"`. |
+| `border-width` | `string` | `"3px"` | Spacing acting as the outer frame border. |
+| `theme` | `string` | `none` | Pre-configured theme choice (case-sensitive). |
 
-  <!-- JLDN: Elements JS -->
-  <script defer type="text/javascript" src="src/script.js"></script>
-  ```
+---
 
-### Usage 
-After including this package into your document, simply include the elements that you want to use.
+## Installation & Setup
 
-Button code example:
+Load JLDN Elements into your web application using one of the following methods:
+
+### Option A: CDN Install (Recommended)
+Include the compiled CSS in your `<head>` and the JS script modules at the end of your `<body>`. Make sure jQuery is loaded first.
+
 ```html
-<!-- button format 1 -->
-<button id='b1' class='button' data-options='{}'>
+<!-- Place inside <head> -->
+<link href="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/style.css" rel="stylesheet">
 
-<!-- button format 2 -->
-<div id='b2' class='button' data-options='{}'>
+<!-- Place near the bottom of your <body> -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/modules/core.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/modules/button.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/modules/meter.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/modules/code.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/modules/alert.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/modules/popup.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.18/src/script.js"></script>
 ```
 
-Meter code example:
+### Option B: Local Installation
+1. Clone this repository to your project directory.
+2. Link the stylesheet and scripts in your files:
 ```html
-<!-- meter format -->
-<div id='m1' class='meter' data-options='{}'>
+<link href="src/style.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script defer src="src/modules/core.js"></script>
+<!-- Include only the component files you need -->
+<script defer src="src/modules/button.js"></script>
+<script defer src="src/modules/meter.js"></script>
+<script defer src="src/modules/code.js"></script>
+<script defer src="src/modules/alert.js"></script>
+<script defer src="src/modules/popup.js"></script>
+<script defer src="src/script.js"></script>
+```
+
+---
+
+## Theme Configuration Directory
+
+Pass the exact case-sensitive **Theme Name** inside the `theme` field of your component options:
+
+| Category | Themes |
+| :--- | :--- |
+| **Holidays** | `Christmas`, `Halloween`, `Easter`, `4th of July`, `St. Patrick`, `Valentine`, `Thanksgiving`, `New Year` |
+| **Seasons** | `Spring`, `Summer`, `Autumn`, `Winter` |
+| **Movies & Pop Culture** | `Star Wars`, `Matrix`, `LOTR`, `Star Trek`, `Barbie`, `Cyberpunk` |
+| **College Sports** | `Michigan`, `Alabama`, `Texas`, `UNC`, `LSU` |
+| **Professional Sports** | `Celtics`, `Seahawks`, `SF49ers`, `Miami Vice`, `Cowboys` |
+
+---
+
+## Dynamic JavaScript API
+
+Elements can be manipulated programmatically after initial render using the public `updateElement` API:
+
+```javascript
+// 1. Initialize the Elements engine
+const JLDN = new JLDN_Elements();
+
+// 2. Select your JQuery element wrapper
+const $myMeter = $('#mtr-interactive');
+
+// 3. Update the component's properties dynamically
+JLDN.updateElement($myMeter, {
+  "fill-size": "95%",
+  "theme": "St. Patrick"
+});
+```
+
+*Note: The update call validates inputs and enforces allowed options whitelists per component class to protect page styling stability.*
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.tion
+</button>
+
+<!-- Using div tag -->
+<div id="btn-div-demo" class="jldn-button" data-options='{"shape":"round", "fill-color":"#ec4899"}'>
+  Click Action
+</div>
+```
+
+### 2. Meters
+```html
+<div id="meter-demo" class="jldn-meter" data-options='{"fill-size":"65%", "theme":"St. Patrick", "animation-speed":"normal"}'>
+  Loading files...
+</div>
+```
+
+### 3. Code snippet Containers
+```html
+<code id="code-demo" class="jldn-code" data-options='{"theme":"Matrix", "border-width":"3px"}'>
+const greeting = "Hello, World!";
+console.log(greeting);
+</code>
+```
+
+### 4. Alert Banners
+```html
+<div id="alert-demo" class="jldn-alert" data-options='{"type":"success", "border-width":"4px"}'>
+  The process finished successfully!
+</div>
+```
+
+### 5. Modals & Popups
+```html
+<!-- Trigger element -->
+<button id="popup-trigger" class="jldn-button" data-options='{}'>Launch Popup</button>
+
+<!-- Modal Container -->
+<div id="popup-demo" class="jldn-popup" data-options='{"trigger":"popup-trigger", "theme":"Star Wars", "style":"3d"}'>
+  <h3>System Dialog</h3>
+  <p>This is a custom alert modal on a blurred backdrop.</p>
+</div>
 ```
 
 ### Built-in Themes
 
-1. Christmas
-1. Halloween
-1. Easter
-1. 4th of July
+This package comes pre-packaged with 28 built-in presets representing holidays, seasonal changes, pop culture, and sports teams:
+
+| Category | Themes |
+|---|---|
+| **Holidays** | Christmas, Halloween, Easter, 4th of July, St. Patrick's Day (`St. Patrick`), Valentine's Day (`Valentine`), Thanksgiving, New Year's Eve (`New Year`) |
+| **Seasons** | Spring, Summer, Autumn, Winter |
+| **Movies & Pop Culture** | Star Wars, The Matrix (`Matrix`), Lord of the Rings (`LOTR`), Star Trek, Barbie, Cyberpunk |
+| **College Sports** | Michigan, Alabama, Texas, UNC, LSU |
+| **Professional Sports** | Celtics, Seahawks, SF49ers, Miami Vice, Cowboys |
+
+> [!NOTE]
+> Theme names are case-sensitive. Pass the exact name shown above in parentheses where provided.
+
+### Dynamic Update API
+
+Elements can be updated programmatically after page load using the `updateElement` method:
+
+```js
+const elements = new JLDN_Elements();
+const $el = $('#my-meter');
+
+elements.updateElement($el, {
+  "fill-size": "80%",
+  "theme": "Cyberpunk"
+});
+```
+
+Only options in the component's `allowedOptions` list will be applied. Unrecognized keys are silently ignored.
 
 ### Todo
 
 - [ ] Add images of element examples
-- [ ] Code javascript (jQuery)
-- [ ] Code css (SASS)
+- [x] Code JavaScript (jQuery)
+- [x] Code CSS (SASS)
+- [x] Create additional themes (28 built-in themes)
+- [x] Implement option validation / whitelist enforcement
+- [x] Add dynamic element update API
 - [ ] Add license information
 - [ ] Add meta information
 - [ ] Setup GitHub IO page
 - [ ] Make repository public
-- [ ] Create additional themes
-- [ ] Create pre-configured elements for ease of use
+- [ ] Create pre-configured element shorthand helpers
