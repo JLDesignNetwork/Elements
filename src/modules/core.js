@@ -101,6 +101,9 @@ class Elements {
     // Find matching registered component
     for (const component of this.registry) {
       if ($el.is(component.selector)) {
+        if (component.name) {
+          $el.addClass(`jldn-${component.name}`);
+        }
         // Filter unrecognized/untracked options
         const filteredOptions = {};
         const allowed = component.allowedOptions || [];
@@ -224,6 +227,7 @@ class Elements {
 // Static registration registry shared by all instances
 Elements.registry = [];
 Elements.register = function (name, config) {
+  config.name = name;
   Elements.registry.push(config);
 };
 
