@@ -156,11 +156,18 @@ class Elements {
     // Translate animation-speed preset keywords to CSS time values
     let speedVal = options["animation-speed"]
     if (speedVal) {
-      if (speedVal === "slow") speedVal = "2.5s"
-      else if (speedVal === "normal") speedVal = "1.5s"
-      else if (speedVal === "fast") speedVal = "0.6s"
-      else if (!isNaN(speedVal)) speedVal = speedVal + "s"
-      $el.css("--jldn-animation-speed", speedVal)
+      if (speedVal === "paused") {
+        $el.css("--jldn-animation-play-state", "paused")
+        $el.attr("data-animation-paused", "true")
+      } else {
+        $el.removeAttr("data-animation-paused")
+        if (speedVal === "slow" || speedVal === "slower") speedVal = "2.5s"
+        else if (speedVal === "normal") speedVal = "1.5s"
+        else if (speedVal === "fast" || speedVal === "faster") speedVal = "0.6s"
+        else if (!isNaN(speedVal)) speedVal = speedVal + "s"
+        $el.css("--jldn-animation-speed", speedVal)
+        $el.css("--jldn-animation-play-state", "running")
+      }
     }
 
     // Ensure data-style defaults to flat
@@ -208,6 +215,20 @@ class Elements {
           $el.attr("data-shape", value)
         } else if (key === "style") {
           $el.attr("data-style", value)
+        } else if (key === "animation-speed") {
+          if (value === "paused") {
+            $el.css("--jldn-animation-play-state", "paused")
+            $el.attr("data-animation-paused", "true")
+          } else {
+            $el.removeAttr("data-animation-paused")
+            let speedVal = value;
+            if (speedVal === "slow" || speedVal === "slower") speedVal = "2.5s"
+            else if (speedVal === "normal") speedVal = "1.5s"
+            else if (speedVal === "fast" || speedVal === "faster") speedVal = "0.6s"
+            else if (!isNaN(speedVal)) speedVal = speedVal + "s"
+            $el.css("--jldn-animation-speed", speedVal)
+            $el.css("--jldn-animation-play-state", "running")
+          }
         } else if (OPTION_MAP[key]) {
           $el.css(OPTION_MAP[key], value)
         }

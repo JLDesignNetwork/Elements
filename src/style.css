@@ -495,6 +495,7 @@
 }
 .jldn-stripes {
   animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite;
+  animation-play-state: var(--jldn-animation-play-state, running);
 }
 
 .jldn-text {
@@ -560,6 +561,7 @@ code.jldn-code .jldn-code-stripes {
   z-index: 2;
   pointer-events: none;
   animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite;
+  animation-play-state: var(--jldn-animation-play-state, running);
 }
 code.jldn-code[style*="--jldn-candystripe-color"] .jldn-code-stripes, code.jldn-code[data-theme] .jldn-code-stripes {
   display: block;
@@ -720,6 +722,7 @@ code.jldn-code .jldn-code-snippet .jldn-code-copy:active {
   z-index: 2;
   pointer-events: none;
   animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite;
+  animation-play-state: var(--jldn-animation-play-state, running);
 }
 .jldn-alert[style*="--jldn-candystripe-color"] .jldn-alert-stripes, .jldn-alert[data-theme] .jldn-alert-stripes, .jldn-alert [style*="--jldn-candystripe-color"] .jldn-alert-stripes, .jldn-alert [data-theme] .jldn-alert-stripes {
   display: block;
@@ -831,7 +834,7 @@ code.jldn-code .jldn-code-snippet .jldn-code-copy:active {
   transform: scale(1);
 }
 .jldn-popup.jldn-active .jldn-popup-stripes {
-  animation-play-state: running;
+  animation-play-state: var(--jldn-animation-play-state, running);
 }
 .jldn-popup .jldn-popup-overlay {
   position: absolute;
@@ -940,6 +943,13 @@ code.jldn-code .jldn-code-snippet .jldn-code-copy:active {
 }
 .jldn-popup .jldn-popup-body .jldn-popup-close:hover {
   color: #f1f5f9;
+}
+
+[data-animation-paused=true] .jldn-stripes,
+[data-animation-paused=true] .jldn-code-stripes,
+[data-animation-paused=true] .jldn-alert-stripes,
+[data-animation-paused=true] .jldn-popup-stripes {
+  animation-play-state: paused !important;
 }
 
 /*# sourceMappingURL=style.css.map */

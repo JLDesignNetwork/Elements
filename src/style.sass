@@ -177,6 +177,7 @@
 
   // Animation speed mapping
   animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
+  animation-play-state: var(--jldn-animation-play-state, running)
 
 // ==========================================
 // LAYER 4: TEXT (ABSOLUTELY CENTERED)
@@ -249,6 +250,7 @@ code.jldn-code
     z-index: 2
     pointer-events: none
     animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
+    animation-play-state: var(--jldn-animation-play-state, running)
 
   &[style*="--jldn-candystripe-color"] .jldn-code-stripes, &[data-theme] .jldn-code-stripes
     display: block
@@ -414,6 +416,7 @@ code.jldn-code
     z-index: 2
     pointer-events: none
     animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
+    animation-play-state: var(--jldn-animation-play-state, running)
 
   &[style*="--jldn-candystripe-color"] .jldn-alert-stripes, &[data-theme] .jldn-alert-stripes, [style*="--jldn-candystripe-color"] .jldn-alert-stripes, [data-theme] .jldn-alert-stripes
     display: block
@@ -527,7 +530,7 @@ code.jldn-code
       transform: scale(1)
 
     .jldn-popup-stripes
-      animation-play-state: running
+      animation-play-state: var(--jldn-animation-play-state, running)
 
   // Backdrop overlay background
   .jldn-popup-overlay
@@ -642,4 +645,12 @@ code.jldn-code
 
       &:hover
         color: #f1f5f9
+
+[data-animation-paused="true"]
+  .jldn-stripes,
+  .jldn-code-stripes,
+  .jldn-alert-stripes,
+  .jldn-popup-stripes
+    animation-play-state: paused !important
+
 
