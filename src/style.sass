@@ -22,9 +22,12 @@
 
 @keyframes stripes-move
   from
-    background-position: 0 0
+    background-position: 0px 0px, 0px 0px
   to
-    background-position: 40px 0
+    background-position: 40px 0px, 0px 0px
+
+[class^="jldn-"]
+  --jldn-stripe-bg-gradient: linear-gradient(var(--jldn-stripe-angle, var(--jldn-default-stripe-angle)), var(--jldn-stripe-color, var(--jldn-default-stripe-color)) 25%, var(--jldn-stripe-accent, transparent) 25%, var(--jldn-stripe-accent, transparent) 50%, var(--jldn-stripe-color, var(--jldn-default-stripe-color)) 50%, var(--jldn-stripe-color, var(--jldn-default-stripe-color)) 75%, var(--jldn-stripe-accent, transparent) 75%, var(--jldn-stripe-accent, transparent))
 
 // ==========================================
 // BASE STYLING (LAYER 1: BACKGROUND / CONTAINER)
@@ -35,31 +38,44 @@
   position: relative
   overflow: hidden
   outline: none
-  border: none
+  border: var(--jldn-border-width, 0px) var(--jldn-border-style, solid) var(--jldn-border-color, currentcolor)
   padding: 0
   user-select: none
   
   // Custom properties defaults
   width: var(--jldn-width, auto)
   height: var(--jldn-height, 50px)
-  background: var(--jldn-fill-color, var(--jldn-default-fill-color))
-  box-shadow: var(--jldn-shadow, none)
-  border-radius: var(--jldn-border-radius, 4px)
+  
+  // Base background (candy stripe + base color)
+  background: var(--jldn-candy-stripe-bg, var(--jldn-stripe-bg-gradient)), var(--jldn-base-color, var(--jldn-default-fill-color))
+  background-size: 40px 40px, 100% 100%
+  background-position: 0 0, 0 0
   background-clip: padding-box
+  
+  &[data-candy-stripe-it="false"]
+    --jldn-candy-stripe-bg: none !important
+
+  &[data-animate="true"], &[style*="--jldn-animate: true"]
+    animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
+    animation-play-state: var(--jldn-animation-play-state, running)
+
+  box-shadow: var(--jldn-shadow, none)
+  border-radius: var(--jldn-border-shape, 4px)
 
   // Shape rules using data attributes
   &[data-shape="round"]
-    --jldn-border-radius: 9999px
+    --jldn-border-shape: 9999px
   &[data-shape="square"]
-    --jldn-border-radius: 4px
+    --jldn-border-shape: 4px
 
   // Flat vs 3D styles
   transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease, box-shadow 0.15s ease
   
   // 3D Style (Thicker solid extruded 3D shadow)
   &[data-style="3d"]
-    background: var(--jldn-fill-color, var(--jldn-default-fill-color))
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25), var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 6px) 0 0 var(--jldn-btn-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 10px) 8px -4px rgba(0, 0, 0, 0.5)
+    background: var(--jldn-candy-stripe-bg, var(--jldn-stripe-bg-gradient)), var(--jldn-base-color, var(--jldn-default-fill-color))
+    background-size: 40px 40px, 100% 100%
+    box-shadow: var(--jldn-shadow, inset 0 0 0 1px rgba(0, 0, 0, 0.25), var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 6px) 0 0 var(--jldn-btn-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 10px) 8px -4px rgba(0, 0, 0, 0.5))
     transform: translateY(-4px)
     
     // Outer border/highlight
@@ -78,18 +94,169 @@
     &:hover
       filter: brightness(1.08)
       transform: translateY(-6px)
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25), calc(var(--jldn-shadow-x, 0px) * 1.33) calc(var(--jldn-shadow-y, 6px) * 1.33) 0 0 var(--jldn-btn-3d-shadow), calc(var(--jldn-drop-shadow-x, 0px) * 1.4) calc(var(--jldn-drop-shadow-y, 10px) * 1.4) 10px -3px rgba(0, 0, 0, 0.55)
+      box-shadow: var(--jldn-shadow, inset 0 0 0 1px rgba(0, 0, 0, 0.25), calc(var(--jldn-shadow-x, 0px) * 1.33) calc(var(--jldn-shadow-y, 6px) * 1.33) 0 0 var(--jldn-btn-3d-shadow), calc(var(--jldn-drop-shadow-x, 0px) * 1.4) calc(var(--jldn-drop-shadow-y, 10px) * 1.4) 10px -3px rgba(0, 0, 0, 0.55))
 
     &:active
       transform: translateY(1px)
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25), calc(var(--jldn-shadow-x, 0px) * 0.16) calc(var(--jldn-shadow-y, 6px) * 0.16) 0 0 var(--jldn-btn-3d-shadow), calc(var(--jldn-drop-shadow-x, 0px) * 0.2) calc(var(--jldn-drop-shadow-y, 10px) * 0.2) 3px -1px rgba(0, 0, 0, 0.45)
+      box-shadow: var(--jldn-shadow, inset 0 0 0 1px rgba(0, 0, 0, 0.25), calc(var(--jldn-shadow-x, 0px) * 0.16) calc(var(--jldn-shadow-y, 6px) * 0.16) 0 0 var(--jldn-btn-3d-shadow), calc(var(--jldn-drop-shadow-x, 0px) * 0.2) calc(var(--jldn-drop-shadow-y, 10px) * 0.2) 3px -1px rgba(0, 0, 0, 0.45))
       &::before
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15)
+
+// ==========================================
+// STYLE CATEGORIES
+// ==========================================
+
+// 1. Basic Style (Simple Flat / 3D)
+[data-style="basic"]
+  // default flat styling
+
+[data-style="basic-3d"]
+  box-shadow: var(--jldn-shadow, inset 0 0 0 1px rgba(0, 0, 0, 0.25), var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 6px) 0 0 var(--jldn-btn-3d-shadow, #0f172a), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 10px) 8px -4px rgba(0, 0, 0, 0.5))
+  transform: translateY(-4px)
+
+  &::before
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    border-radius: inherit
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.25)
+    pointer-events: none
+    z-index: 5
+
+  &:hover
+    filter: brightness(1.08)
+    transform: translateY(-6px)
+    box-shadow: var(--jldn-shadow, inset 0 0 0 1px rgba(0, 0, 0, 0.25), calc(var(--jldn-shadow-x, 0px) * 1.33) calc(var(--jldn-shadow-y, 6px) * 1.33) 0 0 var(--jldn-btn-3d-shadow, #0f172a), calc(var(--jldn-drop-shadow-x, 0px) * 1.4) calc(var(--jldn-drop-shadow-y, 10px) * 1.4) 10px -3px rgba(0, 0, 0, 0.55))
+
+  &:active
+    transform: translateY(1px)
+    box-shadow: var(--jldn-shadow, inset 0 0 0 1px rgba(0, 0, 0, 0.25), calc(var(--jldn-shadow-x, 0px) * 0.16) calc(var(--jldn-shadow-y, 6px) * 0.16) 0 0 var(--jldn-btn-3d-shadow, #0f172a), calc(var(--jldn-drop-shadow-x, 0px) * 0.2) calc(var(--jldn-drop-shadow-y, 10px) * 0.2) 3px -1px rgba(0, 0, 0, 0.45))
+
+// 2. Professional Style (Refined layout, soft ambient shadows)
+[data-style="professional"]
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.1)
+
+[data-style="professional-3d"]
+  box-shadow: var(--jldn-shadow, inset 0 1px 0 rgba(255,255,255,0.2), 0 2px 4px rgba(0,0,0,0.1), var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 4px) 0 0 var(--jldn-btn-3d-shadow, #0f172a))
+  transform: translateY(-3px)
+
+  &::before
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    border-radius: inherit
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.15)
+    pointer-events: none
+    z-index: 5
+
+  &:hover
+    transform: translateY(-4px)
+    box-shadow: var(--jldn-shadow, inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 8px rgba(0,0,0,0.15), calc(var(--jldn-shadow-x, 0px) * 1.25) calc(var(--jldn-shadow-y, 4px) * 1.25) 0 0 var(--jldn-btn-3d-shadow, #0f172a))
+
+  &:active
+    transform: translateY(0px)
+    box-shadow: var(--jldn-shadow, inset 0 1px 0 rgba(255,255,255,0.1), 0 1px 2px rgba(0,0,0,0.1), calc(var(--jldn-shadow-x, 0px) * 0.2) calc(var(--jldn-shadow-y, 4px) * 0.2) 0 0 var(--jldn-btn-3d-shadow, #0f172a))
+
+// 3. Cartoon Style (Comic Book Cel-Shaded)
+[data-style="cartoon"]
+  font-family: 'Impact', 'Arial Black', sans-serif !important
+  border: var(--jldn-border-width, 3px) var(--jldn-border-style, solid) var(--jldn-border-color, #000000)
+  box-shadow: 4px 4px 0px #000000
+  transform: translate(-2px, -2px)
+
+[data-style="cartoon-3d"]
+  font-family: 'Impact', 'Arial Black', sans-serif !important
+  border: var(--jldn-border-width, 3px) var(--jldn-border-style, solid) var(--jldn-border-color, #000000)
+  box-shadow: var(--jldn-shadow, var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 6px) 0 0 #000000)
+  transform: translateY(-4px)
+
+  &:hover
+    transform: translateY(-6px)
+    box-shadow: var(--jldn-shadow, calc(var(--jldn-shadow-x, 0px) * 1.33) calc(var(--jldn-shadow-y, 6px) * 1.33) 0 0 #000000)
+
+  &:active
+    transform: translateY(1px)
+    box-shadow: var(--jldn-shadow, calc(var(--jldn-shadow-x, 0px) * 0.16) calc(var(--jldn-shadow-y, 6px) * 0.16) 0 0 #000000)
+
+// 4. E-Sports / Sports (Cyber Athletic slants and glows)
+[data-style="esports"], [data-style="sports"]
+  transform: skewX(-10deg)
+  box-shadow: 0 0 15px var(--jldn-base-color, var(--jldn-default-fill-color))
+  
+  .jldn-text
+    transform: skewX(10deg)
+
+[data-style="esports-3d"], [data-style="sports-3d"]
+  transform: skewX(-10deg) translateY(-4px)
+  box-shadow: var(--jldn-shadow, 0 0 10px var(--jldn-base-color, var(--jldn-default-fill-color)), var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 5px) 0 0 var(--jldn-btn-3d-shadow, #0f172a))
+
+  .jldn-text
+    transform: skewX(10deg)
+
+  &:hover
+    transform: skewX(-10deg) translateY(-6px)
+    box-shadow: 0 0 18px var(--jldn-base-color, var(--jldn-default-fill-color)), calc(var(--jldn-shadow-x, 0px) * 1.3) calc(var(--jldn-shadow-y, 5px) * 1.3) 0 0 var(--jldn-btn-3d-shadow, #0f172a)
+
+  &:active
+    transform: skewX(-10deg) translateY(1px)
+    box-shadow: 0 0 5px var(--jldn-base-color, var(--jldn-default-fill-color)), calc(var(--jldn-shadow-x, 0px) * 0.2) calc(var(--jldn-shadow-y, 5px) * 0.2) 0 0 var(--jldn-btn-3d-shadow, #0f172a)
+
+// 5. Cyberpunk / Retro Style (Vibrant neons and scanlines)
+[data-style="cyberpunk"]
+  font-family: 'Courier New', Courier, monospace !important
+  border-radius: 0px !important
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 0 2px #00f0ff
+  
+  .jldn-text
+    text-shadow: var(--jldn-text-shadow, 0 0 8px var(--jldn-font-color, #fff), 0 0 15px var(--jldn-base-color, #ff007f))
+
+[data-style="cyberpunk-3d"]
+  font-family: 'Courier New', Courier, monospace !important
+  border-radius: 0px !important
+  box-shadow: var(--jldn-shadow, inset 0 0 0 2px #00f0ff, var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 6px) 0 0 #ff007f, 0 0 10px rgba(0, 240, 255, 0.5))
+  transform: translateY(-4px)
+
+  .jldn-text
+    text-shadow: var(--jldn-text-shadow, 0 0 8px var(--jldn-font-color, #fff), 0 0 15px var(--jldn-base-color, #ff007f))
+
+  &:hover
+    transform: translateY(-6px)
+    box-shadow: var(--jldn-shadow, inset 0 0 0 2px #00f0ff, calc(var(--jldn-shadow-x, 0px) * 1.33) calc(var(--jldn-shadow-y, 6px) * 1.33) 0 0 #ff007f, 0 0 15px rgba(0, 240, 255, 0.7))
+
+  &:active
+    transform: translateY(1px)
+    box-shadow: var(--jldn-shadow, inset 0 0 0 2px #00f0ff, calc(var(--jldn-shadow-x, 0px) * 0.2) calc(var(--jldn-shadow-y, 6px) * 0.2) 0 0 #ff007f, 0 0 5px rgba(0, 240, 255, 0.3))
+
+// 6. Glassmorphic Style (Frosted glass effect)
+[data-style="glassmorphic"]
+  backdrop-filter: blur(12px) saturate(180%)
+  background: rgba(255, 255, 255, 0.08) !important
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 8px 32px 0 rgba(0, 0, 0, 0.3)
+
+[data-style="glassmorphic-3d"]
+  backdrop-filter: blur(12px) saturate(180%)
+  background: rgba(255, 255, 255, 0.08) !important
+  box-shadow: var(--jldn-shadow, inset 0 0 0 1px rgba(255, 255, 255, 0.25), var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 5px) 0 0 rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0, 0, 0, 0.3))
+  transform: translateY(-4px)
+
+  &:hover
+    transform: translateY(-6px)
+    box-shadow: var(--jldn-shadow, inset 0 0 0 1px rgba(255, 255, 255, 0.25), calc(var(--jldn-shadow-x, 0px) * 1.3) calc(var(--jldn-shadow-y, 5px) * 1.3) 0 0 rgba(0, 0, 0, 0.25), 0 12px 30px rgba(0, 0, 0, 0.35))
+
+  &:active
+    transform: translateY(1px)
+    box-shadow: var(--jldn-shadow, inset 0 0 0 1px rgba(255, 255, 255, 0.15), calc(var(--jldn-shadow-x, 0px) * 0.2) calc(var(--jldn-shadow-y, 5px) * 0.2) 0 0 rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.2))
 
 // Button layout adjustments
 .jldn-button
   cursor: pointer
-  min-width: 120px
+  min-width: var(--jldn-min-width, 120px)
   
   &:hover
     filter: brightness(1.1)
@@ -103,81 +270,43 @@
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), var(--jldn-shadow, none)
   
   &[data-style="3d"]
-    background: var(--jldn-fill-color, var(--jldn-default-fill-color))
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(0,0,0,0.3), var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 5px) 0 0 var(--jldn-meter-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 8px) 8px -4px rgba(0, 0, 0, 0.45)
+    background: var(--jldn-base-color, var(--jldn-default-fill-color))
+    box-shadow: var(--jldn-shadow, inset 0 0 0 1px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(0,0,0,0.3), var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 5px) 0 0 var(--jldn-meter-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 8px) 8px -4px rgba(0, 0, 0, 0.45))
     transform: translateY(-3px)
 
 // ==========================================
-// LAYER 2: FILL
+// LAYER 2: INTERMEDIATE (MASK)
 // ==========================================
-.jldn-fill
-  display: flex
-  align-items: center
-  width: var(--jldn-fill-size, 100%)
-  height: 100%
-  background: transparent
-  border-radius: inherit
-  position: relative
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15)
-  // Transition duration uses the custom property directly
-  transition: width var(--jldn-animation-speed, var(--jldn-transition-duration, 1.2s)) cubic-bezier(0.4, 0, 0.2, 1)
-
-  // Universal Convex Overlay
-  &::after
-    content: ''
-    position: absolute
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.12) 25%, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0.45) 100%)
-    pointer-events: none
-    z-index: 3
-    border-radius: inherit
-    display: none
-
-    .jldn-button[data-style="3d"] &, .jldn-meter[data-style="3d"] &
-      display: block
-
-  // 3D fill style details
-  .jldn-meter[data-style="3d"] &
-    box-shadow: inset 0 -4px 0 rgba(0,0,0,0.25), inset 0 3px 0 rgba(255,255,255,0.2)
-
-.jldn-unfill
-  height: calc(100% + 2px)
-  background: var(--jldn-reveal-color, var(--jldn-bar-color, var(--jldn-bg-color, var(--jldn-default-bg-color))))
+.jldn-mask
   position: absolute
   top: -1px
   bottom: -1px
   right: -1px
-  left: calc(var(--jldn-fill-size, 100%) - 1px)
+  left: calc(var(--jldn-reveal-width, 100%) - 1px)
+  background: var(--jldn-mask-color, var(--jldn-reveal-color, var(--jldn-bar-color, var(--jldn-bg-color, var(--jldn-default-bg-color)))))
   z-index: 1
+  border-radius: 0
   transition: left var(--jldn-animation-speed, var(--jldn-transition-duration, 1.2s)) cubic-bezier(0.4, 0, 0.2, 1)
 
-// ==========================================
-// LAYER 3: CANDYSTRIPES
-// ==========================================
-.jldn-stripes
-  display: none
+  // Universal Convex Overlay applied directly on the element before mask
+.jldn-button .jldn-text::after, .jldn-meter .jldn-text::after
+  content: ''
   position: absolute
   top: 0
   left: 0
   right: 0
   bottom: 0
-  background-image: linear-gradient(var(--jldn-stripe-angle, var(--jldn-default-stripe-angle)), var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 25%, var(--jldn-stripe-accent, transparent) 25%, var(--jldn-stripe-accent, transparent) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 75%, var(--jldn-stripe-accent, transparent) 75%, var(--jldn-stripe-accent, transparent))
-  background-size: 40px 40px
-  border-radius: inherit
-  opacity: 0.8
-  z-index: 2
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0) 60%, rgba(0, 0, 0, 0.15) 80%, rgba(0, 0, 0, 0.45) 100%)
   pointer-events: none
+  z-index: 3
+  border-radius: inherit
+  display: none
 
-  // Display stripes when candystripe-color is set or element has theme
-  [style*="--jldn-candystripe-color"] &, [data-theme] &
-    display: block
+.jldn-button[data-style*="3d"] .jldn-text::after, .jldn-meter[data-style*="3d"] .jldn-text::after
+  display: block
 
-  // Animation speed mapping
-  animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
-  animation-play-state: var(--jldn-animation-play-state, running)
+.jldn-button[data-style*="3d"][data-shape="circle"] .jldn-text::after
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0) 65%, rgba(0, 0, 0, 0.2) 85%, rgba(0, 0, 0, 0.5) 100%)
 
 // ==========================================
 // LAYER 4: TEXT (ABSOLUTELY CENTERED)
@@ -196,9 +325,10 @@
   font-weight: 600
   font-size: var(--jldn-font-size, 1rem)
   color: var(--jldn-font-color, var(--jldn-default-font-color))
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 0 2px rgba(0, 0, 0, 0.95), 0 0 5px rgba(0, 0, 0, 0.8)
+  text-shadow: var(--jldn-text-shadow, 0 1px 4px rgba(0, 0, 0, 0.95), 0 0 2px rgba(0, 0, 0, 0.95), 0 0 5px rgba(0, 0, 0, 0.8))
   pointer-events: none // click pass-through
   white-space: nowrap
+  border-radius: inherit
 
 // ==========================================
 // CODE ELEMENTS (.jldn-code)
@@ -213,51 +343,51 @@ code.jldn-code
   // Base configuration (Layer 1)
   width: var(--jldn-width, 100%)
   height: var(--jldn-height, auto)
-  background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, #384252))) // outer border/base color
+  background: var(--jldn-candy-stripe-bg, var(--jldn-stripe-bg-gradient)), var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, #384252))) // outer border/base color
+  background-size: 40px 40px, 100% 100%
+  background-position: 0 0, 0 0
+  background-clip: padding-box
   padding: var(--jldn-border-width, 2px) // spacing acting as border thickness
   box-shadow: var(--jldn-shadow, none)
+
+  &[data-candy-stripe-it="false"]
+    --jldn-candy-stripe-bg: none !important
+
+  &[data-animate="true"], &[style*="--jldn-animate: true"]
+    animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
+    animation-play-state: var(--jldn-animation-play-state, running)
   
   // Shapes
-  border-radius: var(--jldn-border-radius, 8px) // default rounded
+  border-radius: var(--jldn-border-shape, 8px) // default rounded
   &[data-shape="rounded"]
-    --jldn-border-radius: 8px
+    --jldn-border-shape: 8px
   &[data-shape="square"]
-    --jldn-border-radius: 0px
+    --jldn-border-shape: 0px
 
   // Flat vs 3D styles
   transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s ease
 
   &[data-style="3d"]
-    box-shadow: var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 6px) 0 0 var(--jldn-code-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 10px) 12px -3px rgba(0, 0, 0, 0.45)
+    box-shadow: var(--jldn-shadow, var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 6px) 0 0 var(--jldn-code-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 10px) 12px -3px rgba(0, 0, 0, 0.45))
     transform: translateY(-4px)
 
     &:hover
       transform: translateY(-5px)
-      box-shadow: calc(var(--jldn-shadow-x, 0px) * 1.16) calc(var(--jldn-shadow-y, 6px) * 1.16) 0 0 var(--jldn-code-3d-shadow), calc(var(--jldn-drop-shadow-x, 0px) * 1.2) calc(var(--jldn-drop-shadow-y, 10px) * 1.2) 16px -2px rgba(0, 0, 0, 0.5)
+      box-shadow: var(--jldn-shadow, calc(var(--jldn-shadow-x, 0px) * 1.16) calc(var(--jldn-shadow-y, 6px) * 1.16) 0 0 var(--jldn-code-3d-shadow), calc(var(--jldn-drop-shadow-x, 0px) * 1.2) calc(var(--jldn-drop-shadow-y, 10px) * 1.2) 16px -2px rgba(0, 0, 0, 0.5))
 
-  // Candystripes Layer (Layer 2)
-  .jldn-code-stripes
-    display: none
-    position: absolute
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    background-image: linear-gradient(var(--jldn-stripe-angle, var(--jldn-default-stripe-angle)), var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 25%, var(--jldn-stripe-accent, transparent) 25%, var(--jldn-stripe-accent, transparent) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 75%, var(--jldn-stripe-accent, transparent) 75%, var(--jldn-stripe-accent, transparent))
-    background-size: 40px 40px
-    border-radius: inherit
-    opacity: 0.5
-    z-index: 2
-    pointer-events: none
-    animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
-    animation-play-state: var(--jldn-animation-play-state, running)
+  // Mask Layer (Layer 1)
+  .jldn-mask
+    left: var(--jldn-border-width, 2px)
+    right: var(--jldn-border-width, 2px)
+    top: var(--jldn-border-width, 2px)
+    bottom: var(--jldn-border-width, 2px)
+    border-radius: calc(var(--jldn-border-shape, 8px) - var(--jldn-border-width, 2px))
+    background: var(--jldn-mask-color, #0f172a)
+    transition: none
 
-  &[style*="--jldn-candystripe-color"] .jldn-code-stripes, &[data-theme] .jldn-code-stripes
-    display: block
-
-  // Snippet Content Container (Layer 3)
+  // Snippet Content Container (Layer 2)
   .jldn-code-snippet
-    background: #0f172a
+    background: transparent
     border-radius: inherit
     position: relative
     z-index: 5
@@ -281,7 +411,7 @@ code.jldn-code
       border-radius: inherit
       display: none
 
-    @at-root code.jldn-code[data-style="3d"] .jldn-code-snippet::after
+    @at-root code.jldn-code[data-style*="3d"] .jldn-code-snippet::after
       display: block
 
     .jldn-code-pre
@@ -301,7 +431,7 @@ code.jldn-code
       padding: 0 0.5rem
 
       &:nth-child(even)
-        background: color-mix(in srgb, var(--jldn-candystripe-color, #38bdf8) 7%, transparent)
+        background: color-mix(in srgb, var(--jldn-stripe-color, #38bdf8) 7%, transparent)
 
       // Line Numbers
       .jldn-code-ln
@@ -324,8 +454,10 @@ code.jldn-code
         font-size: 0.95rem
         color: #e2e8f0
         white-space: pre-wrap
+        word-break: break-all
+        overflow-wrap: anywhere
         flex-grow: 1
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9)
+        text-shadow: var(--jldn-text-shadow, 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9))
 
     // Copy Button inside code container
     .jldn-code-copy
@@ -368,64 +500,67 @@ code.jldn-code
   padding: 0
   box-shadow: var(--jldn-shadow, none)
   
-  // Default Border Background color mappings by type
-  background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, #3b82f6)))
+  // Base background (Layer 1)
+  background: var(--jldn-candy-stripe-bg, var(--jldn-stripe-bg-gradient)), var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, #3b82f6)))
+  background-size: 40px 40px, 100% 100%
+  background-position: 0 0, 0 0
+  
   &[data-type="success"]
     --default-accent: #10b981
-    background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, var(--default-accent))))
+    background: var(--jldn-candy-stripe-bg, var(--jldn-stripe-bg-gradient)), var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, var(--default-accent))))
   &[data-type="error"]
     --default-accent: #ef4444
-    background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, var(--default-accent))))
+    background: var(--jldn-candy-stripe-bg, var(--jldn-stripe-bg-gradient)), var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, var(--default-accent))))
   &[data-type="warning"]
     --default-accent: #f59e0b
-    background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, var(--default-accent))))
+    background: var(--jldn-candy-stripe-bg, var(--jldn-stripe-bg-gradient)), var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, var(--default-accent))))
   &[data-type="info"]
     --default-accent: #3b82f6
-    background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, var(--default-accent))))
+    background: var(--jldn-candy-stripe-bg, var(--jldn-stripe-bg-gradient)), var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, var(--default-accent))))
+
+  &[data-candy-stripe-it="false"]
+    --jldn-candy-stripe-bg: none !important
+
+  &[data-animate="true"], &[style*="--jldn-animate: true"]
+    animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
+    animation-play-state: var(--jldn-animation-play-state, running)
 
   // Shapes
-  border-radius: var(--jldn-border-radius, 8px)
+  border-radius: var(--jldn-border-shape, 8px)
   &[data-shape="rounded"]
-    --jldn-border-radius: 8px
+    --jldn-border-shape: 8px
   &[data-shape="square"]
-    --jldn-border-radius: 0px
+    --jldn-border-shape: 0px
 
   // Flat vs 3D styles
   transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s ease
   
   &[data-style="3d"]
-    box-shadow: var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 6px) 0 0 var(--jldn-alert-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 10px) 12px -3px rgba(0, 0, 0, 0.35)
+    box-shadow: var(--jldn-shadow, var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 6px) 0 0 var(--jldn-alert-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 10px) 12px -3px rgba(0, 0, 0, 0.35))
     transform: translateY(-4px)
     
     &:hover
       transform: translateY(-5px)
-      box-shadow: calc(var(--jldn-shadow-x, 0px) * 1.16) calc(var(--jldn-shadow-y, 6px) * 1.16) 0 0 var(--jldn-alert-3d-shadow), calc(var(--jldn-drop-shadow-x, 0px) * 1.2) calc(var(--jldn-drop-shadow-y, 10px) * 1.2) 16px -2px rgba(0, 0, 0, 0.4)
+      box-shadow: var(--jldn-shadow, calc(var(--jldn-shadow-x, 0px) * 1.16) calc(var(--jldn-shadow-y, 6px) * 1.16) 0 0 var(--jldn-alert-3d-shadow), calc(var(--jldn-drop-shadow-x, 0px) * 1.2) calc(var(--jldn-drop-shadow-y, 10px) * 1.2) 16px -2px rgba(0, 0, 0, 0.4))
 
-  // Candystripes Layer (Layer 2)
-  .jldn-alert-stripes
-    display: none
-    position: absolute
-    top: 0
-    left: 0
+  // Mask Layer (Layer 1)
+  .jldn-mask
+    left: var(--jldn-border-width, 4px)
     right: 0
+    top: 0
     bottom: 0
-    background-image: linear-gradient(var(--jldn-stripe-angle, var(--jldn-default-stripe-angle)), var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 25%, var(--jldn-stripe-accent, transparent) 25%, var(--jldn-stripe-accent, transparent) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 75%, var(--jldn-stripe-accent, transparent) 75%, var(--jldn-stripe-accent, transparent))
-    background-size: 40px 40px
     border-radius: inherit
-    opacity: 0.5
-    z-index: 2
-    pointer-events: none
-    animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
-    animation-play-state: var(--jldn-animation-play-state, running)
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
+    background: var(--jldn-mask-color, rgba(30, 41, 59, 0.95))
+    transition: none
+    backdrop-filter: blur(10px)
 
-  &[style*="--jldn-candystripe-color"] .jldn-alert-stripes, &[data-theme] .jldn-alert-stripes, [style*="--jldn-candystripe-color"] .jldn-alert-stripes, [data-theme] .jldn-alert-stripes
-    display: block
-
-  // Content Area Layer (Layer 3)
+  // Content Area Layer (Layer 2)
   .jldn-alert-content
     display: flex
     align-items: center
-    background: rgba(30, 41, 59, 0.95)
+    background: transparent
     border-radius: inherit
     margin-top: 0
     margin-bottom: 0
@@ -434,7 +569,6 @@ code.jldn-code
     padding: 1rem 1.25rem
     position: relative
     z-index: 5
-    backdrop-filter: blur(10px)
     color: #f1f5f9
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4)
     min-height: 50px
@@ -455,7 +589,7 @@ code.jldn-code
       border-radius: inherit
       display: none
 
-    @at-root .jldn-alert[data-style="3d"] .jldn-alert-content::after
+    @at-root .jldn-alert[data-style*="3d"] .jldn-alert-content::after
       display: block
 
     .jldn-alert-icon
@@ -473,7 +607,7 @@ code.jldn-code
       flex-shrink: 0
       background: rgba(255, 255, 255, 0.08)
       color: var(--jldn-base-color, var(--default-accent, #3b82f6))
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9)
+      text-shadow: var(--jldn-text-shadow, 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9))
 
     .jldn-alert-text
       position: relative
@@ -482,7 +616,7 @@ code.jldn-code
       padding-right: 1.5rem
       font-size: 0.95rem
       font-weight: 500
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9)
+      text-shadow: var(--jldn-text-shadow, 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9))
 
     .jldn-alert-close
       position: absolute
@@ -500,7 +634,7 @@ code.jldn-code
       transform: translateY(-50%)
       transition: color 0.15s ease
       outline: none
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9)
+      text-shadow: var(--jldn-text-shadow, 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9))
 
       &:hover
         color: #f1f5f9
@@ -555,44 +689,43 @@ code.jldn-code
     max-width: 500px
     height: var(--jldn-height, auto)
     padding: var(--jldn-border-width, 3px) // border thickness
-    background: var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, #384252))) // border background color
+    background: var(--jldn-candy-stripe-bg, var(--jldn-stripe-bg-gradient)), var(--jldn-base-color, var(--jldn-fill-color, var(--jldn-bg-color, #384252))) // border background color
+    background-size: 40px 40px, 100% 100%
+    background-position: 0 0, 0 0
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4)
 
+    &[data-candy-stripe-it="false"]
+      --jldn-candy-stripe-bg: none !important
+
+    &[data-animate="true"], &[style*="--jldn-animate: true"]
+      animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
+      animation-play-state: var(--jldn-animation-play-state, running)
+
     // Shapes
-    border-radius: var(--jldn-border-radius, 16px)
+    border-radius: var(--jldn-border-shape, 16px)
     &[data-shape="rounded"]
-      --jldn-border-radius: 16px
+      --jldn-border-shape: 16px
     &[data-shape="square"]
-      --jldn-border-radius: 0px
+      --jldn-border-shape: 0px
 
     // 3D Extruded popup shadow
     @at-root
       .jldn-popup[data-style="3d"] .jldn-popup-content
-        box-shadow: var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 10px) 0 0 var(--jldn-popup-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 20px) 20px -4px rgba(0, 0, 0, 0.5)
+        box-shadow: var(--jldn-shadow, var(--jldn-shadow-x, 0px) var(--jldn-shadow-y, 10px) 0 0 var(--jldn-popup-3d-shadow), var(--jldn-drop-shadow-x, 0px) var(--jldn-drop-shadow-y, 20px) 20px -4px rgba(0, 0, 0, 0.5))
 
-  // Candystripes Layer (Layer 2)
-  .jldn-popup-stripes
-    display: none
-    position: absolute
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    background-image: linear-gradient(var(--jldn-stripe-angle, var(--jldn-default-stripe-angle)), var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 25%, var(--jldn-stripe-accent, transparent) 25%, var(--jldn-stripe-accent, transparent) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 50%, var(--jldn-candystripe-color, var(--jldn-default-stripe-color)) 75%, var(--jldn-stripe-accent, transparent) 75%, var(--jldn-stripe-accent, transparent))
-    background-size: 40px 40px
-    border-radius: inherit
-    opacity: 0.5
-    z-index: 2
-    pointer-events: none
-    animation: stripes-move var(--jldn-animation-speed, var(--jldn-default-stripe-speed)) linear infinite
-    animation-play-state: paused
+  // Mask Layer (Layer 1)
+  .jldn-mask
+    left: var(--jldn-border-width, 3px)
+    right: var(--jldn-border-width, 3px)
+    top: var(--jldn-border-width, 3px)
+    bottom: var(--jldn-border-width, 3px)
+    border-radius: calc(var(--jldn-border-shape, 16px) - var(--jldn-border-width, 3px))
+    background: var(--jldn-mask-color, #1e293b)
+    transition: none
 
-  &[style*="--jldn-candystripe-color"] .jldn-popup-stripes, &[data-theme] .jldn-popup-stripes, [style*="--jldn-candystripe-color"] .jldn-popup-stripes, [data-theme] .jldn-popup-stripes
-    display: block
-
-  // Body Container (Layer 3: Inset content dialog box)
+  // Body Container (Layer 2: Inset content dialog box)
   .jldn-popup-body
-    background: #1e293b
+    background: transparent
     border-radius: inherit
     padding: 2.2rem 2rem
     color: #f8fafc
@@ -616,7 +749,7 @@ code.jldn-code
       border-radius: inherit
       display: none
 
-    @at-root .jldn-popup[data-style="3d"] .jldn-popup-body::after
+    @at-root .jldn-popup[data-style*="3d"] .jldn-popup-body::after
       display: block
 
     .jldn-popup-text
@@ -624,7 +757,7 @@ code.jldn-code
       z-index: 2
       font-size: 1rem
       line-height: 1.5
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9)
+      text-shadow: var(--jldn-text-shadow, 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9))
 
     // Dismiss close button
     .jldn-popup-close
@@ -641,16 +774,7 @@ code.jldn-code
       transition: color 0.15s ease
       outline: none
       z-index: 3
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9)
+      text-shadow: var(--jldn-text-shadow, 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9))
 
       &:hover
         color: #f1f5f9
-
-[data-animation-paused="true"]
-  .jldn-stripes,
-  .jldn-code-stripes,
-  .jldn-alert-stripes,
-  .jldn-popup-stripes
-    animation-play-state: paused !important
-
-

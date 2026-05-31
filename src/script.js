@@ -24,7 +24,7 @@ $(() => {
 
   // Keyboard navigation accessibility for custom div buttons
   $(document).on("keydown", '[role="button"].jldn-button', function (e) {
-    if (e.key === " " || e.key === "Enter" || e.keyCode === 32 || e.keyCode === 13) {
+    if (e.key === " " || e.key === "Enter") {
       e.preventDefault();
       $(this).click();
     }
@@ -87,15 +87,31 @@ $(() => {
   })
 
   // --- Dynamic Light-Source Shadows ---
+  const visible3DElements = new Set();
+  const shadowObserver = new IntersectionObserver((entries) => {
+    let changed = false;
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        visible3DElements.add(entry.target);
+        changed = true;
+      } else {
+        visible3DElements.delete(entry.target);
+      }
+    });
+    if (changed && visible3DElements.size > 0) {
+      updateShadows();
+    }
+  }, { threshold: 0 });
+
   let updatePending = false;
   const updateShadows = () => {
-    if (updatePending) return;
+    if (updatePending || visible3DElements.size === 0) return;
     updatePending = true;
     requestAnimationFrame(() => {
       const centerX = window.innerWidth / 2;
-      // Select standard 3D components OR the popup content of a 3D popup
-      $('[data-style="3d"]:not(.jldn-popup), .jldn-popup[data-style="3d"] .jldn-popup-content').each(function () {
-        const rect = this.getBoundingClientRect();
+      
+      visible3DElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
         const elCenterX = rect.left + rect.width / 2;
         const deltaX = elCenterX - centerX;
         const ratio = deltaX / (window.innerWidth / 2 || 1);
@@ -108,25 +124,28 @@ $(() => {
         const dropShadowX = (ratio * maxDropShadowOffset).toFixed(1);
 
         // Bind relative offsets to element CSS custom properties
-        this.style.setProperty('--jldn-shadow-x', `${shadowX}px`);
-        this.style.setProperty('--jldn-drop-shadow-x', `${dropShadowX}px`);
+        el.style.setProperty('--jldn-shadow-x', `${shadowX}px`);
+        el.style.setProperty('--jldn-drop-shadow-x', `${dropShadowX}px`);
       });
       updatePending = false;
     });
   };
 
-  // Run on initial construction, window load, scroll, resizing, and custom events
-  updateShadows();
-  $(window).on("load scroll resize lookup-shadows", updateShadows);
+  const bindShadowObservers = () => {
+    $('[data-style="3d"]:not(.jldn-popup), .jldn-popup[data-style="3d"] .jldn-popup-content').each(function () {
+      shadowObserver.observe(this);
+    });
+  };
 
-  // Fallbacks to guarantee calculations run once layout has fully settled
-  setTimeout(updateShadows, 50);
-  setTimeout(updateShadows, 250);
+  // Run on initial construction, window load, scroll, resizing, and custom events
+  bindShadowObservers();
+  $(window).on("load scroll resize lookup-shadows", updateShadows);
 
   // Extend Element prototype to update shadows on dynamic update
   const originalUpdate = JLDN.updateElement;
   JLDN.updateElement = function ($el, options) {
     originalUpdate.call(this, $el, options);
+    bindShadowObservers();
     // Short delay to allow browser to recalculate bounding rects if DOM changed
     setTimeout(updateShadows, 10);
   };

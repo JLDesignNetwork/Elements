@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JLDN: Elements Demo</title>
+    <!-- Google Fonts & CDN Preconnects -->
+    <link rel="preconnect" href="https://code.jquery.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- JLDN: Elements CSS (automatically loaded via core.js unified loader) -->
+    <!-- <link href="src/style.css?v=1.0.19" rel="stylesheet"> -->
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            overflow-y: scroll;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #38bdf8;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: #94a3b8;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .showcase-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .label {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-family: monospace;
+        }
+
+        /* Playground Custom Styling */
+        .playground-wrapper {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (min-width: 900px) {
+            .playground-wrapper {
+                grid-template-columns: 350px minmax(0, 1fr);
+            }
+        }
+
+        .playground-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            background: rgba(15, 23, 42, 0.4);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .playground-control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .playground-control-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #38bdf8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .playground-control-group select,
+        .playground-control-group input[type="text"],
+        .playground-control-group input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: #f8fafc;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .playground-control-group select:focus {
+            border-color: #38bdf8;
+        }
+
+        .playground-checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+            font-size: 0.9rem;
+        }
+
+        .playground-checkbox-group input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .playground-preview-pane {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-height: 250px;
+            justify-content: center;
+            align-items: center;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .playground-code-box {
+            width: 100%;
+            margin-top: 1rem;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .playground-code-box * {
+            word-wrap: break-word;
+            word-break: break-all;
+            white-space: pre-wrap;
+        }
+
+        .range-val-lbl {
+            float: right;
+            font-family: monospace;
+            color: #64748b;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            transition: color 0.2s ease;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: #38bdf8;
+        }
+
+        body.light-mode {
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        
+        .theme-toggle {
+            float: right;
+            padding: 0.5rem 1rem;
+            background: #38bdf8;
+            color: #0f172a;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+        .theme-toggle:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button id="theme-toggle" class="theme-toggle">Switch to Light Mode</button>
+        <a href="index.html" class="back-link">&larr; Back to Home</a>
+        <h1>JLDN: Elements Interactive Playground</h1>
+
+        <h2>Interactive Elements & Style Playground</h2>
+        <div class="grid">
+            <div class="card" style="grid-column: span 2;">
+                <h3>Customize JLDN elements in real-time with any Style, Theme, Shape, and option settings.</h3>
+
+                <div class="playground-wrapper">
+                    <!-- Left: Controls -->
+                    <div class="playground-controls">
+
+                        <div class="playground-control-group">
+                            <label for="play-type">Element Type</label>
+                            <select id="play-type">
+                                <option value="button">Button</option>
+                                <option value="meter">Meter (Progress Bar)</option>
+                                <option value="code">Code Box</option>
+                                <option value="alert">Alert Banner</option>
+                                <option value="popup">Modal Popup</option>
+                            </select>
+                        </div>
+
+                        <div class="playground-control-group">
+                            <label for="play-style">Style Category</label>
+                            <select id="play-style">
+                                <option value="basic">Basic (Flat)</option>
+                                <option value="basic-3d">Basic 3D</option>
+                                <option value="professional">Professional</option>
+                                <option value="professional-3d">Professional 3D</option>
+                                <option value="cartoon">Cartoon</option>
+                                <option value="cartoon-3d">Cartoon 3D</option>
+                                <option value="esports">E-Sports</option>
+                                <option value="esports-3d">E-Sports 3D</option>
+                                <option value="cyberpunk">Cyberpunk</option>
+                                <option value="cyberpunk-3d">Cyberpunk 3D</option>
+                                <option value="glassmorphic">Glassmorphic</option>
+                                <option value="glassmorphic-3d">Glassmorphic 3D</option>
+
+                            </select>
+                        </div>
+
+                        <div class="playground-control-group">
+                            <label for="play-theme">Theme Preset</label>
+                            <select id="play-theme">
+                                <option value="none" selected>None</option>
+                                <optgroup label="Original Themes">
+                                    <option value="Christmas">Christmas</option>
+                                    <option value="Halloween">Halloween</option>
+                                    <option value="Easter">Easter</option>
+                                    <option value="4th of July">4th of July</option>
+                                </optgroup>
+                                <optgroup label="Holidays & Seasonal">
+                                    <option value="St. Patrick">St. Patrick's Day</option>
+                                    <option value="Valentine">Valentine's Day</option>
+                                    <option value="Thanksgiving">Thanksgiving</option>
+                                    <option value="New Year">New Year's Eve</option>
+                                    <option value="Spring">Spring</option>
+                                    <option value="Summer">Summer</option>
+                                    <option value="Autumn">Autumn</option>
+                                    <option value="Winter">Winter</option>
+                                </optgroup>
+                                <optgroup label="Movies & Pop Culture">
+                                    <option value="Star Wars">Star Wars</option>
+                                    <option value="Matrix">The Matrix</option>
+                                    <option value="LOTR">Lord of the Rings</option>
+                                    <option value="Star Trek">Star Trek</option>
+                                    <option value="Barbie">Barbie</option>
+                                    <option value="Cyberpunk">Cyberpunk</option>
+                                </optgroup>
+                                <optgroup label="College Sports">
+                                    <option value="Michigan">Michigan Wolverines</option>
+                                    <option value="Alabama">Alabama Crimson Tide</option>
+                                    <option value="Texas">Texas Longhorns</option>
+                                    <option value="UNC">UNC Tar Heels</option>
+                                    <option value="LSU">LSU Tigers</option>
+                                </optgroup>
+                                <optgroup label="Professional Sports">
+                                    <option value="Celtics">Boston Celtics</option>
+                                    <option value="Seahawks">Seattle Seahawks</option>
+                                    <option value="SF49ers">San Francisco 49ers</option>
+                                    <option value="Miami Vice">Miami Vice</option>
+                                    <option value="Cowboys">Dallas Cowboys</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="playground-control-group">
+                            <label for="play-shape">Border Shape</label>
+                            <select id="play-shape">
+                                <option value="square">Square</option>
+                                <option value="rounded-xs">Rounded XS (2px)</option>
+                                <option value="rounded-sm">Rounded SM (4px)</option>
+                                <option value="rounded-md" selected>Rounded MD (8px)</option>
+                                <option value="rounded-lg">Rounded LG (12px)</option>
+                                <option value="rounded-xl">Rounded XL (20px)</option>
+                                <option value="circle">Circle (Pill)</option>
+                            </select>
+                        </div>
+
+                        <div class="playground-control-group">
+                            <label>Border Width <span id="lbl-border-width" class="range-val-lbl">3px</span></label>
+                            <input type="range" id="play-border-width" min="0" max="12" value="3" style="width: 100%;">
+                        </div>
+
+                        <div class="playground-control-group" id="group-reveal-width">
+                            <label>Reveal Width / Progress <span id="lbl-reveal-width"
+                                    class="range-val-lbl">75%</span></label>
+                            <input type="range" id="play-reveal-width" min="0" max="100" value="75"
+                                style="width: 100%;">
+                        </div>
+
+                        <div class="playground-checkbox-group">
+                            <input type="checkbox" id="play-candy-stripe" checked>
+                            <label for="play-candy-stripe">Candy-Stripe Pattern</label>
+                        </div>
+
+                        <div class="playground-checkbox-group">
+                            <input type="checkbox" id="play-animate" checked>
+                            <label for="play-animate">Animate Stripes</label>
+                        </div>
+
+                        <div class="playground-control-group" id="group-speed">
+                            <label for="play-speed">Animation Speed</label>
+                            <select id="play-speed">
+                                <option value="xslow">Extra Slow (4.0s)</option>
+                                <option value="slow">Slow (2.5s)</option>
+                                <option value="normal" selected>Normal (1.5s)</option>
+                                <option value="fast">Fast (0.8s)</option>
+                                <option value="xfast">Extra Fast (0.4s)</option>
+                            </select>
+                        </div>
+
+                        <details
+                            style="margin-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1rem;">
+                            <summary
+                                style="font-size: 0.85rem; font-weight: 600; color: #38bdf8; cursor: pointer; user-select: none; outline: none; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                                Advanced Options &darr;
+                            </summary>
+                            <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1rem;">
+                                <div class="playground-control-group">
+                                    <label for="play-width">Custom Width (e.g. 250px)</label>
+                                    <input type="text" id="play-width" placeholder="auto">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-height">Custom Height (e.g. 60px)</label>
+                                    <input type="text" id="play-height" placeholder="auto">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-border-style">Border Style</label>
+                                    <select id="play-border-style">
+                                        <option value="solid" selected>Solid</option>
+                                        <option value="dashed">Dashed</option>
+                                        <option value="dotted">Dotted</option>
+                                        <option value="double">Double</option>
+                                        <option value="none">None</option>
+                                    </select>
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-border-color">Border Color (e.g. #ef4444)</label>
+                                    <input type="text" id="play-border-color" placeholder="Default">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-base-color">Base Color / Gradient</label>
+                                    <input type="text" id="play-base-color"
+                                        placeholder="e.g. #10b981 or linear-gradient(...)">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-reveal-color">Reveal Mask Color</label>
+                                    <input type="text" id="play-reveal-color" placeholder="e.g. #0f172a">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-stripe-color">Stripe Color</label>
+                                    <input type="text" id="play-stripe-color" placeholder="e.g. rgba(255,255,255,0.25)">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-3d-shadow-color">3D Extrusion Color</label>
+                                    <input type="text" id="play-3d-shadow-color" placeholder="e.g. #080c16">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-3d-shadow-x">3D Extrusion X</label>
+                                    <input type="text" id="play-3d-shadow-x" placeholder="e.g. 0px">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-3d-shadow-y">3D Extrusion Y</label>
+                                    <input type="text" id="play-3d-shadow-y" placeholder="e.g. 6px">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-drop-shadow-x">Drop Shadow X</label>
+                                    <input type="text" id="play-drop-shadow-x" placeholder="e.g. 0px">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-drop-shadow-y">Drop Shadow Y</label>
+                                    <input type="text" id="play-drop-shadow-y" placeholder="e.g. 10px">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-font-size">Font Size (e.g. 1.1rem)</label>
+                                    <input type="text" id="play-font-size" placeholder="Default">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-font-family">Font Family (e.g. Outfit)</label>
+                                    <input type="text" id="play-font-family" placeholder="Default">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-font-color">Font Color (e.g. #fff)</label>
+                                    <input type="text" id="play-font-color" placeholder="Default">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-box-shadow">Box Shadow</label>
+                                    <input type="text" id="play-box-shadow"
+                                        placeholder="e.g. 0 4px 6px rgba(0,0,0,0.1)">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-text-shadow">Text Shadow</label>
+                                    <input type="text" id="play-text-shadow" placeholder="Default">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-mouseover">Mouseover Action (CSS)</label>
+                                    <input type="text" id="play-mouseover" placeholder="e.g. filter: brightness(1.2)">
+                                </div>
+                                <div class="playground-control-group">
+                                    <label for="play-focus">Focus Action (CSS)</label>
+                                    <input type="text" id="play-focus" placeholder="e.g. outline: 2px solid #38bdf8">
+                                </div>
+                                <div class="playground-control-group" id="group-alert-type" style="display: none;">
+                                    <label for="play-alert-type">Alert Type</label>
+                                    <select id="play-alert-type">
+                                        <option value="info" selected>Info (Blue)</option>
+                                        <option value="success">Success (Green)</option>
+                                        <option value="warning">Warning (Yellow)</option>
+                                        <option value="error">Error (Red)</option>
+                                    </select>
+                                </div>
+                                <div class="playground-checkbox-group" id="group-alert-dismissible"
+                                    style="display: none;">
+                                    <input type="checkbox" id="play-alert-dismissible" checked>
+                                    <label for="play-alert-dismissible">Dismissible Alert</label>
+                                </div>
+                                <div class="playground-control-group" id="group-popup-trigger" style="display: none;">
+                                    <label for="play-popup-trigger">Popup Launch Button ID</label>
+                                    <input type="text" id="play-popup-trigger" value="prev-el-popup-trigger">
+                                </div>
+                            </div>
+                        </details>
+
+                    </div>
+
+
+                    <!-- Right: Preview Area -->
+                    <div>
+                        <span class="label" style="display: block; margin-bottom: 0.5rem;">Live Preview</span>
+                        <div class="playground-preview-pane">
+
+                            <!-- Button Preview -->
+                            <div id="prev-box-button" class="preview-item">
+                                <button id="prev-el-button" class="jldn-button">Interactive Button</button>
+                            </div>
+
+                            <!-- Meter Preview -->
+                            <div id="prev-box-meter" class="preview-item"
+                                style="display:none; width: 100%; max-width: 400px;">
+                                <div id="prev-el-meter" class="jldn-meter">Loading Mainframe...</div>
+                            </div>
+
+                            <!-- Code Box Preview -->
+                            <div id="prev-box-code" class="preview-item" style="display:none; width: 100%;">
+                                <code id="prev-el-code" class="jldn-code">const system = "ready";
+console.log(`System status is ${system}`);</code>
+                            </div>
+
+                            <!-- Alert Preview -->
+                            <div id="prev-box-alert" class="preview-item" style="display:none; width: 100%;">
+                                <div id="prev-el-alert" class="jldn-alert" data-options='{"type":"info"}'>Security
+                                    clearance confirmed.
+                                    Access granted.</div>
+                            </div>
+
+                            <!-- Modal Trigger Preview -->
+                            <div id="prev-box-popup" class="preview-item" style="display:none;">
+                                <button id="prev-el-popup-trigger" class="jldn-button">Launch Modal</button>
+                                <div id="prev-el-popup" class="jldn-popup"
+                                    data-options='{"trigger":"prev-el-popup-trigger", "theme":"St. Patrick"}'>
+                                    <h3 style="margin-top:0;">Interactive Sandbox Modal</h3>
+                                    <p>This modal dialog is dynamically styled based on your selected settings in the
+                                        controls panel.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span class="label" style="display: block; margin-top: 2rem; margin-bottom: 0.5rem;">Generated
+                            Code
+                            Snippet</span>
+                        <div class="playground-code-box" id="playground-code-output-wrap">
+                            <!-- Dynamically populated JLDN Code element -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- JLDN: Elements JS (Unified Single-Link Loader) -->
+    <script defer src="src/modules/core.js?modules=button,meter,code,alert,popup"></script>
+
+    <script>
+        window.addEventListener('load', () => {
+            // Dynamic Style & Elements Playground logic
+            const $playType = $('#play-type');
+            const $playStyle = $('#play-style');
+            const $playTheme = $('#play-theme');
+            const $playShape = $('#play-shape');
+            const $playBorderWidth = $('#play-border-width');
+            const $playRevealWidth = $('#play-reveal-width');
+            const $playCandyStripe = $('#play-candy-stripe');
+            const $playAnimate = $('#play-animate');
+            const $playSpeed = $('#play-speed');
+
+            // Advanced Options inputs
+            const $playWidth = $('#play-width');
+            const $playHeight = $('#play-height');
+            const $playBorderStyle = $('#play-border-style');
+            const $playBorderColor = $('#play-border-color');
+            const $playBaseColor = $('#play-base-color');
+            const $playRevealColor = $('#play-reveal-color');
+            const $playStripeColor = $('#play-stripe-color');
+            const $play3dShadowColor = $('#play-3d-shadow-color');
+            const $play3dShadowX = $('#play-3d-shadow-x');
+            const $play3dShadowY = $('#play-3d-shadow-y');
+            const $playDropShadowX = $('#play-drop-shadow-x');
+            const $playDropShadowY = $('#play-drop-shadow-y');
+            const $playFontSize = $('#play-font-size');
+            const $playFontFamily = $('#play-font-family');
+            const $playFontColor = $('#play-font-color');
+            const $playBoxShadow = $('#play-box-shadow');
+            const $playTextShadow = $('#play-text-shadow');
+            const $playMouseover = $('#play-mouseover');
+            const $playFocus = $('#play-focus');
+            const $playAlertType = $('#play-alert-type');
+            const $playAlertDismissible = $('#play-alert-dismissible');
+            const $playPopupTrigger = $('#play-popup-trigger');
+
+            const $lblBorderWidth = $('#lbl-border-width');
+            const $lblRevealWidth = $('#lbl-reveal-width');
+
+            const $groupSpeed = $('#group-speed');
+            const $groupRevealWidth = $('#group-reveal-width');
+
+            function updatePlayground() {
+                if (!window.JLDN) return;
+                const type = $playType.val();
+                const style = $playStyle.val();
+                const theme = $playTheme.val();
+                const shape = $playShape.val();
+                const borderWidth = $playBorderWidth.val() + 'px';
+                const revealWidth = $playRevealWidth.val() + '%';
+                const candyStripe = $playCandyStripe.is(':checked');
+                const animate = $playAnimate.is(':checked');
+                const speed = $playSpeed.val();
+
+                // Update labels
+                $lblBorderWidth.text(borderWidth);
+                $lblRevealWidth.text(revealWidth);
+
+                // Hide/show speed control based on animate checkbox
+                if (animate) {
+                    $groupSpeed.show();
+                } else {
+                    $groupSpeed.hide();
+                }
+
+                // Hide/show reveal width control based on element type (only applies to button and meter)
+                if (type === 'button' || type === 'meter') {
+                    $groupRevealWidth.show();
+                } else {
+                    $groupRevealWidth.hide();
+                }
+
+                // Hide/show component-specific advanced options
+                if (type === 'alert') {
+                    $('#group-alert-type').show();
+                    $('#group-alert-dismissible').show();
+                } else {
+                    $('#group-alert-type').hide();
+                    $('#group-alert-dismissible').hide();
+                }
+
+                if (type === 'popup') {
+                    $('#group-popup-trigger').show();
+                } else {
+                    $('#group-popup-trigger').hide();
+                }
+
+                // Hide all preview items and show the current type
+                $('.preview-item').hide();
+                $(`#prev-box-${type}`).show();
+
+                // Build the option map to pass to JLDN
+                const opts = {
+                    "style": style,
+                    "border-shape": shape,
+                    "border-width": borderWidth,
+                    "candy-stripe-it": candyStripe,
+                    "animate": animate
+                };
+
+                if (theme !== "none") {
+                    opts["theme"] = theme;
+                }
+
+                if (animate) {
+                    opts["animation-speed"] = speed;
+                } else {
+                    opts["animation-speed"] = "paused";
+                }
+
+                if (type === 'button' || type === 'meter') {
+                    opts["reveal-width"] = revealWidth;
+                }
+
+                // Add advanced options if set
+                const widthVal = $playWidth.val().trim();
+                if (widthVal) opts["width"] = widthVal;
+
+                const heightVal = $playHeight.val().trim();
+                if (heightVal) opts["height"] = heightVal;
+
+                const borderStyleVal = $playBorderStyle.val();
+                if (borderStyleVal) opts["border-style"] = borderStyleVal;
+
+                const borderColorVal = $playBorderColor.val().trim();
+                if (borderColorVal) opts["border-color"] = borderColorVal;
+
+                const baseColorVal = $playBaseColor.val().trim();
+                if (baseColorVal) opts["base-color"] = baseColorVal;
+
+                const revealColorVal = $playRevealColor.val().trim();
+                if (revealColorVal) opts["reveal-color"] = revealColorVal;
+
+                const stripeColorVal = $playStripeColor.val().trim();
+                if (stripeColorVal) opts["stripe-color"] = stripeColorVal;
+
+                const color3dVal = $play3dShadowColor.val().trim();
+                if (color3dVal) opts["3d-shadow-color"] = color3dVal;
+
+                const x3dVal = $play3dShadowX.val().trim();
+                if (x3dVal) opts["3d-shadow-x"] = x3dVal;
+
+                const y3dVal = $play3dShadowY.val().trim();
+                if (y3dVal) opts["3d-shadow-y"] = y3dVal;
+
+                const dropXVal = $playDropShadowX.val().trim();
+                if (dropXVal) opts["drop-shadow-x"] = dropXVal;
+
+                const dropYVal = $playDropShadowY.val().trim();
+                if (dropYVal) opts["drop-shadow-y"] = dropYVal;
+
+                const fontSizeVal = $playFontSize.val().trim();
+                if (fontSizeVal) opts["font-size"] = fontSizeVal;
+
+                const fontFamilyVal = $playFontFamily.val().trim();
+                if (fontFamilyVal) opts["font-family"] = fontFamilyVal;
+
+                const fontColorVal = $playFontColor.val().trim();
+                if (fontColorVal) opts["font-color"] = fontColorVal;
+
+                const boxShadowVal = $playBoxShadow.val().trim();
+                if (boxShadowVal) opts["box-shadow"] = boxShadowVal;
+
+                const textShadowVal = $playTextShadow.val().trim();
+                if (textShadowVal) opts["text-shadow"] = textShadowVal;
+
+                const mouseoverVal = $playMouseover.val().trim();
+                if (mouseoverVal) opts["mouseover"] = mouseoverVal;
+
+                const focusVal = $playFocus.val().trim();
+                if (focusVal) opts["focus"] = focusVal;
+
+                // Component-specific options
+                if (type === 'alert') {
+                    opts["type"] = $playAlertType.val();
+                    opts["dismissible"] = $playAlertDismissible.is(':checked');
+                } else if (type === 'popup') {
+                    const triggerVal = $playPopupTrigger.val().trim();
+                    if (triggerVal) {
+                        opts["trigger"] = triggerVal;
+                    }
+                }
+
+                // Get target element and generate snippet
+                let $target;
+                let snippetMarkup = '';
+
+                if (type === 'button') {
+                    const $prevBox = $('#prev-box-button');
+                    $prevBox.empty().append('<button id="prev-el-button" class="jldn-button">Interactive Button</button>');
+                    $target = $('#prev-el-button');
+                    window.JLDN.buildElement($target, opts);
+                    snippetMarkup = `<button class="jldn-button" data-options='${JSON.stringify(opts)}'>Interactive Button</button>`;
+                } else if (type === 'meter') {
+                    const $prevBox = $('#prev-box-meter');
+                    $prevBox.empty().append('<div id="prev-el-meter" class="jldn-meter">Loading Mainframe...</div>');
+                    $target = $('#prev-el-meter');
+                    window.JLDN.buildElement($target, opts);
+                    $target.find('.jldn-text').text(`Loading... (${revealWidth})`);
+                    snippetMarkup = `<div class="jldn-meter" data-options='${JSON.stringify(opts)}'>Loading...</div>`;
+                } else if (type === 'code') {
+                    const $prevBox = $('#prev-box-code');
+                    $prevBox.empty().append('<code id="prev-el-code" class="jldn-code">const system = "ready";\nconsole.log(`System status is ${system}`);</code>');
+                    $target = $('#prev-el-code');
+                    window.JLDN.buildElement($target, opts);
+                    snippetMarkup = `<code class="jldn-code" data-options='${JSON.stringify(opts)}'>const system = "ready";\nconsole.log(\`System status is \${system}\`);</code>`;
+                } else if (type === 'alert') {
+                    const $prevBox = $('#prev-box-alert');
+                    $prevBox.empty().append('<div id="prev-el-alert" class="jldn-alert">Security clearance confirmed. Access granted.</div>');
+                    $target = $('#prev-el-alert');
+                    window.JLDN.buildElement($target, opts);
+                    snippetMarkup = `<div class="jldn-alert" data-options='${JSON.stringify(opts)}'>Security clearance confirmed. Access granted.</div>`;
+                } else if (type === 'popup') {
+                    const $prevBox = $('#prev-box-popup');
+                    $prevBox.empty().append('<button id="prev-el-popup-trigger" class="jldn-button">Launch Modal</button>\n<div id="prev-el-popup" class="jldn-popup">\n    <h3 style="margin-top:0;">Interactive Sandbox Modal</h3>\n    <p>This modal dialog is dynamically styled based on your selected settings in the controls panel.</p>\n</div>');
+                    const popupTriggerOpts = {
+                        "style": style,
+                        "border-shape": shape,
+                        "border-width": borderWidth
+                    };
+                    if (theme !== "none") {
+                        popupTriggerOpts["theme"] = theme;
+                    }
+                    const $trigger = $('#prev-el-popup-trigger');
+                    window.JLDN.buildElement($trigger, popupTriggerOpts);
+                    $target = $('#prev-el-popup');
+                    window.JLDN.buildElement($target, opts);
+                    snippetMarkup = `<!-- Trigger Button -->\n<button id="my-popup-btn" class="jldn-button" data-options='${JSON.stringify(popupTriggerOpts)}'>Launch Modal</button>\n\n<!-- Modal Popup -->\n<div class="jldn-popup" data-options='${JSON.stringify(opts)}'>\n  <h3>Interactive Sandbox Modal</h3>\n  <p>Modal content goes here...</p>\n</div>`;
+                }
+
+                // Recreate the JLDN code element to render the snippet beautifully with copy capability
+                const $codeOutputWrap = $('#playground-code-output-wrap');
+                $codeOutputWrap.empty();
+
+                const $newCodeEl = $('<code class="jldn-code"></code>').text(snippetMarkup);
+                $codeOutputWrap.append($newCodeEl);
+
+                // Programmatically initialize JLDN code element with a static, clean styling
+                if (window.JLDN && window.JLDN.createCode) {
+                    window.JLDN.createCode($newCodeEl, {
+                        theme: "none",
+                        style: "professional",
+                        "border-width": "2px"
+                    });
+                }
+            }
+
+            // Bind event listeners
+            $('#play-type, #play-style, #play-theme, #play-shape, #play-border-width, #play-reveal-width, #play-speed, #play-width, #play-height, #play-border-style, #play-border-color, #play-base-color, #play-reveal-color, #play-stripe-color, #play-3d-shadow-color, #play-3d-shadow-x, #play-3d-shadow-y, #play-drop-shadow-x, #play-drop-shadow-y, #play-font-size, #play-font-family, #play-font-color, #play-box-shadow, #play-text-shadow, #play-mouseover, #play-focus, #play-alert-type, #play-popup-trigger').on('change input', updatePlayground);
+            $('#play-candy-stripe, #play-animate, #play-alert-dismissible').on('change', updatePlayground);
+
+            // Initial run
+            function initPlayground() {
+                if (window.JLDN) {
+                    updatePlayground();
+                } else {
+                    setTimeout(initPlayground, 20);
+                }
+            }
+            initPlayground();
+
+            // Initial trigger
+            updatePlayground();
+
+            // Theme Toggle
+            $('#theme-toggle').on('click', function() {
+                $('body').toggleClass('light-mode');
+                if ($('body').hasClass('light-mode')) {
+                    $(this).text('Switch to Dark Mode');
+                } else {
+                    $(this).text('Switch to Light Mode');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

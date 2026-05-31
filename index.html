@@ -2,630 +2,661 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JLDN: Elements Demo</title>
-  <!-- Google Fonts & CDN Preconnects -->
-  <link rel="preconnect" href="https://code.jquery.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;600;800&display=swap"
-    rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JLDN: Elements — Premium Custom UI Library</title>
+    <!-- Google Fonts & CDN Preconnects -->
+    <link rel="preconnect" href="https://code.jquery.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
 
-  <!-- JLDN: Elements CSS (automatically loaded via core.js unified loader) -->
-  <!-- <link href="src/style.css?v=1.0.19" rel="stylesheet"> -->
+    <style>
+        :root {
+            --primary-grad: linear-gradient(135deg, #38bdf8, #818cf8);
+            --accent-grad: linear-gradient(135deg, #ec4899, #8b5cf6);
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.06);
+        }
 
-  <style>
-    body {
-      background-color: #0f172a;
-      color: #f8fafc;
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 2rem;
-    }
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
 
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        .hero-banner {
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent 50%),
+                radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.1), transparent 50%);
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-    h1,
-    h2,
-    h3 {
-      font-family: 'Outfit', sans-serif;
-    }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-    h1 {
-      font-size: 2.5rem;
-      background: linear-gradient(135deg, #38bdf8, #818cf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #334155;
-      padding-bottom: 1rem;
-    }
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+        }
 
-    h2 {
-      font-size: 1.8rem;
-      color: #38bdf8;
-      margin-top: 3rem;
-      margin-bottom: 1.5rem;
-    }
+        .hero-banner h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--primary-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
 
-    .card {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
+        .nav-btn-grid {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    .card h3 {
-      margin-top: 0;
-      font-size: 1.2rem;
-      color: #94a3b8;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
-    }
+        .btn-primary,
+        .btn-secondary {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1rem;
+        }
 
-    .showcase {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
+        .btn-primary {
+            background: var(--primary-grad);
+            color: #0f172a;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+        }
 
-    .showcase-row {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(56, 189, 248, 0.55);
+        }
 
-    .label {
-      font-size: 0.85rem;
-      color: #64748b;
-      font-family: monospace;
-    }
-  </style>
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #f8fafc;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-top: 5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #38bdf8;
+            padding-left: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            color: #38bdf8;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: #94a3b8;
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* 4 Layers details */
+        .architecture-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .architecture-layers {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .architecture-layers {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .layer-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .layer-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            border-radius: 9999px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .layer-card h4 {
+            font-size: 1.1rem;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+        }
+
+        .layer-card p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        /* Styled Table Styling */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 4rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--glass-bg);
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th,
+        td {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            background: rgba(15, 23, 42, 0.8);
+            color: #38bdf8;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        td code {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #f472b6;
+        }
+
+        .style-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .style-item {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .style-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #38bdf8;
+            box-shadow: 0 0 8px #38bdf8;
+        }
+
+        .style-item.three-d .style-indicator {
+            background: #ec4899;
+            box-shadow: 0 0 8px #ec4899;
+        }
+
+        .style-name {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="container">
-    <h1>JLDN: Elements Component Showcase</h1>
-
-    <h2>Buttons Showcase</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Basic & Shapes</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">Default (Square, Flat)</span>
-            <button id="btn-default" class="jldn-button" data-options='{}'>Default Button</button>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Round Shape</span>
-            <button id="btn-round" class="jldn-button" data-options='{"shape":"round"}'>Round Button</button>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Div Tag Button</span>
-            <div id="btn-div" class="jldn-button" data-options='{"shape":"round"}'>Div Button</div>
-          </div>
+    <!-- Hero Banner -->
+    <header class="hero-banner">
+        <div class="container">
+            <h1>JLDN Elements</h1>
+            <p class="hero-subtitle">
+                A premium custom UI library featuring high-fidelity, multi-layered styled containers, progress meters,
+                buttons,
+                and popups. Powered by HTML, CSS/SASS, and jQuery.
+            </p>
+            <div class="nav-btn-grid">
+                <a href="playground.html" class="btn-primary">Interactive Playground</a>
+                <a href="snippets.html" class="btn-secondary">Cookbook Recipes</a>
+            </div>
         </div>
-      </div>
+    </header>
 
-      <div class="card">
-        <h3>Styles & Colors</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">3D Style (Default color)</span>
-            <button id="btn-3d" class="jldn-button" data-options='{"style":"3d"}'>3D Style</button>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Custom Fill (Solid)</span>
-            <button id="btn-fill-solid" class="jldn-button"
-              data-options='{"fill-color":"#ec4899", "shape":"round"}'>Solid Pink</button>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Custom Gradient (3D)</span>
-            <button id="btn-fill-grad" class="jldn-button"
-              data-options='{"style":"3d", "fill-color":"linear-gradient(135deg, #06b6d4, #3b82f6)"}'>Cyan-Blue
-              3D</button>
-          </div>
-        </div>
-      </div>
+    <!-- Content Container -->
+    <main class="container">
 
-      <div class="card">
-        <h3>Candystripes & Sizes</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">Striped Flat Button</span>
-            <button id="btn-stripe-flat" class="jldn-button"
-              data-options='{"candystripe-color":"rgba(255,255,255,0.2)", "fill-color":"#e11d48"}'>Candystripes</button>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Striped 3D Button (Custom size)</span>
-            <button id="btn-stripe-3d" class="jldn-button"
-              data-options='{"style":"3d", "candystripe-color":"rgba(0,0,0,0.15)", "fill-color":"#10b981", "width":"200px", "height":"60px"}'>Big
-              Striped 3D</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h2>Meters Showcase</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Shapes & Sizes</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">Default Meter (Square, Flat, 100%)</span>
-            <div id="mtr-default" class="jldn-meter" data-options='{}'>Default</div>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Round Meter (50% progress)</span>
-            <div id="mtr-round" class="jldn-meter" data-options='{"shape":"round", "fill-size":"50%"}'>Loading</div>
-          </div>
-          <div class="showcase-row">
-            <span class="label">3D Meter (Custom height & size)</span>
-            <div id="mtr-3d" class="jldn-meter" data-options='{"style":"3d", "fill-size":"75%", "height":"30px"}'>75%
-              Done</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Colors & Stripes</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">Custom Fill / Reveal Colors</span>
-            <div id="mtr-custom-colors" class="jldn-meter"
-              data-options='{"fill-color":"#8b5cf6", "reveal-color":"#1e293b", "fill-size":"60%"}'>Custom Colors</div>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Striped Meter</span>
-            <div id="mtr-striped" class="jldn-meter"
-              data-options='{"candystripe-color":"rgba(255,255,255,0.25)", "fill-color":"#f59e0b", "fill-size":"80%"}'>
-              Stripes</div>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Animated Stripes & Transitions</span>
-            <div id="mtr-animated" class="jldn-meter"
-              data-options='{"candystripe-color":"rgba(255,255,255,0.2)", "fill-color":"linear-gradient(90deg, #3b82f6, #8b5cf6)", "fill-size":"90%", "animation-speed":"normal"}'>
-              Animated Progress</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Stripe Animation States</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">Paused Animation ("animation-speed": "paused")</span>
-            <div id="mtr-stripe-paused" class="jldn-meter"
-              data-options='{"candystripe-color":"rgba(255,255,255,0.25)", "fill-color":"#ef4444", "fill-size":"70%", "animation-speed":"paused"}'>
-              Paused Stripes</div>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Slower Animation ("animation-speed": "slow")</span>
-            <div id="mtr-stripe-slow" class="jldn-meter"
-              data-options='{"candystripe-color":"rgba(255,255,255,0.25)", "fill-color":"#10b981", "fill-size":"70%", "animation-speed":"slow"}'>
-              Slower Stripes</div>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Faster Animation ("animation-speed": "fast")</span>
-            <div id="mtr-stripe-fast" class="jldn-meter"
-              data-options='{"candystripe-color":"rgba(255,255,255,0.25)", "fill-color":"#3b82f6", "fill-size":"70%", "animation-speed":"fast"}'>
-              Faster Stripes</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h2>Code Showcase</h2>
-    <div class="grid">
-      <div class="card" style="grid-column: span 2;">
-        <h3>Code Snippet Containers</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">Default (no options, simple rounded border)</span>
-            <code id="code-1" class="jldn-code" data-options='{}'>const greeting = "Hello, developer!";
-console.log(greeting);</code>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Cyberpunk Theme (3D, neon yellow/cyan/magenta border)</span>
-            <code id="code-2" class="jldn-code"
-              data-options='{"theme":"Cyberpunk", "style":"3d", "border-width":"4px"}'>function initiateHack() {
-  console.log("Accessing mainframe...");
-}</code>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Matrix Theme (green border & stripes)</span>
-            <code id="code-3" class="jldn-code" data-options='{"theme":"Matrix", "border-width":"3px"}'>// Down the rabbit hole
-const redPill = true;
-const truth = redPill ? "Reality" : "Simulation";</code>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Star Wars Theme (Lightsaber clash: red/blue border)</span>
-            <code id="code-4" class="jldn-code" data-options='{"theme":"Star Wars", "border-width":"5px"}'>import { Force } from 'galaxy';
-const user = new Jedi("Luke Skywalker");
-user.use(Force.LightSide);</code>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h2>Alert Showcase</h2>
-    <div class="grid">
-      <div class="card" style="grid-column: span 2;">
-        <h3>Alert Notifications</h3>
-        <div class="showcase">
-          <div id="alert-1" class="jldn-alert" data-options='{"type":"success", "border-width":"4px"}'>Standard Success:
-            Operations completed successfully!</div>
-          <div id="alert-2" class="jldn-alert"
-            data-options='{"theme":"Christmas", "type":"warning", "dismissible":true, "border-width":"6px"}'>Christmas
-            themed warning: Watch out for falling snow! (Dismissible, 6px border)</div>
-          <div id="alert-3" class="jldn-alert"
-            data-options='{"theme":"St. Patrick", "type":"info", "dismissible":false, "border-width":"5px"}'>St. Patrick
-            Theme: Find the pot of gold at the end of the rainbow. (Non-dismissible)</div>
-          <div id="alert-4" class="jldn-alert"
-            data-options='{"theme":"Halloween", "type":"error", "dismissible":true, "border-width":"8px"}'>Halloween
-            Theme: Spooky errors detected! Proceed with caution. (8px border)</div>
-          <div id="alert-5" class="jldn-alert" data-options='{"theme":"Summer", "type":"info", "border-width":"4px"}'>
-            Summer Theme: Beach season has officially started.</div>
-        </div>
-      </div>
-    </div>
-
-    <h2>Modal & Popup Showcase</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Standard & Sci-Fi Modals</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">Default (Simple Flat Border)</span>
-            <button id="btn-trigger-default" class="jldn-button" data-options='{}'>Launch Default
-              Modal</button>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Star Wars Modal (Blue/Red clash)</span>
-            <button id="btn-trigger-starwars" class="jldn-button"
-              data-options='{"theme":"Star Wars", "style":"3d"}'>Launch Star Wars Modal</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Sports & Theme Modals</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">Celtics Modal (Clover Green & Gold)</span>
-            <button id="btn-trigger-celtics" class="jldn-button" data-options='{"theme":"Celtics", "style":"3d"}'>Launch
-              Celtics Modal</button>
-          </div>
-          <div class="showcase-row">
-            <span class="label">Miami Vice Modal (Pink/Teal Gradient)</span>
-            <button id="btn-trigger-vice" class="jldn-button" data-options='{"theme":"Miami Vice", "style":"3d"}'>Launch
-              Miami Vice Modal</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modals Markup -->
-    <div id="popup-default" class="jldn-popup" data-options='{"trigger":"btn-trigger-default", "border-width":"3px"}'>
-      <h3 style="margin-top:0;">Default Modal</h3>
-      <p>This is a standard modal dialog with a flat layout and neutral base styling.</p>
-    </div>
-
-    <div id="popup-starwars" class="jldn-popup"
-      data-options='{"trigger":"btn-trigger-starwars", "theme":"Star Wars", "style":"3d", "border-width":"5px"}'>
-      <h3 style="margin-top:0; color:#3b82f6;">May the Force Be With You</h3>
-      <p>This Star Wars themed popup features a lightsaber clash border (blue to red gradient) and a 3D shadow depth.
-      </p>
-    </div>
-
-    <div id="popup-celtics" class="jldn-popup"
-      data-options='{"trigger":"btn-trigger-celtics", "theme":"Celtics", "style":"3d", "border-width":"4px"}'>
-      <h3 style="margin-top:0; color:#10b981;">Celtics Championship Pride</h3>
-      <p>Boston Celtics colors matching the clover green and gold theme variables.</p>
-    </div>
-
-    <div id="popup-vice" class="jldn-popup"
-      data-options='{"trigger":"btn-trigger-vice", "theme":"Miami Vice", "style":"3d", "border-width":"6px"}'>
-      <h3 style="margin-top:0; color:#f43f5e;">Miami Vice Vibes</h3>
-      <p>A sunset pink-to-blue neon border with high transparency candystripes representing the Miami Vice aesthetic.
-      </p>
-    </div>
-
-    <!-- Playground Modals -->
-    <div id="playground-popup-flat" class="jldn-popup"
-      data-options='{"trigger":"btn-trigger-play-flat", "theme":"St. Patrick", "style":"flat", "border-width":"4px"}'>
-      <h3 style="margin-top:0;">Interactive Flat Modal</h3>
-      <p>This modal updates its theme dynamically in real-time.</p>
-    </div>
-
-    <div id="playground-popup-3d" class="jldn-popup"
-      data-options='{"trigger":"btn-trigger-play-3d", "theme":"St. Patrick", "style":"3d", "border-width":"4px"}'>
-      <h3 style="margin-top:0;">Interactive 3D Modal</h3>
-      <p>This modal updates its theme and shows 3D effects dynamically.</p>
-    </div>
-
-    <h2>Shorthand Helpers Showcase</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Shorthand Buttons</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">class="jldn-button-cyberpunk-3d"</span>
-            <button class="jldn-button-cyberpunk-3d">Cyberpunk 3D</button>
-          </div>
-          <div class="showcase-row">
-            <span class="label">class="jldn-button-starwars"</span>
-            <button class="jldn-button-starwars">Star Wars Flat</button>
-          </div>
-          <div class="showcase-row">
-            <span class="label">class="jldn-button-christmas-3d" (div)</span>
-            <div class="jldn-button-christmas-3d">Christmas 3D Div</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Shorthand Meters</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">class="jldn-meter-matrix" (fill: 80%)</span>
-            <div class="jldn-meter-matrix" data-options='{"fill-size":"80%"}'>Matrix Flat 80%</div>
-          </div>
-          <div class="showcase-row">
-            <span class="label">class="jldn-meter-halloween-3d" (fill: 40%)</span>
-            <div class="jldn-meter-halloween-3d" data-options='{"fill-size":"40%"}'>Halloween 3D 40%</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" style="grid-column: span 2;">
-        <h3>Shorthand Code & Alert</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">class="jldn-code-cyberpunk-3d"</span>
-            <code class="jldn-code-cyberpunk-3d">const shorthand = "Cyberpunk Code 3D";
-console.log(shorthand);</code>
-          </div>
-          <div class="showcase-row">
-            <span class="label">class="jldn-alert-thanksgiving"</span>
-            <div class="jldn-alert-thanksgiving">Thanksgiving Flat Alert (Dismissible info by default)</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h2>Interactive Dynamic Updates (API Test)</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Dynamic Meter Progress & Callback</h3>
-        <div class="showcase">
-          <div class="showcase-row">
-            <span class="label">Interactive Meter</span>
-            <div id="mtr-interactive" class="jldn-meter" data-options='{"fill-size":"10%", "animation-speed":"normal"}'>
-              Press button to fill</div>
-          </div>
-          <div class="showcase-row" style="margin-top: 1rem;">
-            <button id="btn-trigger-fill"
-              style="padding: 10px; background: #38bdf8; border: none; border-radius: 4px; color: #0f172a; font-weight: bold; cursor: pointer;">
-              Update Fill to 100%
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h2>Themes Showcase</h2>
-    <div class="grid">
-      <div class="card" style="grid-column: span 2;">
-        <h3>Dynamic Theme Playground</h3>
-        <div class="showcase" style="flex-direction: row; align-items: center; gap: 2rem; flex-wrap: wrap;">
-          <div style="flex: 1; min-width: 250px;">
-            <label for="theme-select"
-              style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #38bdf8;">Choose a Theme (28
-              Built-in Presets):</label>
-            <select id="theme-select"
-              style="width: 100%; padding: 12px; background: #1e293b; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: #f8fafc; font-family: inherit; font-size: 1rem; cursor: pointer; outline: none;">
-              <optgroup label="Original Themes">
-                <option value="Christmas">Christmas</option>
-                <option value="Halloween">Halloween</option>
-                <option value="Easter">Easter</option>
-                <option value="4th of July">4th of July</option>
-              </optgroup>
-              <optgroup label="Holidays & Seasonal">
-                <option value="St. Patrick" selected>St. Patrick's Day</option>
-                <option value="Valentine">Valentine's Day</option>
-                <option value="Thanksgiving">Thanksgiving</option>
-                <option value="New Year">New Year's Eve</option>
-                <option value="Spring">Spring</option>
-                <option value="Summer">Summer</option>
-                <option value="Autumn">Autumn</option>
-                <option value="Winter">Winter</option>
-              </optgroup>
-              <optgroup label="Movies & Pop Culture">
-                <option value="Star Wars">Star Wars</option>
-                <option value="Matrix">The Matrix</option>
-                <option value="LOTR">Lord of the Rings</option>
-                <option value="Star Trek">Star Trek</option>
-                <option value="Barbie">Barbie</option>
-                <option value="Cyberpunk">Cyberpunk</option>
-              </optgroup>
-              <optgroup label="College Sports">
-                <option value="Michigan">Michigan Wolverines</option>
-                <option value="Alabama">Alabama Crimson Tide</option>
-                <option value="Texas">Texas Longhorns</option>
-                <option value="UNC">UNC Tar Heels</option>
-                <option value="LSU">LSU Tigers</option>
-              </optgroup>
-              <optgroup label="Professional Sports">
-                <option value="Celtics">Boston Celtics</option>
-                <option value="Seahawks">Seattle Seahawks</option>
-                <option value="SF49ers">San Francisco 49ers</option>
-                <option value="Miami Vice">Miami Vice</option>
-                <option value="Cowboys">Dallas Cowboys</option>
-              </optgroup>
-            </select>
-          </div>
-          <div style="flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 1.5rem;">
-            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-              <div style="flex: 1; min-width: 200px;">
-                <span class="label">Button (Flat)</span>
-                <div style="margin-top: 0.5rem;">
-                  <button id="playground-btn-flat" class="jldn-button"
-                    data-options='{"theme":"St. Patrick", "style":"flat"}'>Flat Button</button>
+        <!-- 3-Layer DOM Architecture -->
+        <section>
+            <h2 class="section-title">Component Architecture</h2>
+            <div class="architecture-box">
+                <h3>The 3-Layer DOM Architecture</h3>
+                <p style="color: #94a3b8; font-weight: 300; margin-bottom: 2rem;">
+                    Every component in JLDN Elements uses a clean 3-layer DOM structure. For progress-capable elements
+                    (Buttons & Meters), this visually stacks into 4 presentation layers using multiple CSS backgrounds
+                    on the base.
+                </p>
+                <div class="architecture-layers">
+                    <div class="layer-card">
+                        <span class="layer-badge">Layer 0</span>
+                        <h4>Base Container / Border</h4>
+                        <p>Defines outer boundaries, shape, shadows, and base backgrounds + stripe overlays.</p>
+                    </div>
+                    <div class="layer-card">
+                        <span class="layer-badge">Layer 1</span>
+                        <h4>Middle Mask / Body</h4>
+                        <p>Controls the progress unfill mask (.jldn-unfill) or acts as the dark inset container masking
+                            the center.</p>
+                    </div>
+                    <div class="layer-card">
+                        <span class="layer-badge">Layer 2</span>
+                        <h4>Foreground Content</h4>
+                        <p>Houses standard text, icon, and code lines safely on top of all underlying backgrounds.</p>
+                    </div>
                 </div>
-              </div>
-              <div style="flex: 1; min-width: 200px;">
-                <span class="label">Button (3D)</span>
-                <div style="margin-top: 0.5rem;">
-                  <button id="playground-btn-3d" class="jldn-button"
-                    data-options='{"theme":"St. Patrick", "style":"3d"}'>3D Button</button>
+            </div>
+        </section>
+
+        <!-- Style Categories -->
+        <section>
+            <h2 class="section-title">Design Style Categories</h2>
+            <p style="color: #94a3b8; font-weight: 300; margin-bottom: 2rem;">
+                Select from 14 high-fidelity style categories natively supported by JLDN Elements, available in both
+                flat and
+                extruded 3D variations.
+            </p>
+            <div class="style-list">
+                <div class="style-item"><span class="style-indicator"></span><span class="style-name">Basic
+                        (Flat)</span></div>
+                <div class="style-item three-d"><span class="style-indicator"></span><span class="style-name">Basic
+                        3D</span>
                 </div>
-              </div>
+                <div class="style-item"><span class="style-indicator"></span><span
+                        class="style-name">Professional</span></div>
+                <div class="style-item three-d"><span class="style-indicator"></span><span
+                        class="style-name">Professional
+                        3D</span></div>
+                <div class="style-item"><span class="style-indicator"></span><span class="style-name">Cartoon</span>
+                </div>
+                <div class="style-item three-d"><span class="style-indicator"></span><span class="style-name">Cartoon
+                        3D</span>
+                </div>
+                <div class="style-item"><span class="style-indicator"></span><span class="style-name">E-Sports</span>
+                </div>
+                <div class="style-item three-d"><span class="style-indicator"></span><span class="style-name">E-Sports
+                        3D</span>
+                </div>
+                <div class="style-item"><span class="style-indicator"></span><span class="style-name">Cyberpunk</span>
+                </div>
+                <div class="style-item three-d"><span class="style-indicator"></span><span class="style-name">Cyberpunk
+                        3D</span></div>
+                <div class="style-item"><span class="style-indicator"></span><span
+                        class="style-name">Glassmorphic</span></div>
+                <div class="style-item three-d"><span class="style-indicator"></span><span
+                        class="style-name">Glassmorphic
+                        3D</span></div>
+
+            </div>
+        </section>
+
+        <!-- Features & Options Table -->
+        <section>
+            <h2 class="section-title">Configuration Options Reference</h2>
+            <p style="color: #94a3b8; font-weight: 300; margin-bottom: 2rem;">
+                JLDN Elements components can be configured dynamically by passing a JSON object inside the
+                <code>data-options</code> HTML attribute, or via JavaScript API updates.
+            </p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Option Name</th>
+                            <th style="width: 15%;">Type</th>
+                            <th style="width: 20%;">Default Value</th>
+                            <th style="width: 45%;">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>style</code></td>
+                            <td>String</td>
+                            <td><code>"basic"</code></td>
+                            <td>Selects the visual style category (e.g. <code>"basic-3d"</code>,
+                                <code>"professional"</code>, <code>"cyberpunk-3d"</code>).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>theme</code></td>
+                            <td>String</td>
+                            <td><code>"none"</code></td>
+                            <td>One of 28 built-in holiday, seasonal, or movie themes (e.g. <code>"Matrix"</code>,
+                                <code>"Star Wars"</code>).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>width</code></td>
+                            <td>String</td>
+                            <td><code>"auto" / "100%"</code></td>
+                            <td>Custom width (CSS lengths, or presets: <code>"super-long"</code>, <code>"x-long"</code>,
+                                <code>"long"</code>, <code>"medium"</code>, <code>"short"</code>,
+                                <code>"x-short"</code>, <code>"super-short"</code>).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>height</code></td>
+                            <td>String</td>
+                            <td><code>"auto" / "30px"</code></td>
+                            <td>Custom height (CSS lengths, or presets: <code>"super-thick"</code>,
+                                <code>"x-thick"</code>, <code>"thick"</code>, <code>"thin"</code>,
+                                <code>"x-thin"</code>, <code>"super-thin"</code>).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>border</code></td>
+                            <td>String</td>
+                            <td><code>"none"</code></td>
+                            <td>Shorthand property to set border-width, border-style, and border-color at once.</td>
+                        </tr>
+                        <tr>
+                            <td><code>border-width</code></td>
+                            <td>String</td>
+                            <td><code>2px / 3px / 4px</code></td>
+                            <td>Border thickness (defaults: Code 2px, Popup 3px, Alert 4px).</td>
+                        </tr>
+                        <tr>
+                            <td><code>border-style</code></td>
+                            <td>String</td>
+                            <td><code>"solid"</code></td>
+                            <td>Border style (e.g. <code>"solid"</code>, <code>"dashed"</code>, <code>"dotted"</code>,
+                                <code>"double"</code>, <code>"none"</code>).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>border-color</code></td>
+                            <td>String</td>
+                            <td>*derived*</td>
+                            <td>Border frame color outline.</td>
+                        </tr>
+                        <tr>
+                            <td><code>border-shape</code></td>
+                            <td>String</td>
+                            <td><code>"square" / "rounded-md"</code></td>
+                            <td>Corner radius (CSS lengths, or presets: <code>"square"</code>,
+                                <code>"rounded-xs"</code>, <code>"rounded-sm"</code>, <code>"rounded-md"</code>,
+                                <code>"rounded-lg"</code>, <code>"rounded-xl"</code>, <code>"circle"</code>).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>base-color</code></td>
+                            <td>String</td>
+                            <td>*Rainbow Gradient*</td>
+                            <td>Background color or fill gradient of the main container/border layer.</td>
+                        </tr>
+                        <tr>
+                            <td><code>reveal-width</code></td>
+                            <td>String</td>
+                            <td><code>"100%"</code></td>
+                            <td>Horizontal fill percentage width (0% to 100%) showing/hiding background progress.</td>
+                        </tr>
+                        <tr>
+                            <td><code>reveal-color</code></td>
+                            <td>String</td>
+                            <td><code>#1e293b / #0f172a</code></td>
+                            <td>Dark background color used to mask container centers or meter tracks.</td>
+                        </tr>
+                        <tr>
+                            <td><code>stripe-color</code></td>
+                            <td>String</td>
+                            <td><code>"rgba(255,255,255,0.25)"</code></td>
+                            <td>The color or opacity level of the candy-stripe overlay bands.</td>
+                        </tr>
+                        <tr>
+                            <td><code>animate</code></td>
+                            <td>Boolean</td>
+                            <td><code>true</code></td>
+                            <td>Enables/disables scrolling stripe animations.</td>
+                        </tr>
+                        <tr>
+                            <td><code>candy-stripe-it</code></td>
+                            <td>Boolean</td>
+                            <td><code>true</code></td>
+                            <td>Enables/disables diagonal stripe overlay visibility.</td>
+                        </tr>
+                        <tr>
+                            <td><code>animation-speed</code></td>
+                            <td>String</td>
+                            <td><code>"normal"</code></td>
+                            <td>Velocity preset: <code>"xslow"</code> (4s), <code>"slow"</code> (2.5s),
+                                <code>"normal"</code> (1.5s), <code>"fast"</code> (0.8s), <code>"xfast"</code> (0.4s),
+                                or numeric in seconds.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>font</code></td>
+                            <td>String</td>
+                            <td><code>"none"</code></td>
+                            <td>Shorthand property to set font-size and font-family at once.</td>
+                        </tr>
+                        <tr>
+                            <td><code>font-size</code></td>
+                            <td>String</td>
+                            <td><code>"inherit"</code></td>
+                            <td>Font size configuration (e.g. <code>"0.95rem"</code>).</td>
+                        </tr>
+                        <tr>
+                            <td><code>font-family</code></td>
+                            <td>String</td>
+                            <td><code>"inherit"</code></td>
+                            <td>Custom typeface family.</td>
+                        </tr>
+                        <tr>
+                            <td><code>font-color</code></td>
+                            <td>String</td>
+                            <td><code>"#ffffff"</code></td>
+                            <td>Color of the text content.</td>
+                        </tr>
+                        <tr>
+                            <td><code>box-shadow</code></td>
+                            <td>String</td>
+                            <td><code>"none"</code></td>
+                            <td>Applies outer dropshadow rules.</td>
+                        </tr>
+                        <tr>
+                            <td><code>text-shadow</code></td>
+                            <td>String</td>
+                            <td>*derived*</td>
+                            <td>Applies glow or boundary shadowing to the text.</td>
+                        </tr>
+                        <tr>
+                            <td><code>mouseover</code></td>
+                            <td>String</td>
+                            <td><code>"none"</code></td>
+                            <td>Inline CSS styles applied on element hover states.</td>
+                        </tr>
+                        <tr>
+                            <td><code>focus</code></td>
+                            <td>String</td>
+                            <td><code>"none"</code></td>
+                            <td>Inline CSS styles applied on element focus states.</td>
+                        </tr>
+                        <tr>
+                            <td><code>3d-shadow-x</code></td>
+                            <td>String</td>
+                            <td><code>"0px"</code></td>
+                            <td>Horizontal extrusion thickness for 3D styles.</td>
+                        </tr>
+                        <tr>
+                            <td><code>3d-shadow-y</code></td>
+                            <td>String</td>
+                            <td><code>"6px"</code></td>
+                            <td>Vertical extrusion thickness for 3D styles.</td>
+                        </tr>
+                        <tr>
+                            <td><code>3d-shadow-color</code></td>
+                            <td>String</td>
+                            <td>*varies*</td>
+                            <td>Custom hex/rgb color for the solid 3D extrusion ledge.</td>
+                        </tr>
+                        <tr>
+                            <td><code>drop-shadow-x</code></td>
+                            <td>String</td>
+                            <td><code>"0px"</code></td>
+                            <td>Horizontal offset for the ambient blurred drop shadow.</td>
+                        </tr>
+                        <tr>
+                            <td><code>drop-shadow-y</code></td>
+                            <td>String</td>
+                            <td><code>"10px"</code></td>
+                            <td>Vertical offset for the ambient blurred drop shadow.</td>
+                        </tr>
+                        <tr>
+                            <td><code>type</code></td>
+                            <td>String</td>
+                            <td><code>"info"</code></td>
+                            <td>Alert severity presets (applies to Alerts): <code>"success"</code>,
+                                <code>"error"</code>, <code>"warning"</code>, <code>"info"</code>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>dismissible</code></td>
+                            <td>Boolean</td>
+                            <td><code>true</code></td>
+                            <td>Toggles close button rendering (applies to Alerts).</td>
+                        </tr>
+                        <tr>
+                            <td><code>trigger</code></td>
+                            <td>String</td>
+                            <td>*required*</td>
+                            <td>The ID of the launch button element (applies to Popups).</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-              <div style="flex: 1; min-width: 200px;">
-                <span class="label">Meter (Flat)</span>
-                <div style="margin-top: 0.5rem;">
-                  <div id="playground-meter-flat" class="jldn-meter"
-                    data-options='{"theme":"St. Patrick", "style":"flat", "fill-size":"75%"}'>Flat Progress</div>
-                </div>
-              </div>
-              <div style="flex: 1; min-width: 200px;">
-                <span class="label">Meter (3D)</span>
-                <div style="margin-top: 0.5rem;">
-                  <div id="playground-meter-3d" class="jldn-meter"
-                    data-options='{"theme":"St. Patrick", "style":"3d", "fill-size":"75%", "animation-speed":"normal"}'>3D Progress</div>
-                </div>
-              </div>
+            <div
+                style="margin-top: 3rem; background: rgba(30, 41, 59, 0.4); border: 1px solid var(--glass-border); border-radius: 12px; padding: 2rem;">
+                <h3 style="color: #38bdf8; margin-top: 0; margin-bottom: 1rem;">Compatibility Option Aliases</h3>
+                <p style="color: #94a3b8; font-weight: 300; margin-bottom: 1.5rem; font-size: 0.95rem;">
+                    For backward compatibility, the runtime engine automatically intercepts and redirects these legacy
+                    alias option keys:
+                </p>
+                <ul
+                    style="color: #e2e8f0; font-size: 0.95rem; margin: 0; padding-left: 1.5rem; line-height: 1.8; font-weight: 300;">
+                    <li><code>shape</code> &rarr; mapped to <code>border-shape</code></li>
+                    <li><code>fill-size</code> &rarr; mapped to <code>reveal-width</code></li>
+                    <li><code>fill-color</code> &rarr; mapped to <code>base-color</code></li>
+                    <li><code>candystripe-color</code> &rarr; mapped to <code>stripe-color</code></li>
+                    <li><code>meter-color</code> / <code>bar-color</code> &rarr; mapped to <code>reveal-color</code>
+                    </li>
+                </ul>
             </div>
+        </section>
+    </main>
 
-            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-              <div style="flex: 1; min-width: 200px;">
-                <span class="label">Code (Flat)</span>
-                <div style="margin-top: 0.5rem;">
-                  <code id="playground-code-flat" class="jldn-code"
-                    data-options='{"theme":"St. Patrick", "style":"flat", "border-width":"3px"}'>const theme = "flat";</code>
-                </div>
-              </div>
-              <div style="flex: 1; min-width: 200px;">
-                <span class="label">Code (3D)</span>
-                <div style="margin-top: 0.5rem;">
-                  <code id="playground-code-3d" class="jldn-code"
-                    data-options='{"theme":"St. Patrick", "style":"3d", "border-width":"3px"}'>const theme = "3d";</code>
-                </div>
-              </div>
-            </div>
-
-            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-              <div style="flex: 1; min-width: 200px;">
-                <span class="label">Alert (Flat)</span>
-                <div style="margin-top: 0.5rem;">
-                  <div id="playground-alert-flat" class="jldn-alert"
-                    data-options='{"theme":"St. Patrick", "style":"flat", "type":"info", "border-width":"4px"}'>Flat themed Alert info!</div>
-                </div>
-              </div>
-              <div style="flex: 1; min-width: 200px;">
-                <span class="label">Alert (3D)</span>
-                <div style="margin-top: 0.5rem;">
-                  <div id="playground-alert-3d" class="jldn-alert"
-                    data-options='{"theme":"St. Patrick", "style":"3d", "type":"info", "border-width":"4px"}'>3D themed Alert info!</div>
-                </div>
-              </div>
-            </div>
-
-            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-              <div style="flex: 1; min-width: 200px;">
-                <span class="label">Modal (Flat)</span>
-                <div style="margin-top: 0.5rem;">
-                  <button id="btn-trigger-play-flat" class="jldn-button"
-                    data-options='{"theme":"St. Patrick", "style":"flat"}'>Launch Flat Modal</button>
-                </div>
-              </div>
-              <div style="flex: 1; min-width: 200px;">
-                <span class="label">Modal (3D)</span>
-                <div style="margin-top: 0.5rem;">
-                  <button id="btn-trigger-play-3d" class="jldn-button"
-                    data-options='{"theme":"St. Patrick", "style":"3d"}'>Launch 3D Modal</button>
-                </div>
-              </div>
-            </div>
-          </div>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 JLDN Elements. Premium UI component framework.</p>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
-  <!-- JLDN: Elements JS (Unified Single-Link Loader) -->
-  <script defer src="src/modules/core.js?modules=button,meter,code,alert,popup"></script>
-  <!--
-  <script defer src="src/modules/core.js?v=1.0.19"></script>
-  <script defer src="src/modules/button.js?v=1.0.19"></script>
-  <script defer src="src/modules/meter.js?v=1.0.19"></script>
-  <script defer src="src/modules/code.js?v=1.0.19"></script>
-  <script defer src="src/modules/alert.js?v=1.0.19"></script>
-  <script defer src="src/modules/popup.js?v=1.0.19"></script>
-  <script defer src="src/script.js?v=1.0.19"></script>
-  -->
-
-  <script>
-    window.addEventListener('load', () => {
-      const triggerBtn = document.getElementById('btn-trigger-fill');
-      const interactiveMeter = document.getElementById('mtr-interactive');
-
-      triggerBtn.addEventListener('click', () => {
-        // Update elements progress to 100%
-        window.JLDN.updateElement($(interactiveMeter), { "fill-size": "100%" });
-      });
-
-      // Handle the custom complete event
-      $(interactiveMeter).on('jldn:fill-complete', () => {
-        $(interactiveMeter).find('.jldn-text').text('Fill Completed! (Callback Fired)');
-        $(interactiveMeter).css('--jldn-fill-color', 'linear-gradient(90deg, #10b981, #059669)');
-      });
-
-      // Handle theme playground changes
-      const themeSelect = document.getElementById('theme-select');
-      const playgroundElements = [
-        '#playground-btn-flat', '#playground-btn-3d',
-        '#playground-meter-flat', '#playground-meter-3d',
-        '#playground-code-flat', '#playground-code-3d',
-        '#playground-alert-flat', '#playground-alert-3d',
-        '#playground-popup-flat', '#playground-popup-3d',
-        '#btn-trigger-play-flat', '#btn-trigger-play-3d'
-      ];
-
-      if (themeSelect) {
-        themeSelect.addEventListener('change', (e) => {
-          const selectedTheme = e.target.value;
-          playgroundElements.forEach(selector => {
-            const $el = $(selector);
-            if ($el.length > 0) {
-              window.JLDN.updateElement($el, { "theme": selectedTheme });
-            }
-          });
-        });
-      }
-    });
-  </script>
+    </footer>
 </body>
+
 </html>

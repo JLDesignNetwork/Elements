@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.20] - 2026-05-31
+
+### Added
+- **Playground Light Mode**: Added a "Switch to Light Mode" toggle in `playground.html` to allow developers to preview Elements against a bright `#f8fafc` background (making drop shadows and light themes clearly visible).
+- **Universal Custom Styling API**: Added `box-shadow`, `text-shadow`, `mouseover`, `focus`, `3d-shadow-color`, `3d-shadow-x`, `3d-shadow-y`, `drop-shadow-x`, and `drop-shadow-y` to the `allowedOptions` whitelists across all component handlers.
+
+### Changed
+- **Dynamic State Injection**: The `mouseover` and `focus` parameters now dynamically construct and inject a `<style id="jldn-dynamic-states">` block into the document `<head>`. This safely applies arbitrary CSS rule blocks to component pseudo-classes (like `:hover` and `:focus`) without violating inline CSS variable specs.
+- **3D Extrusion Overrides**: Complex mathematical `box-shadow` structures and `text-shadow` configurations across 3D-styled components are now wrapped in CSS variable fallback logic (e.g. `var(--jldn-shadow, ...)`). This allows developers to pass custom `box-shadow` or `text-shadow` values that completely override the default 3D behaviors.
+
+### Fixed
+- **Extrusion Unit Calculation**: Added logic to `core.js` to auto-append `px` units to raw integers provided for 3D extrusion and drop-shadow coordinates. This prevents CSS `calc()` operations (used for dynamic hover/active states) from breaking due to unitless numbers.
+- **Whitelist Rejection Bug**: Fixed a bug where `3d-shadow-x`, `3d-shadow-y`, etc. were silently dropped during initialization because they were missing from the component whitelists.
+
 ## [1.0.19] - 2026-05-29
 
 ### Added

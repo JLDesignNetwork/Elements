@@ -2,15 +2,17 @@ if (window.JLDN_Elements) {
   window.JLDN_Elements.register('popup', {
     selector: 'div.jldn-popup, div[class*="jldn-popup-"]',
     defaults: {
-      style: "flat",
-      shape: "rounded",
+      style: "basic",
+      "border-shape": "rounded-md",
       "border-width": "3px",
       width: "90%"
     },
     allowedOptions: [
-      "theme", "shape", "style", "base-color", "border-width",
-      "font-size", "font-color", "width", "height",
-      "candystripe-color", "animation-speed", "trigger"
+      "theme", "border", "border-width", "border-style", "border-color", "border-shape", "shape",
+      "style", "base-color", "reveal-width", "fill-size", "reveal-color", "stripe-color",
+      "width", "height", "min-width", "min-height",
+      "animation-speed", "animate", "candy-stripe-it", "font", "font-size", "font-family", "font-color",
+      "box-shadow", "text-shadow", "mouseover", "focus", "3d-shadow-color", "3d-shadow-x", "3d-shadow-y", "drop-shadow-x", "drop-shadow-y", "trigger"
     ],
     build: function ($el, options, core) {
       const $contents = $el.contents().detach();
@@ -21,7 +23,7 @@ if (window.JLDN_Elements) {
       $el.html(
         '<div class="jldn-popup-overlay">' +
         '<div class="jldn-popup-content">' +
-        '<span class="jldn-popup-stripes"></span>' +
+        '<div class="jldn-mask"></div>' +
         '<div class="jldn-popup-body">' +
         '<button class="jldn-popup-close" type="button">&times;</button>' +
         '<div class="jldn-popup-text"></div>' +

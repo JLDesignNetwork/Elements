@@ -2,14 +2,16 @@ if (window.JLDN_Elements) {
   window.JLDN_Elements.register('code', {
     selector: 'code.jldn-code, div.jldn-code, code[class*="jldn-code-"], div[class*="jldn-code-"]',
     defaults: {
-      style: "flat",
-      shape: "rounded",
+      style: "basic",
+      "border-shape": "rounded-md",
       "border-width": "2px"
     },
     allowedOptions: [
-      "theme", "shape", "style", "base-color", "border-width",
-      "font-size", "font-color", "width", "height",
-      "candystripe-color", "animation-speed"
+      "theme", "border", "border-width", "border-style", "border-color", "border-shape", "shape",
+      "style", "base-color", "reveal-width", "fill-size", "reveal-color", "stripe-color",
+      "width", "height", "min-width", "min-height",
+      "animation-speed", "animate", "candy-stripe-it", "font", "font-size", "font-family", "font-color",
+      "box-shadow", "text-shadow", "mouseover", "focus", "3d-shadow-color", "3d-shadow-x", "3d-shadow-y", "drop-shadow-x", "drop-shadow-y"
     ],
     build: function ($el, options, core) {
       const text = $el.text() || "";
@@ -31,7 +33,7 @@ if (window.JLDN_Elements) {
       });
 
       $el.html(
-        '<span class="jldn-code-stripes"></span>' +
+        '<div class="jldn-mask"></div>' +
         '<div class="jldn-code-snippet">' +
         '<button class="jldn-code-copy" type="button">Copy</button>' +
         '<pre class="jldn-code-pre">' + linesHTML + '</pre>' +
