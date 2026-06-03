@@ -1,8 +1,16 @@
 # JLDN : Elements
 
 [![CDN](https://img.shields.io/badge/CDN-jsDelivr-ff69b4.svg?style=flat-square)](https://www.jsdelivr.com/)
+[![jsDelivr Hits](https://img.shields.io/jsdelivr/gh/hm/JLDesignNetwork/Elements?style=flat-square)](https://www.jsdelivr.com/package/gh/JLDesignNetwork/Elements)
 [![Version](https://img.shields.io/badge/Version-1.0.20-blue.svg?style=flat-square)](https://github.com/JLDesignNetwork/Elements/releases)
+[![Size](https://img.shields.io/github/repo-size/JLDesignNetwork/Elements?style=flat-square&color=orange)](https://github.com/JLDesignNetwork/Elements)
+[![jQuery](https://img.shields.io/badge/jQuery-3.7.1-0769AD?style=flat-square&logo=jquery)](https://jquery.com/)
+[![SASS](https://img.shields.io/badge/SASS-Supported-CC6699?style=flat-square&logo=sass)](https://sass-lang.com/)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Glossary/HTML5)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/JLDesignNetwork/Elements?style=flat-square&color=yellow)](https://github.com/JLDesignNetwork/Elements/stargazers)
+[![Issues](https://img.shields.io/github/issues/JLDesignNetwork/Elements?style=flat-square&color=blue)](https://github.com/JLDesignNetwork/Elements/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/JLDesignNetwork/Elements?style=flat-square)](https://github.com/JLDesignNetwork/Elements/commits/main)
 
 **JLDN : Elements** is a premium, lightweight client-side UI component engine powered by jQuery and SASS. It scans your markup at runtime, translating simple HTML elements into rich, animated components. 
 
