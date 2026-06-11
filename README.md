@@ -1,16 +1,12 @@
 # JLDN : Elements
 
 [![CDN](https://img.shields.io/badge/CDN-jsDelivr-ff69b4.svg?style=flat-square)](https://www.jsdelivr.com/)
-[![Version](https://img.shields.io/badge/Version-1.0.20-blue.svg?style=flat-square)](https://github.com/JLDesignNetwork/Elements/releases)
+[![Version](https://img.shields.io/badge/Version-1.0.19-blue.svg?style=flat-square)](https://github.com/JLDesignNetwork/Elements/releases)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
 **JLDN : Elements** is a premium, lightweight client-side UI component engine powered by jQuery and SASS. It scans your markup at runtime, translating simple HTML elements into rich, animated components. 
 
-### Layer Architecture
-The library features a sophisticated **3-Layer DOM Architecture** that visually renders as **4 layers** for progress-capable elements:
-* **Layer 0 (Base Container)**: Structural outer border, shapes, shadows, and base background color/gradients. (For progress elements, the candy-stripe overlay is drawn on this layer via CSS multiple backgrounds).
-* **Layer 1 (Body/Mask)**: The middle overlay. For progress elements (Buttons, Meters), this is the `.jldn-unfill` progress mask. For bordered components (Alerts, Code, Popups), this is the inset content box masking the center to reveal borders.
-* **Layer 2 (Content)**: The foreground element housing text, icons, or code lines safely on top.
+The library features a sophisticated **multi-layer rendering architecture** that supports both flat modern styling and advanced 3D convex extrusion aesthetics with dynamic light-source casting.
 
 🔗 **[Live Component Showcase & Interactive Playground](https://jldesignnetwork.github.io/Elements/)**
 
@@ -30,36 +26,19 @@ The library features a sophisticated **3-Layer DOM Architecture** that visually 
 
 JLDN Elements are initialized automatically based on CSS classes. Configure individual component behavior using the `data-options` JSON attribute.
 
-### Universal Style Overrides
-These options can be applied to **any component** (button, meter, code, alert, or popup) to override its default physical metrics or add custom CSS states.
-
-| Option | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `box-shadow` | `string` | `none` | Custom CSS box-shadow. Overrides the 3D extrusion shadows and flat shadows. |
-| `text-shadow` | `string` | `none` | Custom CSS text-shadow. Overrides the 3D text contrast shadows. |
-| `mouseover` | `string` | `none` | Arbitrary CSS block applied on `:hover`. (e.g. `"transform: scale(1.1); filter: brightness(1.2)"`) |
-| `focus` | `string` | `none` | Arbitrary CSS block applied on `:focus`. |
-| `3d-shadow-x` | `string` | `0px` | Horizontal extrusion thickness for 3D styles. |
-| `3d-shadow-y` | `string` | `6px` | Vertical extrusion thickness for 3D styles. |
-| `3d-shadow-color` | `string` | *varies* | Custom hex/rgb color for the solid 3D extrusion ledge. |
-| `drop-shadow-x` | `string` | `0px` | Horizontal offset for the ambient blurred drop shadow (Basic 3D style only). |
-| `drop-shadow-y` | `string` | `10px` | Vertical offset for the ambient blurred drop shadow (Basic 3D style only). |
-
----
-
 ### 1. Buttons (`.jldn-button`)
 Provides smooth button styling on top of standard `<button>` tags or custom interactive `<div>` structures (keyboard navigation for space/enter is automatically injected).
 
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `style` | `string` | `"basic"` | Selects the visual style category (e.g. `"basic"`, `"basic-3d"`, `"professional"`, `"professional-3d"`, etc.). |
-| `shape` | `string` | `"square"` | Edge shape preset: `"square"`, `"rounded-xs"`, `"rounded-sm"`, `"rounded-md"`, `"rounded-lg"`, `"rounded-xl"`, `"circle"`. (Maps to `border-shape`). |
-| `width` | `string` | `auto` | Custom CSS width (e.g., `"200px"`, `"50%"` or preset `"long"`, `"medium"`, `"short"`). |
-| `height` | `string` | `auto` | Custom CSS height (e.g., `"60px"` or preset `"thick"`, `"thin"`). |
-| `fill-size` | `string` | `"100%"` | Fill progress indicator length (e.g. `"75%"`). (Maps to `reveal-width`). |
-| `fill-color` | `string` | *rainbow* | Custom fill solid color or gradient. (Maps to `base-color`). |
-| `candystripe-color` | `string` | `none` | Subtle stripe background layer color. (Maps to `stripe-color`). |
-| `animation-speed` | `string` | `none` | Animated fill speed: `"xslow"`, `"slow"`, `"normal"`, `"fast"`, `"xfast"`, or `"paused"`. |
+| `style` | `string` | `"flat"` | Layout style: `"flat"` or `"3d"`. |
+| `shape` | `string` | `"square"` | Edge layout shape: `"square"` or `"round"`. |
+| `width` | `string` | `auto` | Custom CSS width (e.g., `"200px"`, `"50%"`). |
+| `height` | `string` | `"50px"` | Custom CSS height (e.g., `"60px"`). |
+| `fill-size` | `string` | `"100%"` | Fill progress indicator length (e.g. `"75%"`). |
+| `fill-color` | `string` | *rainbow* | Custom fill solid color or gradient. |
+| `candystripe-color` | `string` | `none` | Subtle stripe background layer color. |
+| `animation-speed` | `string` | `none` | Animated fill speed: `"slow"`, `"normal"`, or `"fast"`. |
 | `theme` | `string` | `none` | Pre-configured theme choice (case-sensitive). |
 
 ---
@@ -69,15 +48,15 @@ An replacement for the standard HTML progress bar, featuring fluid status transi
 
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `style` | `string` | `"basic"` | Selects the visual style category (e.g. `"basic"`, `"basic-3d"`, `"professional"`, `"professional-3d"`, etc.). |
-| `shape` | `string` | `"square"` | Edge shape preset: `"square"`, `"rounded-xs"`, `"rounded-sm"`, `"rounded-md"`, `"rounded-lg"`, `"rounded-xl"`, `"circle"`. (Maps to `border-shape`). |
-| `width` | `string` | `"100%"` | Custom CSS width (e.g. `"500px"` or preset `"long"`, `"medium"`, `"short"`). |
-| `height` | `string` | `"30px"` | Custom CSS height (e.g. `"40px"` or preset `"thick"`, `"thin"`). |
-| `fill-size` | `string` | `"100%"` | Progress percentage length (e.g. `"50%"`). (Maps to `reveal-width`). |
-| `fill-color` | `string` | *rainbow* | Solid color or gradient background of progress bar. (Maps to `base-color`). |
+| `style` | `string` | `"flat"` | Layout style: `"flat"` or `"3d"`. |
+| `shape` | `string` | `"square"` | Edge layout shape: `"square"` or `"round"`. |
+| `width` | `string` | `"100%"` | Custom CSS width presets (e.g. `"long"`, `"medium"`, `"short"`). |
+| `height` | `string` | `"50px"` | Custom CSS height presets (e.g. `"thick"`, `"thin"`). |
+| `fill-size` | `string` | `"100%"` | Progress percentage length (e.g. `"50%"`). |
+| `fill-color` | `string` | *rainbow* | Solid color or gradient background of progress bar. |
 | `reveal-color` | `string` | `#1e293b` | Unfilled track background color. |
-| `candystripe-color` | `string` | `none` | Alternating stripe background color. (Maps to `stripe-color`). |
-| `animation-speed` | `string` | `none` | Animated progress speed preset: `"xslow"`, `"slow"`, `"normal"`, `"fast"`, `"xfast"`, or `"paused"`. |
+| `candystripe-color` | `string` | `none` | alternating stripe background color. |
+| `animation-speed` | `string` | `none` | Animated progress speed: `"slow"`, `"normal"`, or `"fast"`. |
 | `theme` | `string` | `none` | Pre-configured theme choice (case-sensitive). |
 
 ---
@@ -87,12 +66,12 @@ Elegant code display containers with automated line numbering, a copy-to-clipboa
 
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `style` | `string` | `"basic"` | Selects the visual style category (e.g. `"basic"`, `"basic-3d"`, `"professional"`, `"professional-3d"`, etc.). |
-| `shape` | `string` | `"rounded-md"` | Edge shape preset: `"square"`, `"rounded-xs"`, `"rounded-sm"`, `"rounded-md"`, `"rounded-lg"`, `"rounded-xl"`, `"circle"`. (Maps to `border-shape`). |
+| `style` | `string` | `"flat"` | Layout style: `"flat"` or `"3d"`. |
+| `shape` | `string` | `"rounded"` | Layout shape: `"rounded"` or `"square"`. |
 | `border-width` | `string` | `"2px"` | Border boundary thickness. |
-| `base-color` | `string` | *rainbow* | Border background color/gradient frame. |
-| `font-size` | `string` | `"0.95rem"` | Font size configuration. |
-| `candystripe-color` | `string` | `none` | Background stripe highlight color. (Maps to `stripe-color`). |
+| `base-color` | `string` | `#384252` | Border background color/gradient frame. |
+| `font-size` | `string` | `"1rem"` | Font size configuration. |
+| `candystripe-color` | `string` | `none` | Background stripe highlight color. |
 | `theme` | `string` | `none` | Pre-configured theme choice (case-sensitive). |
 
 > [!NOTE]
@@ -106,8 +85,8 @@ Notification banners supporting custom message types, dismissible controls, and 
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `type` | `string` | `"info"` | Message severity level: `"info"`, `"success"`, `"warning"`, or `"error"`. |
-| `style` | `string` | `"basic"` | Selects the visual style category (e.g. `"basic"`, `"basic-3d"`, `"professional"`, `"professional-3d"`, etc.). |
-| `shape` | `string` | `"rounded-md"` | Edge shape preset: `"square"`, `"rounded-xs"`, `"rounded-sm"`, `"rounded-md"`, `"rounded-lg"`, `"rounded-xl"`, `"circle"`. (Maps to `border-shape`). |
+| `style` | `string` | `"flat"` | Layout style: `"flat"` or `"3d"`. |
+| `shape` | `string` | `"rounded"` | Edge shape: `"rounded"` or `"square"`. |
 | `dismissible` | `boolean` | `true` | Show/hide the close dismiss button tag. |
 | `border-width` | `string` | `"4px"` | Left accent-border thickness. |
 | `theme` | `string` | `none` | Pre-configured theme choice (case-sensitive). |
@@ -120,10 +99,9 @@ Interactive popup overlays that stack above a high-blur backdrop overlay. They b
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `trigger` | `string` | *required* | The ID of the HTML button/element that launches the modal. |
-| `style` | `string` | `"basic"` | Selects the visual style category (e.g. `"basic"`, `"basic-3d"`, `"professional"`, `"professional-3d"`, etc.). |
-| `shape` | `string` | `"rounded-md"` | Edge shape preset: `"square"`, `"rounded-xs"`, `"rounded-sm"`, `"rounded-md"`, `"rounded-lg"`, `"rounded-xl"`, `"circle"`. (Maps to `border-shape`). |
+| `style` | `string` | `"flat"` | Layout style: `"flat"` or `"3d"`. |
+| `shape` | `string` | `"rounded"` | Edge shape: `"rounded"` or `"square"`. |
 | `border-width` | `string` | `"3px"` | Spacing acting as the outer frame border. |
-| `width` | `string` | `"90%"` | Custom width of the popup container. |
 | `theme` | `string` | `none` | Pre-configured theme choice (case-sensitive). |
 
 ---
@@ -140,23 +118,23 @@ Specify the modules you need in the `modules` query parameter. Styling (`style.c
 ```html
 <!-- Place near the bottom of your <body> -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.20/src/modules/core.js?modules=button,meter,code,alert,popup"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/core.js?modules=button,meter,code,alert,popup"></script>
 ```
 
 #### 2. Manual Multi-Link
 ```html
 <!-- Place inside <head> -->
-<link href="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.20/src/style.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/style.css" rel="stylesheet">
 
 <!-- Place near the bottom of your <body> -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.20/src/modules/core.js"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.20/src/modules/button.js"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.20/src/modules/meter.js"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.20/src/modules/code.js"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.20/src/modules/alert.js"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.20/src/modules/popup.js"></script>
-<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.20/src/script.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/core.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/button.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/meter.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/code.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/alert.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/modules/popup.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/JLDesignNetwork/Elements@1.0.19/src/script.js"></script>
 ```
 
 ### Option B: Local Installation

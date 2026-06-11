@@ -1,662 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JLDN: Elements — Premium Custom UI Library</title>
-    <!-- Google Fonts & CDN Preconnects -->
-    <link rel="preconnect" href="https://code.jquery.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <style>
-        :root {
-            --primary-grad: linear-gradient(135deg, #38bdf8, #818cf8);
-            --accent-grad: linear-gradient(135deg, #ec4899, #8b5cf6);
-            --glass-bg: rgba(30, 41, 59, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.06);
-        }
-
-        body {
-            background-color: #0f172a;
-            color: #f8fafc;
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        .hero-banner {
-            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent 50%),
-                radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.1), transparent 50%);
-            padding: 6rem 2rem 4rem;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4 {
-            font-family: 'Outfit', sans-serif;
-            margin: 0;
-        }
-
-        .hero-banner h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: var(--primary-grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: #94a3b8;
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
-            font-weight: 300;
-        }
-
-        .nav-btn-grid {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary,
-        .btn-secondary {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            text-decoration: none;
-            padding: 0.85rem 2rem;
-            border-radius: 8px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: var(--primary-grad);
-            color: #0f172a;
-            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(56, 189, 248, 0.55);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: #f8fafc;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #f8fafc;
-            margin-top: 5rem;
-            margin-bottom: 2rem;
-            border-left: 4px solid #38bdf8;
-            padding-left: 1rem;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-        }
-
-        .card h3 {
-            font-size: 1.4rem;
-            color: #38bdf8;
-            margin-bottom: 1rem;
-        }
-
-        .card p {
-            color: #94a3b8;
-            margin: 0;
-            font-size: 0.95rem;
-            font-weight: 300;
-        }
-
-        /* 4 Layers details */
-        .architecture-box {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 2.5rem;
-            margin-bottom: 4rem;
-        }
-
-        .architecture-layers {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .architecture-layers {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .layer-card {
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .layer-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: rgba(56, 189, 248, 0.1);
-            color: #38bdf8;
-            border-radius: 9999px;
-            font-family: monospace;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .layer-card h4 {
-            font-size: 1.1rem;
-            color: #f8fafc;
-            margin-bottom: 0.5rem;
-        }
-
-        .layer-card p {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            margin: 0;
-            font-weight: 300;
-        }
-
-        /* Styled Table Styling */
-        .table-container {
-            overflow-x: auto;
-            border-radius: 12px;
-            border: 1px solid var(--glass-border);
-            margin-bottom: 4rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--glass-bg);
-            text-align: left;
-            font-size: 0.95rem;
-        }
-
-        th,
-        td {
-            padding: 1.25rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        th {
-            background: rgba(15, 23, 42, 0.8);
-            color: #38bdf8;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        td code {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: #f472b6;
-        }
-
-        .style-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1rem;
-            margin-bottom: 4rem;
-        }
-
-        .style-item {
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .style-indicator {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #38bdf8;
-            box-shadow: 0 0 8px #38bdf8;
-        }
-
-        .style-item.three-d .style-indicator {
-            background: #ec4899;
-            box-shadow: 0 0 8px #ec4899;
-        }
-
-        .style-name {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            color: #e2e8f0;
-            font-size: 0.95rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: #64748b;
-            font-size: 0.9rem;
-            font-weight: 300;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elements | The Modern Web Component Library</title>
+  <link rel="stylesheet" href="./src/style.sass">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .hero {
+      text-align: center;
+      padding: 100px 20px 60px;
+      background: radial-gradient(circle at 50% 0%, rgba(52, 152, 219, 0.4) 0%, transparent 50%);
+    }
+    .hero h1 {
+      font-size: 4.5rem;
+      font-weight: 800;
+      margin: 0;
+      background: -webkit-linear-gradient(45deg, #00d2ff 0%, #3a7bd5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    }
+    .hero p {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: #cbd5e1;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+    .nav-cards {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 30px;
+      text-decoration: none;
+      color: #fff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+    .glass-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 210, 255, 0.2);
+    }
+    .glass-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.5rem;
+      color: #00d2ff;
+    }
+    .glass-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px 100px;
+    }
+    .doc-section {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 40px;
+      margin-top: 40px;
+    }
+    .doc-section h2 {
+      margin-top: 0;
+      color: #38bdf8;
+      font-size: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 15px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    th {
+      color: #94a3b8;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+    code {
+      background: rgba(0,0,0,0.3);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #38bdf8;
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Hero Banner -->
-    <header class="hero-banner">
-        <div class="container">
-            <h1>JLDN Elements</h1>
-            <p class="hero-subtitle">
-                A premium custom UI library featuring high-fidelity, multi-layered styled containers, progress meters,
-                buttons,
-                and popups. Powered by HTML, CSS/SASS, and jQuery.
-            </p>
-            <div class="nav-btn-grid">
-                <a href="playground.html" class="btn-primary">Interactive Playground</a>
-                <a href="snippets.html" class="btn-secondary">Cookbook Recipes</a>
-            </div>
-        </div>
-    </header>
 
-    <!-- Content Container -->
-    <main class="container">
+  <header class="hero">
+    <h1>Elements</h1>
+    <p>A highly modular, themeable Web Component library built with Vite, Shadow DOM, and modern SASS architecture.</p>
+    
+    <div class="nav-cards">
+      <a href="playground.html" class="glass-card">
+        <h3>Playground</h3>
+        <p>Interactive testing environment to visually configure components.</p>
+      </a>
+      <a href="snippets.html" class="glass-card">
+        <h3>Snippets</h3>
+        <p>A gallery showcasing the limitless styling possibilities.</p>
+      </a>
+    </div>
+  </header>
 
-        <!-- 3-Layer DOM Architecture -->
-        <section>
-            <h2 class="section-title">Component Architecture</h2>
-            <div class="architecture-box">
-                <h3>The 3-Layer DOM Architecture</h3>
-                <p style="color: #94a3b8; font-weight: 300; margin-bottom: 2rem;">
-                    Every component in JLDN Elements uses a clean 3-layer DOM structure. For progress-capable elements
-                    (Buttons & Meters), this visually stacks into 4 presentation layers using multiple CSS backgrounds
-                    on the base.
-                </p>
-                <div class="architecture-layers">
-                    <div class="layer-card">
-                        <span class="layer-badge">Layer 0</span>
-                        <h4>Base Container / Border</h4>
-                        <p>Defines outer boundaries, shape, shadows, and base backgrounds + stripe overlays.</p>
-                    </div>
-                    <div class="layer-card">
-                        <span class="layer-badge">Layer 1</span>
-                        <h4>Middle Mask / Body</h4>
-                        <p>Controls the progress unfill mask (.jldn-unfill) or acts as the dark inset container masking
-                            the center.</p>
-                    </div>
-                    <div class="layer-card">
-                        <span class="layer-badge">Layer 2</span>
-                        <h4>Foreground Content</h4>
-                        <p>Houses standard text, icon, and code lines safely on top of all underlying backgrounds.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <main class="container">
+    <div class="doc-section">
+      <h2>Variable Taxonomy: Themes (Colors)</h2>
+      <p>Themes define the color palettes using Semantic Functional Naming. These variables map to the <code>theme="..."</code> attribute (e.g. primary, alert, dark) and only control hues, lightness, and opacities.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Variable Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>--surface-base</code></td>
+            <td>The background color of a container (e.g., the empty track of a meter, or background of a popup).</td>
+          </tr>
+          <tr>
+            <td><code>--surface-fill</code></td>
+            <td>The active/primary color (e.g., the progress bar of a meter, or active button background).</td>
+          </tr>
+          <tr>
+            <td><code>--surface-text</code></td>
+            <td>The typography color used within the component.</td>
+          </tr>
+          <tr>
+            <td><code>--border-color</code></td>
+            <td>The color applied to borders or outlines.</td>
+          </tr>
+          <tr>
+            <td><code>--overlay-stripe-color</code></td>
+            <td>The color overlay used for candy-stripe patterns.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <!-- Style Categories -->
-        <section>
-            <h2 class="section-title">Design Style Categories</h2>
-            <p style="color: #94a3b8; font-weight: 300; margin-bottom: 2rem;">
-                Select from 14 high-fidelity style categories natively supported by JLDN Elements, available in both
-                flat and
-                extruded 3D variations.
-            </p>
-            <div class="style-list">
-                <div class="style-item"><span class="style-indicator"></span><span class="style-name">Basic
-                        (Flat)</span></div>
-                <div class="style-item three-d"><span class="style-indicator"></span><span class="style-name">Basic
-                        3D</span>
-                </div>
-                <div class="style-item"><span class="style-indicator"></span><span
-                        class="style-name">Professional</span></div>
-                <div class="style-item three-d"><span class="style-indicator"></span><span
-                        class="style-name">Professional
-                        3D</span></div>
-                <div class="style-item"><span class="style-indicator"></span><span class="style-name">Cartoon</span>
-                </div>
-                <div class="style-item three-d"><span class="style-indicator"></span><span class="style-name">Cartoon
-                        3D</span>
-                </div>
-                <div class="style-item"><span class="style-indicator"></span><span class="style-name">E-Sports</span>
-                </div>
-                <div class="style-item three-d"><span class="style-indicator"></span><span class="style-name">E-Sports
-                        3D</span>
-                </div>
-                <div class="style-item"><span class="style-indicator"></span><span class="style-name">Cyberpunk</span>
-                </div>
-                <div class="style-item three-d"><span class="style-indicator"></span><span class="style-name">Cyberpunk
-                        3D</span></div>
-                <div class="style-item"><span class="style-indicator"></span><span
-                        class="style-name">Glassmorphic</span></div>
-                <div class="style-item three-d"><span class="style-indicator"></span><span
-                        class="style-name">Glassmorphic
-                        3D</span></div>
+    <div class="doc-section">
+      <h2>Variable Taxonomy: Styles (Appearances)</h2>
+      <p>Styles define the physical appearances and effects. These map to the <code>variant="..."</code> attribute (e.g. flat, 3d, rounded) and control dimensions, radiuses, shadows, and animations.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Variable Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>--surface-radius</code></td>
+            <td>Controls rounded corners (e.g., <code>0px</code> for flat, <code>25px</code> for pill-shaped).</td>
+          </tr>
+          <tr>
+            <td><code>--surface-shadow</code></td>
+            <td>Controls drop shadows or inner shadows to simulate depth.</td>
+          </tr>
+          <tr>
+            <td><code>--overlay-convex-opacity</code></td>
+            <td>Controls visibility of a 3D glossy/convex shine overlay (<code>0</code> for flat, <code>1</code> for 3D).</td>
+          </tr>
+          <tr>
+            <td><code>--border-width</code></td>
+            <td>Controls the thickness of the border.</td>
+          </tr>
+          <tr>
+            <td><code>--transition-speed</code></td>
+            <td>Controls the timing of animations (e.g. candy-stripe moving speed).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
 
-            </div>
-        </section>
-
-        <!-- Features & Options Table -->
-        <section>
-            <h2 class="section-title">Configuration Options Reference</h2>
-            <p style="color: #94a3b8; font-weight: 300; margin-bottom: 2rem;">
-                JLDN Elements components can be configured dynamically by passing a JSON object inside the
-                <code>data-options</code> HTML attribute, or via JavaScript API updates.
-            </p>
-
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 20%;">Option Name</th>
-                            <th style="width: 15%;">Type</th>
-                            <th style="width: 20%;">Default Value</th>
-                            <th style="width: 45%;">Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>style</code></td>
-                            <td>String</td>
-                            <td><code>"basic"</code></td>
-                            <td>Selects the visual style category (e.g. <code>"basic-3d"</code>,
-                                <code>"professional"</code>, <code>"cyberpunk-3d"</code>).
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><code>theme</code></td>
-                            <td>String</td>
-                            <td><code>"none"</code></td>
-                            <td>One of 28 built-in holiday, seasonal, or movie themes (e.g. <code>"Matrix"</code>,
-                                <code>"Star Wars"</code>).
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><code>width</code></td>
-                            <td>String</td>
-                            <td><code>"auto" / "100%"</code></td>
-                            <td>Custom width (CSS lengths, or presets: <code>"super-long"</code>, <code>"x-long"</code>,
-                                <code>"long"</code>, <code>"medium"</code>, <code>"short"</code>,
-                                <code>"x-short"</code>, <code>"super-short"</code>).
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><code>height</code></td>
-                            <td>String</td>
-                            <td><code>"auto" / "30px"</code></td>
-                            <td>Custom height (CSS lengths, or presets: <code>"super-thick"</code>,
-                                <code>"x-thick"</code>, <code>"thick"</code>, <code>"thin"</code>,
-                                <code>"x-thin"</code>, <code>"super-thin"</code>).
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><code>border</code></td>
-                            <td>String</td>
-                            <td><code>"none"</code></td>
-                            <td>Shorthand property to set border-width, border-style, and border-color at once.</td>
-                        </tr>
-                        <tr>
-                            <td><code>border-width</code></td>
-                            <td>String</td>
-                            <td><code>2px / 3px / 4px</code></td>
-                            <td>Border thickness (defaults: Code 2px, Popup 3px, Alert 4px).</td>
-                        </tr>
-                        <tr>
-                            <td><code>border-style</code></td>
-                            <td>String</td>
-                            <td><code>"solid"</code></td>
-                            <td>Border style (e.g. <code>"solid"</code>, <code>"dashed"</code>, <code>"dotted"</code>,
-                                <code>"double"</code>, <code>"none"</code>).
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><code>border-color</code></td>
-                            <td>String</td>
-                            <td>*derived*</td>
-                            <td>Border frame color outline.</td>
-                        </tr>
-                        <tr>
-                            <td><code>border-shape</code></td>
-                            <td>String</td>
-                            <td><code>"square" / "rounded-md"</code></td>
-                            <td>Corner radius (CSS lengths, or presets: <code>"square"</code>,
-                                <code>"rounded-xs"</code>, <code>"rounded-sm"</code>, <code>"rounded-md"</code>,
-                                <code>"rounded-lg"</code>, <code>"rounded-xl"</code>, <code>"circle"</code>).
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><code>base-color</code></td>
-                            <td>String</td>
-                            <td>*Rainbow Gradient*</td>
-                            <td>Background color or fill gradient of the main container/border layer.</td>
-                        </tr>
-                        <tr>
-                            <td><code>reveal-width</code></td>
-                            <td>String</td>
-                            <td><code>"100%"</code></td>
-                            <td>Horizontal fill percentage width (0% to 100%) showing/hiding background progress.</td>
-                        </tr>
-                        <tr>
-                            <td><code>reveal-color</code></td>
-                            <td>String</td>
-                            <td><code>#1e293b / #0f172a</code></td>
-                            <td>Dark background color used to mask container centers or meter tracks.</td>
-                        </tr>
-                        <tr>
-                            <td><code>stripe-color</code></td>
-                            <td>String</td>
-                            <td><code>"rgba(255,255,255,0.25)"</code></td>
-                            <td>The color or opacity level of the candy-stripe overlay bands.</td>
-                        </tr>
-                        <tr>
-                            <td><code>animate</code></td>
-                            <td>Boolean</td>
-                            <td><code>true</code></td>
-                            <td>Enables/disables scrolling stripe animations.</td>
-                        </tr>
-                        <tr>
-                            <td><code>candy-stripe-it</code></td>
-                            <td>Boolean</td>
-                            <td><code>true</code></td>
-                            <td>Enables/disables diagonal stripe overlay visibility.</td>
-                        </tr>
-                        <tr>
-                            <td><code>animation-speed</code></td>
-                            <td>String</td>
-                            <td><code>"normal"</code></td>
-                            <td>Velocity preset: <code>"xslow"</code> (4s), <code>"slow"</code> (2.5s),
-                                <code>"normal"</code> (1.5s), <code>"fast"</code> (0.8s), <code>"xfast"</code> (0.4s),
-                                or numeric in seconds.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><code>font</code></td>
-                            <td>String</td>
-                            <td><code>"none"</code></td>
-                            <td>Shorthand property to set font-size and font-family at once.</td>
-                        </tr>
-                        <tr>
-                            <td><code>font-size</code></td>
-                            <td>String</td>
-                            <td><code>"inherit"</code></td>
-                            <td>Font size configuration (e.g. <code>"0.95rem"</code>).</td>
-                        </tr>
-                        <tr>
-                            <td><code>font-family</code></td>
-                            <td>String</td>
-                            <td><code>"inherit"</code></td>
-                            <td>Custom typeface family.</td>
-                        </tr>
-                        <tr>
-                            <td><code>font-color</code></td>
-                            <td>String</td>
-                            <td><code>"#ffffff"</code></td>
-                            <td>Color of the text content.</td>
-                        </tr>
-                        <tr>
-                            <td><code>box-shadow</code></td>
-                            <td>String</td>
-                            <td><code>"none"</code></td>
-                            <td>Applies outer dropshadow rules.</td>
-                        </tr>
-                        <tr>
-                            <td><code>text-shadow</code></td>
-                            <td>String</td>
-                            <td>*derived*</td>
-                            <td>Applies glow or boundary shadowing to the text.</td>
-                        </tr>
-                        <tr>
-                            <td><code>mouseover</code></td>
-                            <td>String</td>
-                            <td><code>"none"</code></td>
-                            <td>Inline CSS styles applied on element hover states.</td>
-                        </tr>
-                        <tr>
-                            <td><code>focus</code></td>
-                            <td>String</td>
-                            <td><code>"none"</code></td>
-                            <td>Inline CSS styles applied on element focus states.</td>
-                        </tr>
-                        <tr>
-                            <td><code>3d-shadow-x</code></td>
-                            <td>String</td>
-                            <td><code>"0px"</code></td>
-                            <td>Horizontal extrusion thickness for 3D styles.</td>
-                        </tr>
-                        <tr>
-                            <td><code>3d-shadow-y</code></td>
-                            <td>String</td>
-                            <td><code>"6px"</code></td>
-                            <td>Vertical extrusion thickness for 3D styles.</td>
-                        </tr>
-                        <tr>
-                            <td><code>3d-shadow-color</code></td>
-                            <td>String</td>
-                            <td>*varies*</td>
-                            <td>Custom hex/rgb color for the solid 3D extrusion ledge.</td>
-                        </tr>
-                        <tr>
-                            <td><code>drop-shadow-x</code></td>
-                            <td>String</td>
-                            <td><code>"0px"</code></td>
-                            <td>Horizontal offset for the ambient blurred drop shadow.</td>
-                        </tr>
-                        <tr>
-                            <td><code>drop-shadow-y</code></td>
-                            <td>String</td>
-                            <td><code>"10px"</code></td>
-                            <td>Vertical offset for the ambient blurred drop shadow.</td>
-                        </tr>
-                        <tr>
-                            <td><code>type</code></td>
-                            <td>String</td>
-                            <td><code>"info"</code></td>
-                            <td>Alert severity presets (applies to Alerts): <code>"success"</code>,
-                                <code>"error"</code>, <code>"warning"</code>, <code>"info"</code>.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><code>dismissible</code></td>
-                            <td>Boolean</td>
-                            <td><code>true</code></td>
-                            <td>Toggles close button rendering (applies to Alerts).</td>
-                        </tr>
-                        <tr>
-                            <td><code>trigger</code></td>
-                            <td>String</td>
-                            <td>*required*</td>
-                            <td>The ID of the launch button element (applies to Popups).</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div
-                style="margin-top: 3rem; background: rgba(30, 41, 59, 0.4); border: 1px solid var(--glass-border); border-radius: 12px; padding: 2rem;">
-                <h3 style="color: #38bdf8; margin-top: 0; margin-bottom: 1rem;">Compatibility Option Aliases</h3>
-                <p style="color: #94a3b8; font-weight: 300; margin-bottom: 1.5rem; font-size: 0.95rem;">
-                    For backward compatibility, the runtime engine automatically intercepts and redirects these legacy
-                    alias option keys:
-                </p>
-                <ul
-                    style="color: #e2e8f0; font-size: 0.95rem; margin: 0; padding-left: 1.5rem; line-height: 1.8; font-weight: 300;">
-                    <li><code>shape</code> &rarr; mapped to <code>border-shape</code></li>
-                    <li><code>fill-size</code> &rarr; mapped to <code>reveal-width</code></li>
-                    <li><code>fill-color</code> &rarr; mapped to <code>base-color</code></li>
-                    <li><code>candystripe-color</code> &rarr; mapped to <code>stripe-color</code></li>
-                    <li><code>meter-color</code> / <code>bar-color</code> &rarr; mapped to <code>reveal-color</code>
-                    </li>
-                </ul>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 JLDN Elements. Premium UI component framework.</p>
-        </div>
-    </footer>
+  <script type="module" src="./src/script.js"></script>
 </body>
-
 </html>

@@ -1,280 +1,73 @@
-// Themes config
-[data-theme="Christmas"]
-  --jldn-reveal-color: #0f1810 !important
-  --jldn-base-color: linear-gradient(90deg, #c41e3a, #ffffff, #286e41) !important
-  --jldn-stripe-color: rgba(255, 255, 255, 0.95) !important
-  --jldn-btn-3d-shadow: #050805 !important
-  --jldn-meter-3d-shadow: #050805 !important
-  --jldn-code-3d-shadow: #050805 !important
-  --jldn-alert-3d-shadow: #050805 !important
-  --jldn-popup-3d-shadow: #050805 !important
+// Themes define the color palettes using Semantic Functional Naming.
+// These map to the [theme="..."] attribute on any Elements component.
 
-[data-theme="Halloween"]
-  --jldn-reveal-color: #0d0714 !important
-  --jldn-base-color: linear-gradient(90deg, #f75f1c, #8d44ad, #1b1b1b) !important
-  --jldn-stripe-color: rgba(247, 95, 28, 0.95) !important
-  --jldn-btn-3d-shadow: #060309 !important
-  --jldn-meter-3d-shadow: #060309 !important
-  --jldn-code-3d-shadow: #060309 !important
-  --jldn-alert-3d-shadow: #060309 !important
-  --jldn-popup-3d-shadow: #060309 !important
+:root
+  // Default fallbacks if no theme is specified
+  --surface-base: #1e293b
+  --surface-fill: #95a5a6
+  --surface-text: #ffffff
+  --border-color: #7f8c8d
+  --overlay-stripe-color: rgba(255, 255, 255, 0.2)
 
-[data-theme="Easter"]
-  --jldn-reveal-color: #201b2d !important
-  --jldn-base-color: linear-gradient(90deg, #ffb3ba, #ffffba, #baffc9, #bae1ff) !important
-  --jldn-stripe-color: rgba(255, 255, 255, 0.95) !important
-  --jldn-btn-3d-shadow: #100b18 !important
-  --jldn-meter-3d-shadow: #100b18 !important
-  --jldn-code-3d-shadow: #100b18 !important
-  --jldn-alert-3d-shadow: #100b18 !important
-  --jldn-popup-3d-shadow: #100b18 !important
+[theme="primary"]
+  --surface-base: #1e293b
+  --surface-fill: #3498db
+  --surface-text: #ffffff
+  --border-color: #2980b9
+  --overlay-stripe-color: rgba(255, 255, 255, 0.25)
 
-[data-theme="4th of July"]
-  --jldn-reveal-color: #0b132b !important
-  --jldn-base-color: linear-gradient(90deg, #002868, #ffffff, #bf0a30) !important
-  --jldn-stripe-color: rgba(255, 255, 255, 0.95) !important
-  --jldn-btn-3d-shadow: #040710 !important
-  --jldn-meter-3d-shadow: #040710 !important
-  --jldn-code-3d-shadow: #040710 !important
-  --jldn-alert-3d-shadow: #040710 !important
-  --jldn-popup-3d-shadow: #040710 !important
+[theme="secondary"]
+  --surface-base: #1e293b
+  --surface-fill: #2ecc71
+  --surface-text: #ffffff
+  --border-color: #27ae60
+  --overlay-stripe-color: rgba(255, 255, 255, 0.25)
 
-[data-theme="St. Patrick"]
-  --jldn-reveal-color: #022c16 !important
-  --jldn-base-color: linear-gradient(90deg, #10b981, #22c55e, #047857) !important
-  --jldn-stripe-color: rgba(74, 222, 128, 0.85) !important
-  --jldn-btn-3d-shadow: #01140a !important
-  --jldn-meter-3d-shadow: #01140a !important
-  --jldn-code-3d-shadow: #01140a !important
-  --jldn-alert-3d-shadow: #01140a !important
-  --jldn-popup-3d-shadow: #01140a !important
+[theme="alert"]
+  --surface-base: #1e293b
+  --surface-fill: #e74c3c
+  --surface-text: #ffffff
+  --border-color: #c0392b
+  --overlay-stripe-color: rgba(255, 255, 255, 0.25)
 
-[data-theme="Valentine"]
-  --jldn-reveal-color: #2b0612 !important
-  --jldn-base-color: linear-gradient(90deg, #a6101e, #ff69b4, #ffc0cb) !important
-  --jldn-stripe-color: rgba(255, 255, 255, 0.95) !important
-  --jldn-btn-3d-shadow: #120207 !important
-  --jldn-meter-3d-shadow: #120207 !important
-  --jldn-code-3d-shadow: #120207 !important
-  --jldn-alert-3d-shadow: #120207 !important
-  --jldn-popup-3d-shadow: #120207 !important
+[theme="warning"]
+  --surface-base: #1e293b
+  --surface-fill: #f1c40f
+  --surface-text: #333333
+  --border-color: #f39c12
+  --overlay-stripe-color: rgba(255, 255, 255, 0.4)
 
-[data-theme="Thanksgiving"]
-  --jldn-reveal-color: #231205 !important
-  --jldn-base-color: linear-gradient(90deg, #b8471a, #e09924, #800020) !important
-  --jldn-stripe-color: rgba(224, 153, 36, 0.95) !important
-  --jldn-btn-3d-shadow: #0f0702 !important
-  --jldn-meter-3d-shadow: #0f0702 !important
-  --jldn-code-3d-shadow: #0f0702 !important
-  --jldn-alert-3d-shadow: #0f0702 !important
-  --jldn-popup-3d-shadow: #0f0702 !important
+[theme="dark"]
+  --surface-base: #2c3e50
+  --surface-fill: #34495e
+  --surface-text: #ffffff
+  --border-color: #1a252f
+  --overlay-stripe-color: rgba(0, 0, 0, 0.2)
 
-[data-theme="New Year"]
-  --jldn-reveal-color: #080808 !important
-  --jldn-base-color: linear-gradient(90deg, #c5a059, #181818, #c0c0c0) !important
-  --jldn-stripe-color: rgba(197, 160, 89, 0.95) !important
-  --jldn-btn-3d-shadow: #000000 !important
-  --jldn-meter-3d-shadow: #000000 !important
-  --jldn-code-3d-shadow: #000000 !important
-  --jldn-alert-3d-shadow: #000000 !important
-  --jldn-popup-3d-shadow: #000000 !important
+[theme="rainbow"]
+  --surface-base: #555
+  --surface-fill: linear-gradient(90deg, red, orange, yellow, lime, green)
+  --surface-text: #000000
+  --border-color: #000000
+  --overlay-stripe-color: rgba(0, 0, 0, 0.1)
 
-[data-theme="Spring"]
-  --jldn-reveal-color: #112211 !important
-  --jldn-base-color: linear-gradient(90deg, #ffb7c5, #90ee90, #ffdf00, #87ceeb) !important
-  --jldn-stripe-color: rgba(255, 183, 197, 0.95) !important
-  --jldn-btn-3d-shadow: #081008 !important
-  --jldn-meter-3d-shadow: #081008 !important
-  --jldn-code-3d-shadow: #081008 !important
-  --jldn-alert-3d-shadow: #081008 !important
-  --jldn-popup-3d-shadow: #081008 !important
+[theme="halloween"]
+  --surface-base: #2c3e50
+  --surface-fill: #e67e22
+  --surface-text: #ffffff
+  --border-color: #8e44ad
+  --overlay-stripe-color: rgba(0, 0, 0, 0.3)
 
-[data-theme="Summer"]
-  --jldn-reveal-color: #081b29 !important
-  --jldn-base-color: linear-gradient(90deg, #fdda0d, #ff7f50, #00bfff) !important
-  --jldn-stripe-color: rgba(253, 218, 13, 0.95) !important
-  --jldn-btn-3d-shadow: #030c14 !important
-  --jldn-meter-3d-shadow: #030c14 !important
-  --jldn-code-3d-shadow: #030c14 !important
-  --jldn-alert-3d-shadow: #030c14 !important
-  --jldn-popup-3d-shadow: #030c14 !important
+[theme="christmas"]
+  --surface-base: #1e293b
+  --surface-fill: #e74c3c
+  --surface-text: #ffffff
+  --border-color: #2ecc71
+  --overlay-stripe-color: rgba(255, 255, 255, 0.25)
 
-[data-theme="Autumn"]
-  --jldn-reveal-color: #1e140a !important
-  --jldn-base-color: linear-gradient(90deg, #963014, #daa520, #808000) !important
-  --jldn-stripe-color: rgba(218, 165, 32, 0.95) !important
-  --jldn-btn-3d-shadow: #0c0804 !important
-  --jldn-meter-3d-shadow: #0c0804 !important
-  --jldn-code-3d-shadow: #0c0804 !important
-  --jldn-alert-3d-shadow: #0c0804 !important
-  --jldn-popup-3d-shadow: #0c0804 !important
-
-[data-theme="Winter"]
-  --jldn-reveal-color: #060f1e !important
-  --jldn-base-color: linear-gradient(90deg, #add8e6, #fafafa, #191970) !important
-  --jldn-stripe-color: rgba(173, 216, 230, 0.95) !important
-  --jldn-btn-3d-shadow: #02060c !important
-  --jldn-meter-3d-shadow: #02060c !important
-  --jldn-code-3d-shadow: #02060c !important
-  --jldn-alert-3d-shadow: #02060c !important
-  --jldn-popup-3d-shadow: #02060c !important
-
-[data-theme="Star Wars"]
-  --jldn-reveal-color: #020617 !important
-  --jldn-base-color: linear-gradient(90deg, #0066cc, #0a0a0a, #cc0000) !important
-  --jldn-stripe-color: rgba(0, 102, 204, 0.95) !important
-  --jldn-btn-3d-shadow: #000000 !important
-  --jldn-meter-3d-shadow: #000000 !important
-  --jldn-code-3d-shadow: #000000 !important
-  --jldn-alert-3d-shadow: #000000 !important
-  --jldn-popup-3d-shadow: #000000 !important
-
-[data-theme="Matrix"]
-  --jldn-reveal-color: #020605 !important
-  --jldn-base-color: linear-gradient(90deg, #003b00, #00ff41, #003b00) !important
-  --jldn-stripe-color: rgba(0, 255, 65, 0.95) !important
-  --jldn-btn-3d-shadow: #000000 !important
-  --jldn-meter-3d-shadow: #000000 !important
-  --jldn-code-3d-shadow: #000000 !important
-  --jldn-alert-3d-shadow: #000000 !important
-  --jldn-popup-3d-shadow: #000000 !important
-
-[data-theme="LOTR"]
-  --jldn-reveal-color: #160e05 !important
-  --jldn-base-color: linear-gradient(90deg, #d4a017, #355e3b, #1c1c1c) !important
-  --jldn-stripe-color: rgba(212, 160, 23, 0.95) !important
-  --jldn-btn-3d-shadow: #070401 !important
-  --jldn-meter-3d-shadow: #070401 !important
-  --jldn-code-3d-shadow: #070401 !important
-  --jldn-alert-3d-shadow: #070401 !important
-  --jldn-popup-3d-shadow: #070401 !important
-
-[data-theme="Star Trek"]
-  --jldn-reveal-color: #080c16 !important
-  --jldn-base-color: linear-gradient(90deg, #d62728, #e8b42e, #1f77b4) !important
-  --jldn-stripe-color: rgba(232, 180, 46, 0.95) !important
-  --jldn-btn-3d-shadow: #03050a !important
-  --jldn-meter-3d-shadow: #03050a !important
-  --jldn-code-3d-shadow: #03050a !important
-  --jldn-alert-3d-shadow: #03050a !important
-  --jldn-popup-3d-shadow: #03050a !important
-
-[data-theme="Barbie"]
-  --jldn-reveal-color: #2d0b1d !important
-  --jldn-base-color: linear-gradient(90deg, #e0218a, #f38fb2, #00c4cc) !important
-  --jldn-stripe-color: rgba(255, 255, 255, 0.95) !important
-  --jldn-btn-3d-shadow: #12040c !important
-  --jldn-meter-3d-shadow: #12040c !important
-  --jldn-code-3d-shadow: #12040c !important
-  --jldn-alert-3d-shadow: #12040c !important
-  --jldn-popup-3d-shadow: #12040c !important
-
-[data-theme="Cyberpunk"]
-  --jldn-reveal-color: #0a041c !important
-  --jldn-base-color: linear-gradient(90deg, #ff007f, #00f0ff, #f3e700) !important
-  --jldn-stripe-color: rgba(0, 240, 255, 0.95) !important
-  --jldn-btn-3d-shadow: #04020a !important
-  --jldn-meter-3d-shadow: #04020a !important
-  --jldn-code-3d-shadow: #04020a !important
-  --jldn-alert-3d-shadow: #04020a !important
-  --jldn-popup-3d-shadow: #04020a !important
-
-[data-theme="Michigan"]
-  --jldn-reveal-color: #081026 !important
-  --jldn-base-color: linear-gradient(90deg, #00274c, #ffcb05, #00274c) !important
-  --jldn-stripe-color: rgba(255, 203, 5, 0.95) !important
-  --jldn-btn-3d-shadow: #03060f !important
-  --jldn-meter-3d-shadow: #03060f !important
-  --jldn-code-3d-shadow: #03060f !important
-  --jldn-alert-3d-shadow: #03060f !important
-  --jldn-popup-3d-shadow: #03060f !important
-
-[data-theme="Alabama"]
-  --jldn-reveal-color: #20040b !important
-  --jldn-base-color: linear-gradient(90deg, #9e1b32, #ffffff, #888b8d) !important
-  --jldn-stripe-color: rgba(158, 27, 50, 0.95) !important
-  --jldn-btn-3d-shadow: #0c0104 !important
-  --jldn-meter-3d-shadow: #0c0104 !important
-  --jldn-code-3d-shadow: #0c0104 !important
-  --jldn-alert-3d-shadow: #0c0104 !important
-  --jldn-popup-3d-shadow: #0c0104 !important
-
-[data-theme="Texas"]
-  --jldn-reveal-color: #230c02 !important
-  --jldn-base-color: linear-gradient(90deg, #bf5700, #ffffff, #333f48) !important
-  --jldn-stripe-color: rgba(191, 87, 0, 0.95) !important
-  --jldn-btn-3d-shadow: #0e0400 !important
-  --jldn-meter-3d-shadow: #0e0400 !important
-  --jldn-code-3d-shadow: #0e0400 !important
-  --jldn-alert-3d-shadow: #0e0400 !important
-  --jldn-popup-3d-shadow: #0e0400 !important
-
-[data-theme="UNC"]
-  --jldn-reveal-color: #04101e !important
-  --jldn-base-color: linear-gradient(90deg, #7bafd4, #ffffff, #13294b) !important
-  --jldn-stripe-color: rgba(123, 175, 212, 0.95) !important
-  --jldn-btn-3d-shadow: #01050c !important
-  --jldn-meter-3d-shadow: #01050c !important
-  --jldn-code-3d-shadow: #01050c !important
-  --jldn-alert-3d-shadow: #01050c !important
-  --jldn-popup-3d-shadow: #01050c !important
-
-[data-theme="LSU"]
-  --jldn-reveal-color: #1e0a3a !important
-  --jldn-base-color: linear-gradient(90deg, #fdd023, #461d7c, #fdd023) !important
-  --jldn-stripe-color: rgba(70, 29, 124, 0.95) !important
-  --jldn-btn-3d-shadow: #0d041a !important
-  --jldn-meter-3d-shadow: #0d041a !important
-  --jldn-code-3d-shadow: #0d041a !important
-  --jldn-alert-3d-shadow: #0d041a !important
-  --jldn-popup-3d-shadow: #0d041a !important
-
-[data-theme="Celtics"]
-  --jldn-reveal-color: #001f0c !important
-  --jldn-base-color: linear-gradient(90deg, #007a33, #baa059, #ffffff, #000000) !important
-  --jldn-stripe-color: rgba(0, 122, 51, 0.95) !important
-  --jldn-btn-3d-shadow: #000a04 !important
-  --jldn-meter-3d-shadow: #000a04 !important
-  --jldn-code-3d-shadow: #000a04 !important
-  --jldn-alert-3d-shadow: #000a04 !important
-  --jldn-popup-3d-shadow: #000a04 !important
-
-[data-theme="Seahawks"]
-  --jldn-reveal-color: #030d1a !important
-  --jldn-base-color: linear-gradient(90deg, #002244, #69be28, #a5acaf) !important
-  --jldn-stripe-color: rgba(105, 190, 40, 0.95) !important
-  --jldn-btn-3d-shadow: #01050a !important
-  --jldn-meter-3d-shadow: #01050a !important
-  --jldn-code-3d-shadow: #01050a !important
-  --jldn-alert-3d-shadow: #01050a !important
-  --jldn-popup-3d-shadow: #01050a !important
-
-[data-theme="SF49ers"]
-  --jldn-reveal-color: #200205 !important
-  --jldn-base-color: linear-gradient(90deg, #aa0000, #b3995d, #ffffff) !important
-  --jldn-stripe-color: rgba(170, 0, 0, 0.95) !important
-  --jldn-btn-3d-shadow: #0b0001 !important
-  --jldn-meter-3d-shadow: #0b0001 !important
-  --jldn-code-3d-shadow: #0b0001 !important
-  --jldn-alert-3d-shadow: #0b0001 !important
-  --jldn-popup-3d-shadow: #0b0001 !important
-
-[data-theme="Miami Vice"]
-  --jldn-reveal-color: #0d061e !important
-  --jldn-base-color: linear-gradient(90deg, #f18fbb, #00e0d4, #ff6e40) !important
-  --jldn-stripe-color: rgba(0, 224, 212, 0.95) !important
-  --jldn-btn-3d-shadow: #060312 !important
-  --jldn-meter-3d-shadow: #060312 !important
-  --jldn-code-3d-shadow: #060312 !important
-  --jldn-alert-3d-shadow: #060312 !important
-  --jldn-popup-3d-shadow: #060312 !important
-
-[data-theme="Cowboys"]
-  --jldn-reveal-color: #070b14 !important
-  --jldn-base-color: linear-gradient(90deg, #002244, #869397, #004c96) !important
-  --jldn-stripe-color: rgba(134, 147, 151, 0.95) !important
-  --jldn-btn-3d-shadow: #020306 !important
-  --jldn-meter-3d-shadow: #020306 !important
-  --jldn-code-3d-shadow: #020306 !important
-  --jldn-alert-3d-shadow: #020306 !important
-  --jldn-popup-3d-shadow: #020306 !important
+[theme="valentine"]
+  --surface-base: #ffb8b8
+  --surface-fill: #ff4757
+  --surface-text: #ffffff
+  --border-color: #ff6b81
+  --overlay-stripe-color: rgba(255, 255, 255, 0.3)

@@ -1,908 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JLDN Elements: Code Snippets & Cookbook</title>
-  
-  <!-- Google Fonts & CDN Preconnects -->
-  <link rel="preconnect" href="https://code.jquery.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-
+  <title>Elements | Snippets Gallery</title>
+  <link rel="stylesheet" href="./src/style.sass">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-base: #070a13;
-      --bg-surface: rgba(15, 22, 42, 0.65);
-      --border-color: rgba(255, 255, 255, 0.05);
-      --text-main: #f8fafc;
-      --text-muted: #64748b;
-      --accent-blue: #38bdf8;
-      
-      /* Category Signature Accent Colors */
-      --color-buttons: #f97316;
-      --color-meters: #22c55e;
-      --color-code: #a855f7;
-      --color-alerts: #10b981;
-      --color-popups: #ec4899;
-    }
-
     body {
-      background-color: var(--bg-base);
-      color: var(--text-main);
-      font-family: 'Inter', sans-serif;
       margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      background-image: 
-        radial-gradient(circle at 10% 20%, rgba(249, 115, 22, 0.04) 0%, transparent 40%),
-        radial-gradient(circle at 90% 40%, rgba(34, 197, 94, 0.04) 0%, transparent 40%),
-        radial-gradient(circle at 20% 70%, rgba(168, 85, 247, 0.04) 0%, transparent 40%),
-        radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.04) 0%, transparent 40%);
-      background-attachment: fixed;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-      transition: color 0.2s ease;
-      font-weight: 500;
       font-family: 'Outfit', sans-serif;
+      background: #0f172a;
+      color: #fff;
     }
-    .back-link:hover {
-      color: var(--accent-blue);
-    }
-
     header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-      position: relative;
-    }
-
-    header h1 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 3rem;
-      font-weight: 800;
-      margin: 0 0 0.5rem 0;
-      background: linear-gradient(135deg, #38bdf8, #818cf8, #d946ef);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: -0.02em;
-    }
-
-    header p {
-      color: var(--text-muted);
-      font-size: 1.15rem;
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    /* Quick Navigation bar */
-    .quick-nav {
+      padding: 20px 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 1rem;
-      z-index: 100;
-    }
-
-    .quick-nav-btn {
-      background: rgba(15, 22, 42, 0.85);
-      border: 1px solid var(--border-color);
-      color: var(--text-muted);
-      padding: 0.6rem 1.2rem;
-      border-radius: 9999px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      backdrop-filter: blur(10px);
-      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 0.5rem;
     }
-
-    .quick-nav-btn::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-
-    .quick-nav-btn[data-target="buttons"] { color: var(--color-buttons); }
-    .quick-nav-btn[data-target="meters"] { color: var(--color-meters); }
-    .quick-nav-btn[data-target="code"] { color: var(--color-code); }
-    .quick-nav-btn[data-target="alerts"] { color: var(--color-alerts); }
-    .quick-nav-btn[data-target="popups"] { color: var(--color-popups); }
-
-    .quick-nav-btn:hover {
-      background: var(--text-main);
-      color: var(--bg-base) !important;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255,255,255,0.08);
-    }
-
-    /* Category Layout Section */
-    .section-wrapper {
-      margin-bottom: 5rem;
-      scroll-margin-top: 6rem;
-    }
-
-    .category-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.75rem;
-    }
-
-    .category-header h2 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.8rem;
-      margin: 0;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-
-    .category-badge {
-      font-size: 0.75rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      padding: 0.25rem 0.6rem;
-      border-radius: 4px;
-      letter-spacing: 0.05em;
-    }
-
-    /* Component Grids */
-    .snippet-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    /* Glassmorphism Showcase Card */
-    .snippet-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 2rem;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    /* Responsive side-by-side on large screens */
-    @media (min-width: 900px) {
-      .card-body {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        align-items: start;
-      }
-    }
-
-    .card-info {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .card-title-row {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .card-title-row h3 {
-      margin: 0;
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-    }
-
-    .difficulty-badge {
-      font-size: 0.7rem;
-      font-weight: 800;
-      padding: 0.15rem 0.45rem;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .difficulty-badge.basic {
-      background: rgba(56, 189, 248, 0.1);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.2);
-    }
-    .difficulty-badge.intermediate {
-      background: rgba(245, 158, 11, 0.1);
-      color: #f59e0b;
-      border: 1px solid rgba(245, 158, 11, 0.2);
-    }
-    .difficulty-badge.advanced {
-      background: rgba(236, 72, 153, 0.1);
-      color: #ec4899;
-      border: 1px solid rgba(236, 72, 153, 0.2);
-    }
-
-    .card-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    .preview-box {
-      border: 1px dashed rgba(255,255,255,0.08);
-      background: rgba(0,0,0,0.15);
-      border-radius: 8px;
-      padding: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100px;
-      position: relative;
-    }
-
-    /* Category Signature Effects */
+    header h1 { margin: 0; font-size: 1.5rem; color: #38bdf8; }
+    header a { color: #94a3b8; text-decoration: none; }
+    header a:hover { color: #fff; }
     
-    /* 1. BUTTONS (Orange Accent/Glow) */
-    #section-buttons .category-header h2 { color: var(--color-buttons); }
-    #section-buttons .category-badge { background: rgba(249, 115, 22, 0.15); color: var(--color-buttons); }
-    #section-buttons .snippet-card:hover {
-      border-color: rgba(249, 115, 22, 0.3);
-      box-shadow: 0 10px 30px -10px rgba(249, 115, 22, 0.15);
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
 
-    /* 2. METERS (Green Accent/Glow) */
-    #section-meters .category-header h2 { color: var(--color-meters); }
-    #section-meters .category-badge { background: rgba(34, 197, 94, 0.15); color: var(--color-meters); }
-    #section-meters .snippet-card:hover {
-      border-color: rgba(34, 197, 94, 0.3);
-      box-shadow: 0 10px 30px -10px rgba(34, 197, 94, 0.15);
+    h2 {
+      font-size: 2.5rem;
+      border-bottom: 2px solid rgba(56, 189, 248, 0.5);
+      padding-bottom: 10px;
+      margin-top: 60px;
     }
 
-    /* 3. CODE (Purple Accent/Glow) */
-    #section-code .category-header h2 { color: var(--color-code); }
-    #section-code .category-badge { background: rgba(168, 85, 247, 0.15); color: var(--color-code); }
-    #section-code .snippet-card:hover {
-      border-color: rgba(168, 85, 247, 0.3);
-      box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.15);
+    .snippet-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 40px;
     }
 
-    /* 4. ALERTS (Emerald Accent/Glow) */
-    #section-alerts .category-header h2 { color: var(--color-alerts); }
-    #section-alerts .category-badge { background: rgba(16, 185, 129, 0.15); color: var(--color-alerts); }
-    #section-alerts .snippet-card:hover {
-      border-color: rgba(16, 185, 129, 0.3);
-      box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
+    .snippet-title {
+      font-size: 1.2rem;
+      color: #38bdf8;
+      margin-top: 0;
+      margin-bottom: 20px;
     }
 
-    /* 5. POPUPS (Pink Accent/Glow) */
-    #section-popups .category-header h2 { color: var(--color-popups); }
-    #section-popups .category-badge { background: rgba(236, 72, 153, 0.15); color: var(--color-popups); }
-    #section-popups .snippet-card:hover {
-      border-color: rgba(236, 72, 153, 0.3);
-      box-shadow: 0 10px 30px -10px rgba(236, 72, 153, 0.15);
-    }
-
-    /* Custom Controller Buttons for Interactive Demos */
-    .demo-btn {
-      background: var(--accent-blue);
-      color: #070a13;
-      border: none;
-      border-radius: 4px;
-      padding: 0.5rem 1rem;
-      font-weight: 700;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      margin-top: 0.5rem;
-    }
-
-    .demo-btn:hover {
-      filter: brightness(1.15);
-      transform: translateY(-1px);
-    }
-
-    .demo-btn:active {
-      transform: translateY(1px);
-    }
-
-    .demo-controls {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      width: 100%;
-    }
-
-    .demo-speed-indicator {
-      font-size: 0.8rem;
-      font-family: monospace;
-      color: var(--text-muted);
-      text-align: center;
+    .demo-area {
+      margin-bottom: 20px;
+      padding: 20px;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+      border-radius: 8px;
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <a href="index.html" class="back-link">&larr; Back to Home</a>
-    <header>
-      <h1>JLDN Elements Cookbook</h1>
-      <p>A comprehensive showcase of premium, modern user interface element configurations. Explore basic implementation up to advanced dynamic configurations.</p>
-    </header>
 
-    <!-- Quick Navigation Sticky Bar -->
-    <div class="quick-nav">
-      <button class="quick-nav-btn" data-target="section-buttons">Buttons</button>
-      <button class="quick-nav-btn" data-target="section-meters">Meters</button>
-      <button class="quick-nav-btn" data-target="section-code">Code Boxes</button>
-      <button class="quick-nav-btn" data-target="section-alerts">Alerts</button>
-      <button class="quick-nav-btn" data-target="section-popups">Modals & Popups</button>
-    </div>
-    <!-- 1. BUTTONS SECTION -->
-    <div id="section-buttons" class="section-wrapper">
-      <div class="category-header">
-        <h2>Buttons</h2>
-        <span class="category-badge">Component</span>
+  <header>
+    <h1>Elements Snippets</h1>
+    <a href="index.html">&larr; Back to Docs</a>
+  </header>
+
+  <main class="container">
+    <h2>Meters</h2>
+
+    <div class="snippet-card">
+      <h3 class="snippet-title">1. The Classic Loading Bar</h3>
+      <div class="demo-area">
+        <jl-meter value="30" theme="primary" variant="flat">30%</jl-meter>
       </div>
-      <div class="snippet-grid">
-        <!-- Basic -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Flat Default Button</h3>
-            <span class="difficulty-badge basic">Basic</span>
-          </div>
-          <p class="card-desc">Standard square button with flat style layout and a single-layer default fill state.</p>
-          <div class="card-body">
-            <div class="preview-box">
-              <button class="jldn-button">Default Button</button>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Matrix"}'>&lt;button class="jldn-button"&gt;Default Button&lt;/button&gt;</code>
-          </div>
-        </div>
-
-        <!-- Intermediate -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Shorthand 3D Theme Button</h3>
-            <span class="difficulty-badge intermediate">Intermediate</span>
-          </div>
-          <p class="card-desc">A button that uses shorthand naming convention (`jldn-button-{themeName}-3d`) to quickly assign the Christmas colors and 3D extruded shadows.</p>
-          <div class="card-body">
-            <div class="preview-box">
-              <button class="jldn-button-christmas-3d">Christmas 3D</button>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Christmas"}'>&lt;button class="jldn-button-christmas-3d"&gt;Christmas 3D&lt;/button&gt;</code>
-          </div>
-        </div>
-
-        <!-- Advanced -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Turbo Gradient 3D Button</h3>
-            <span class="difficulty-badge advanced">Advanced</span>
-          </div>
-          <p class="card-desc">Custom dimensions, high-contrast animated stripes, a fast animation speed (0.6s), round pill layout, and a vibrant dual-tone custom fill color.</p>
-          <div class="card-body">
-            <div class="preview-box">
-              <button class="jldn-button" data-options='{"style":"3d", "border-shape":"round", "base-color":"linear-gradient(90deg, #ec4899, #8b5cf6)", "stripe-color":"rgba(255,255,255,0.25)", "animation-speed":"fast", "width":"220px", "height":"56px"}'>Turbo 3D</button>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Cyberpunk"}'>&lt;button class="jldn-button" data-options='{
-  "style": "3d",
-  "border-shape": "round",
-  "base-color": "linear-gradient(90deg, #ec4899, #8b5cf6)",
-  "stripe-color": "rgba(255,255,255,0.25)",
-  "animation-speed": "fast",
-  "width": "220px",
-  "height": "56px"
-}'&gt;Turbo 3D&lt;/button&gt;</code>
-          </div>
-        </div>
-        <!-- Universal Style Overrides Example -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Universal Style Overrides</h3>
-            <span class="difficulty-badge advanced">Advanced</span>
-          </div>
-          <p class="card-desc">Use <code>mouseover</code>, <code>focus</code>, <code>box-shadow</code>, and <code>3d-shadow-y</code> to override physical metrics or inject custom CSS rule blocks for dynamic pseudo-states.</p>
-          <div class="card-body">
-            <div class="preview-box">
-              <button class="jldn-button-cyberpunk-3d" data-options='{"mouseover":"transform: scale(1.1); filter: brightness(1.3);", "3d-shadow-y":"12px"}'>Hyper Drive</button>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Matrix"}'>&lt;button class="jldn-button-cyberpunk-3d" 
-  data-options='{
-    "mouseover":"transform: scale(1.1); filter: brightness(1.3);", 
-    "3d-shadow-y":"12px"
-  }'&gt;
-  Hyper Drive
-&lt;/button&gt;</code>
-          </div>
-        </div>
-      </div>
+      <jl-code>&lt;jl-meter value="30" theme="primary" variant="flat"&gt;30%&lt;/jl-meter&gt;</jl-code>
     </div>
 
-    <!-- 2. METERS SECTION -->
-    <div id="section-meters" class="section-wrapper">
-      <div class="category-header">
-        <h2>Meters</h2>
-        <span class="category-badge">Component</span>
+    <div class="snippet-card">
+      <h3 class="snippet-title">2. The 3D Barber Pole</h3>
+      <div class="demo-area">
+        <jl-meter value="75" theme="secondary" variant="3d" stripes="true" animated="true" size="lg">Processing...</jl-meter>
       </div>
-      <div class="snippet-grid">
-        <!-- Basic -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Flat Progress Meter</h3>
-            <span class="difficulty-badge basic">Basic</span>
-          </div>
-          <p class="card-desc">Standard square layout progress bar loaded flat at a static 50% completion.</p>
-          <div class="card-body">
-            <div class="preview-box">
-              <div class="jldn-meter" data-options='{"reveal-width":"50%"}'>50% Loaded</div>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Matrix"}'>&lt;div class="jldn-meter" data-options='{"reveal-width":"50%"}'&gt;
-  50% Loaded
-&lt;/div&gt;</code>
-          </div>
-        </div>
-
-        <!-- Intermediate -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Shorthand 3D Theme Meter</h3>
-            <span class="difficulty-badge intermediate">Intermediate</span>
-          </div>
-          <p class="card-desc">Progress bar initialized with round caps (`"border-shape":"round"`) utilizing the Halloween themed colors and 3D extruded depth.</p>
-          <div class="card-body">
-            <div class="preview-box" style="width: 100%; box-sizing: border-box;">
-              <div class="jldn-meter-halloween-3d" data-options='{"reveal-width":"75%", "border-shape":"round"}'>75% Spooky</div>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Halloween"}'>&lt;div class="jldn-meter-halloween-3d" data-options='{"reveal-width":"75%", "border-shape":"round"}'&gt;
-  75% Spooky
-&lt;/div&gt;</code>
-          </div>
-        </div>
-
-        <!-- Advanced -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Interactive Speed-Progress Download Simulator</h3>
-            <span class="difficulty-badge advanced">Advanced</span>
-          </div>
-          <p class="card-desc">Demonstrates real-time progress filling together with dynamic stripe animation speed representing changing speeds during a mock file download.</p>
-          <div class="card-body">
-            <div class="preview-box">
-              <div class="demo-controls">
-                <div id="download-meter-demo" class="jldn-meter" data-options='{"reveal-width":"10%", "stripe-color":"rgba(255,255,255,0.2)", "base-color":"#10b981", "animation-speed":"slow", "height":"36px"}'>
-                  Ready to Start
-                </div>
-                <div style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.5rem;">
-                  <button id="btn-start-download" class="demo-btn">Start Download</button>
-                  <button id="btn-pause-download" class="demo-btn" style="background:#e11d48; color:white;">Pause</button>
-                </div>
-                <div id="download-speed-txt" class="demo-speed-indicator">Speed: 0 Mbps</div>
-              </div>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Matrix"}'>&lt;!-- Markup --&gt;
-&lt;div id="download-meter" class="jldn-meter" data-options='{
-  "reveal-width": "10%",
-  "stripe-color": "rgba(255,255,255,0.2)",
-  "base-color": "#10b981",
-  "animation-speed": "slow",
-  "height": "36px"
-}'&gt;Ready to Start&lt;/div&gt;
- 
-&lt;!-- JS API Update calls --&gt;
-&lt;script&gt;
-// To pause:
-window.JLDN.updateElement($meter, { "animation-speed": "paused" });
- 
-// To change speed and progress:
-window.JLDN.updateElement($meter, { 
-  "reveal-width": "50%", 
-  "animation-speed": "fast" 
-});
-&lt;/script&gt;</code>
-          </div>
-        </div>
-      </div>
+      <jl-code>&lt;jl-meter value="75" theme="secondary" variant="3d" stripes="true" animated="true" size="lg"&gt;Processing...&lt;/jl-meter&gt;</jl-code>
     </div>
 
-    <!-- 3. CODE SECTION -->
-    <div id="section-code" class="section-wrapper">
-      <div class="category-header">
-        <h2>Code Boxes</h2>
-        <span class="category-badge">Component</span>
+    <div class="snippet-card">
+      <h3 class="snippet-title">3. Minimal Rounded Tracker</h3>
+      <div class="demo-area">
+        <jl-meter value="90" theme="dark" variant="rounded" size="sm"></jl-meter>
       </div>
-      <div class="snippet-grid">
-        <!-- Basic -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Default Code Container</h3>
-            <span class="difficulty-badge basic">Basic</span>
-          </div>
-          <p class="card-desc">Standard syntax display box with copy-to-clipboard button and line numbering built automatically.</p>
-          <div class="card-body">
-            <div class="preview-box" style="display: block;">
-              <code class="jldn-code">const element = "JLDN Elements";
-console.log(element + " is ready.");</code>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Matrix"}'>&lt;code class="jldn-code"&gt;const element = "JLDN Elements";
-console.log(element + " is ready.");&lt;/code&gt;</code>
-          </div>
-        </div>
-
-        <!-- Intermediate -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Shorthand 3D Cyberpunk Code Container</h3>
-            <span class="difficulty-badge intermediate">Intermediate</span>
-          </div>
-          <p class="card-desc">A code display container styled using shorthand conventions to render neon Cyberpunk borders, glowing outlines, and 3D solids.</p>
-          <div class="card-body">
-            <div class="preview-box" style="display: block;">
-              <code class="jldn-code-cyberpunk-3d" data-options='{"border-width":"4px"}'>function runHack() {
-  console.log("Compiling security payloads...");
-  return true;
-}</code>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Cyberpunk"}'>&lt;code class="jldn-code-cyberpunk-3d" data-options='{"border-width":"4px"}'&gt;function runHack() {
-  console.log("Compiling security payloads...");
-  return true;
-}&lt;/code&gt;</code>
-          </div>
-        </div>
-
-        <!-- Advanced -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Hyper-Themed 3D Star Wars Container</h3>
-            <span class="difficulty-badge advanced">Advanced</span>
-          </div>
-          <p class="card-desc">Features lightsaber clash styling (blue left, red right border), 3D solid shadows, custom border sizing (6px), and high-frequency animations.</p>
-          <div class="card-body">
-            <div class="preview-box" style="display: block;">
-              <code class="jldn-code" data-options='{"theme":"Star Wars", "style":"3d", "border-width":"6px", "stripe-color":"rgba(0,102,204,0.15)", "animation-speed":"fast"}'>import { Jedi } from 'light-side';
-const master = new Jedi("Yoda");
-master.igniteSaber();</code>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Star Wars"}'>&lt;code class="jldn-code" data-options='{
-  "theme": "Star Wars",
-  "style": "3d",
-  "border-width": "6px",
-  "stripe-color": "rgba(0,102,204,0.15)",
-  "animation-speed": "fast"
-}'&gt;import { Jedi } from 'light-side';
-const master = new Jedi("Yoda");
-master.igniteSaber();&lt;/code&gt;</code>
-          </div>
-        </div>
-      </div>
+      <jl-code>&lt;jl-meter value="90" theme="dark" variant="rounded" size="sm"&gt;&lt;/jl-meter&gt;</jl-code>
     </div>
 
-    <!-- 4. ALERTS SECTION -->
-    <div id="section-alerts" class="section-wrapper">
-      <div class="category-header">
-        <h2>Alerts</h2>
-        <span class="category-badge">Component</span>
+    <div class="snippet-card">
+      <h3 class="snippet-title">4. Critical Alert Progress</h3>
+      <div class="demo-area">
+        <jl-meter value="99" theme="alert" variant="soft" stripes="true" animated="true">CRITICAL</jl-meter>
       </div>
-      <div class="snippet-grid">
-        <!-- Basic -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Standard Alert Banners</h3>
-            <span class="difficulty-badge basic">Basic</span>
-          </div>
-          <p class="card-desc">Alert banners containing custom icons, layout alignment, and close buttons triggered dynamically.</p>
-          <div class="card-body">
-            <div class="preview-box" style="display: block;">
-              <div class="jldn-alert" data-options='{"type":"success"}'>Operations completed successfully.</div>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Matrix"}'>&lt;div class="jldn-alert" data-options='{"type":"success"}'&gt;
-  Operations completed successfully.
-&lt;/div&gt;</code>
-          </div>
-        </div>
-
-        <!-- Intermediate -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Shorthand Themed Alert</h3>
-            <span class="difficulty-badge intermediate">Intermediate</span>
-          </div>
-          <p class="card-desc">A custom Thanksgiving themed alert configured with flat layout styles and dismissible controls.</p>
-          <div class="card-body">
-            <div class="preview-box" style="display: block;">
-              <div class="jldn-alert-thanksgiving">A warm festive info banner.</div>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Thanksgiving"}'>&lt;div class="jldn-alert-thanksgiving"&gt;
-  A warm festive info banner.
-&lt;/div&gt;</code>
-          </div>
-        </div>
-
-        <!-- Advanced -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>3D Thick-Bordered Summer Alert</h3>
-            <span class="difficulty-badge advanced">Advanced</span>
-          </div>
-          <p class="card-desc">Custom settings containing thick borders (6px), 3D layout shadow states, alert type 'warning', and custom themed variables.</p>
-          <div class="card-body">
-            <div class="preview-box" style="display: block;">
-              <div class="jldn-alert" data-options='{"theme":"Summer", "style":"3d", "type":"warning", "border-width":"6px", "dismissible":true}'>Storm Warning: Beach services closed!</div>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Summer"}'>&lt;div class="jldn-alert" data-options='{
-  "theme": "Summer",
-  "style": "3d",
-  "type": "warning",
-  "border-width": "6px",
-  "dismissible": true
-}'&gt;Storm Warning: Beach services closed!&lt;/div&gt;</code>
-          </div>
-        </div>
-      </div>
+      <jl-code>&lt;jl-meter value="99" theme="alert" variant="soft" stripes="true" animated="true"&gt;CRITICAL&lt;/jl-meter&gt;</jl-code>
     </div>
 
-    <!-- 5. POPUPS SECTION -->
-    <div id="section-popups" class="section-wrapper">
-      <div class="category-header">
-        <h2>Modals & Popups</h2>
-        <span class="category-badge">Component</span>
+    <div class="snippet-card">
+      <h3 class="snippet-title">5. The Rainbow Dash</h3>
+      <div class="demo-area">
+        <jl-meter value="100" theme="rainbow" variant="3d" stripes="true">COMPLETED</jl-meter>
       </div>
-      <div class="snippet-grid">
-        <!-- Basic -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Flat Modal Popup</h3>
-            <span class="difficulty-badge basic">Basic</span>
-          </div>
-          <p class="card-desc">Standard overlays and popup layout triggers bound to buttons with basic configuration.</p>
-          <div class="card-body">
-            <div class="preview-box">
-              <button id="btn-popup-basic" class="jldn-button">Open Basic Popup</button>
-              
-              <div id="popup-basic" class="jldn-popup" data-options='{"trigger":"btn-popup-basic"}'>
-                <h3>Default Modal</h3>
-                <p>This is a standard modal overlay dialog. Press ESC or click the cross button to close.</p>
-              </div>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Matrix"}'>&lt;!-- Trigger Button --&gt;
-&lt;button id="btn-popup-basic" class="jldn-button"&gt;Open Basic Popup&lt;/button&gt;
-
-&lt;!-- Modal Markup --&gt;
-&lt;div class="jldn-popup" data-options='{"trigger":"btn-popup-basic"}'&gt;
-  &lt;h3&gt;Default Modal&lt;/h3&gt;
-  &lt;p&gt;This is a standard modal overlay dialog.&lt;/p&gt;
-&lt;/div&gt;</code>
-          </div>
-        </div>
-
-        <!-- Intermediate -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Shorthand 3D Theme Modal</h3>
-            <span class="difficulty-badge intermediate">Intermediate</span>
-          </div>
-          <p class="card-desc">A custom Miami Vice themed modal using the shorthand naming configuration and a 3D shadow cast.</p>
-          <div class="card-body">
-            <div class="preview-box">
-              <button id="btn-popup-vice" class="jldn-button-miamivice">Open Vice Popup</button>
-              
-              <div id="popup-vice" class="jldn-popup-miamivice-3d" data-options='{"trigger":"btn-popup-vice", "border-width":"4px"}'>
-                <h3>Miami Vice Vibes</h3>
-                <p>Features pink-to-blue sunset gradients and a translucent striped glass layer.</p>
-              </div>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Miami Vice"}'>&lt;!-- Trigger Button --&gt;
-&lt;button id="btn-popup-vice" class="jldn-button-miamivice"&gt;Open Vice Popup&lt;/button&gt;
-
-&lt;!-- Modal Markup --&gt;
-&lt;div class="jldn-popup-miamivice-3d" data-options='{"trigger":"btn-popup-vice", "border-width":"4px"}'&gt;
-  &lt;h3&gt;Miami Vice Vibes&lt;/h3&gt;
-  &lt;p&gt;Features pink-to-blue sunset gradients.&lt;/p&gt;
-&lt;/div&gt;</code>
-          </div>
-        </div>
-
-        <!-- Advanced -->
-        <div class="snippet-card">
-          <div class="card-title-row">
-            <h3>Dynamic Interactive System Loader Popup</h3>
-            <span class="difficulty-badge advanced">Advanced</span>
-          </div>
-          <p class="card-desc">Demonstrates combining popups and meters. Opening the modal starts a progress bar load and triggers a complete callback dynamically.</p>
-          <div class="card-body">
-            <div class="preview-box">
-              <button id="btn-popup-loading" class="jldn-button-cyberpunk-3d">Load System</button>
-              
-              <div id="popup-loading-demo" class="jldn-popup" data-options='{"trigger":"btn-popup-loading", "theme":"Matrix", "style":"3d"}'>
-                <h3>Compiling Mainframe...</h3>
-                <div id="popup-meter-demo" class="jldn-meter" data-options='{"reveal-width":"0%", "stripe-color":"rgba(0,255,65,0.3)", "animation-speed":"normal", "height":"32px"}'>
-                  Connecting...
-                </div>
-              </div>
-            </div>
-            <code class="jldn-code" data-options='{"theme":"Matrix"}'>&lt;!-- Trigger Button --&gt;
-&lt;button id="btn-popup" class="jldn-button-cyberpunk-3d"&gt;Load System&lt;/button&gt;
-
-&lt;!-- Modal Markup --&gt;
-&lt;div id="popup-loading" class="jldn-popup" data-options='{"trigger":"btn-popup", "theme":"Matrix", "style":"3d"}'&gt;
-  &lt;h3&gt;Compiling Mainframe...&lt;/h3&gt;
-  &lt;div id="popup-meter" class="jldn-meter" data-options='{"reveal-width":"0%"}'&gt;Connecting...&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- JS Event bindings --&gt;
-&lt;script&gt;
-// Run simulation when trigger clicked
-$('#btn-popup').on('click', () => {
-  let progress = 0;
-  const interval = setInterval(() => {
-    progress += 20;
-    window.JLDN.updateElement($('#popup-meter'), { "reveal-width": progress + "%" });
-    if (progress >= 100) clearInterval(interval);
-  }, 500);
-});
-&lt;/script&gt;</code>
-          </div>
-        </div>
-      </div>
+      <jl-code>&lt;jl-meter value="100" theme="rainbow" variant="3d" stripes="true"&gt;COMPLETED&lt;/jl-meter&gt;</jl-code>
     </div>
-  </div>
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-  <!-- JLDN Elements Loader -->
-  <script defer src="src/modules/core.js?modules=button,meter,code,alert,popup"></script>
+    <h2>Buttons</h2>
 
-  <!-- Interactive Demo Scripts -->
-  <script>
-    window.addEventListener('load', () => {
-      // 1. Quick Navigation Scroll Helper
-      $('.quick-nav-btn').on('click', function() {
-        const targetId = $(this).data('target');
-        const $target = $('#' + targetId);
-        if ($target.length) {
-          $('html, body').animate({
-            scrollTop: $target.offset().top - 80
-          }, 400);
-        }
-      });
+    <div class="snippet-card">
+      <h3 class="snippet-title">1. Standard Primary Action</h3>
+      <div class="demo-area">
+        <jl-button theme="primary" variant="rounded">Submit Form</jl-button>
+      </div>
+      <jl-code>&lt;jl-button theme="primary" variant="rounded"&gt;Submit Form&lt;/jl-button&gt;</jl-code>
+    </div>
 
-      // 2. Download Progress Simulator (Advanced Meter demo)
-      let downloadInterval = null;
-      let downloadProgress = 10;
-      let downloadSpeed = 0;
-      const $dlMeter = $('#download-meter-demo');
-      const $speedTxt = $('#download-speed-txt');
+    <div class="snippet-card">
+      <h3 class="snippet-title">2. Warning 3D Clicker</h3>
+      <div class="demo-area">
+        <jl-button theme="warning" variant="3d">Are you sure?</jl-button>
+      </div>
+      <jl-code>&lt;jl-button theme="warning" variant="3d"&gt;Are you sure?&lt;/jl-button&gt;</jl-code>
+    </div>
 
-      $('#btn-start-download').on('click', function() {
-        if (downloadInterval) return; // already running
-        
-        // Reset progress if completed
-        if (downloadProgress >= 100) {
-          downloadProgress = 0;
-          $dlMeter.css('--jldn-base-color', '#10b981');
-        }
+    <div class="snippet-card">
+      <h3 class="snippet-title">3. Soft Neumorphic Ghost</h3>
+      <div class="demo-area">
+        <jl-button theme="dark" variant="soft">Cancel</jl-button>
+      </div>
+      <jl-code>&lt;jl-button theme="dark" variant="soft"&gt;Cancel&lt;/jl-button&gt;</jl-code>
+    </div>
 
-        downloadInterval = setInterval(() => {
-          downloadProgress += Math.floor(Math.random() * 8) + 2;
-          
-          if (downloadProgress >= 100) {
-            downloadProgress = 100;
-            downloadSpeed = 0;
-            clearInterval(downloadInterval);
-            downloadInterval = null;
-            $speedTxt.text('Download Complete!');
-            window.JLDN.updateElement($dlMeter, { 
-              "reveal-width": "100%", 
-              "animation-speed": "paused"
-            });
-            $dlMeter.find('.jldn-text').text('Complete!');
-            // Complete event trigger
-            $dlMeter.trigger('jldn:fill-complete');
-            return;
-          }
+    <div class="snippet-card">
+      <h3 class="snippet-title">4. Alert Action</h3>
+      <div class="demo-area">
+        <jl-button theme="alert" variant="flat">Delete Account</jl-button>
+      </div>
+      <jl-code>&lt;jl-button theme="alert" variant="flat"&gt;Delete Account&lt;/jl-button&gt;</jl-code>
+    </div>
 
-          // Generate simulated dynamic speed fluctuations (0 to 120 Mbps)
-          downloadSpeed = Math.floor(Math.random() * 110) + 10;
-          $speedTxt.text(`Speed: ${downloadSpeed} Mbps`);
+    <div class="snippet-card">
+      <h3 class="snippet-title">5. Success Badge</h3>
+      <div class="demo-area">
+        <jl-button theme="secondary" variant="3d">Save Successfully</jl-button>
+      </div>
+      <jl-code>&lt;jl-button theme="secondary" variant="3d"&gt;Save Successfully&lt;/jl-button&gt;</jl-code>
+    </div>
 
-          // Calculate animation speed based on download speed (0.3s to 3.0s duration)
-          const animSpeed = Math.max(0.3, Math.min(3.0, 3.0 / (downloadSpeed / 12))).toFixed(2);
+    <h2>Alerts</h2>
 
-          window.JLDN.updateElement($dlMeter, {
-            "reveal-width": `${downloadProgress}%`,
-            "animation-speed": animSpeed
-          });
-          $dlMeter.find('.jldn-text').text(`${downloadProgress}%`);
-        }, 300);
-      });
+    <div class="snippet-card">
+      <h3 class="snippet-title">1. Standard Information</h3>
+      <div class="demo-area">
+        <jl-alert theme="primary" variant="flat" title="Info" dismissible="true">Please update your account details.</jl-alert>
+      </div>
+      <jl-code>&lt;jl-alert theme="primary" variant="flat" title="Info" dismissible="true"&gt;Please update your account details.&lt;/jl-alert&gt;</jl-code>
+    </div>
 
-      $('#btn-pause-download').on('click', function() {
-        if (downloadInterval) {
-          clearInterval(downloadInterval);
-          downloadInterval = null;
-        }
-        downloadSpeed = 0;
-        $speedTxt.text('Paused');
-        window.JLDN.updateElement($dlMeter, { "animation-speed": "paused" });
-        $dlMeter.find('.jldn-text').text(`${downloadProgress}% (Paused)`);
-      });
+    <div class="snippet-card">
+      <h3 class="snippet-title">2. Critical Error (3D Convex)</h3>
+      <div class="demo-area">
+        <jl-alert theme="alert" variant="3d" title="Error!" dismissible="false">A critical system failure occurred.</jl-alert>
+      </div>
+      <jl-code>&lt;jl-alert theme="alert" variant="3d" title="Error!" dismissible="false"&gt;A critical system failure occurred.&lt;/jl-alert&gt;</jl-code>
+    </div>
 
-      // 3. Dynamic Modal Simulator (Advanced Popup demo)
-      let popupLoadingInterval = null;
-      let popupProgress = 0;
-      const $popupMeter = $('#popup-meter-demo');
+    <div class="snippet-card">
+      <h3 class="snippet-title">3. Success Notification (Soft Neumorphic)</h3>
+      <div class="demo-area">
+        <jl-alert theme="secondary" variant="soft" title="Success!" dismissible="true">Your changes have been saved successfully.</jl-alert>
+      </div>
+      <jl-code>&lt;jl-alert theme="secondary" variant="soft" title="Success!" dismissible="true"&gt;Your changes have been saved successfully.&lt;/jl-alert&gt;</jl-code>
+    </div>
 
-      $('#btn-popup-loading').on('click', function() {
-        // Reset loading progress
-        popupProgress = 0;
-        $popupMeter.css('--jldn-base-color', 'linear-gradient(90deg, #003b00, #00ff41, #003b00)');
-        window.JLDN.updateElement($popupMeter, { 
-          "reveal-width": "0%", 
-          "animation-speed": "normal" 
-        });
-        $popupMeter.find('.jldn-text').text('0% Connecting...');
+    <div class="snippet-card">
+      <h3 class="snippet-title">4. Warning Banner (Rounded)</h3>
+      <div class="demo-area">
+        <jl-alert theme="warning" variant="rounded" title="Caution" dismissible="true">Your session is about to expire.</jl-alert>
+      </div>
+      <jl-code>&lt;jl-alert theme="warning" variant="rounded" title="Caution" dismissible="true"&gt;Your session is about to expire.&lt;/jl-alert&gt;</jl-code>
+    </div>
 
-        if (popupLoadingInterval) clearInterval(popupLoadingInterval);
-        
-        // Start load simulator after modal triggers and transition starts
-        setTimeout(() => {
-          popupLoadingInterval = setInterval(() => {
-            popupProgress += 20;
-            if (popupProgress >= 100) {
-              popupProgress = 100;
-              clearInterval(popupLoadingInterval);
-              window.JLDN.updateElement($popupMeter, { 
-                "reveal-width": "100%", 
-                "animation-speed": "paused" 
-              });
-              $popupMeter.find('.jldn-text').text('Mainframe Decrypted!');
-              $popupMeter.css('--jldn-base-color', 'linear-gradient(90deg, #10b981, #059669)');
-              return;
-            }
-            window.JLDN.updateElement($popupMeter, { 
-              "reveal-width": `${popupProgress}%` 
-            });
-            $popupMeter.find('.jldn-text').text(`${popupProgress}% Loaded...`);
-          }, 600);
-        }, 300);
-      });
-      
-      // Cleanup interval on modal close
-      $(document).on('click', '.jldn-popup-close, .jldn-popup-overlay', function() {
-        if (popupLoadingInterval) {
-          clearInterval(popupLoadingInterval);
-          popupLoadingInterval = null;
-        }
-      });
-    });
-  </script>
+    <div class="snippet-card">
+      <h3 class="snippet-title">5. Dark Mode Message</h3>
+      <div class="demo-area">
+        <jl-alert theme="dark" variant="flat" dismissible="true">This is a subtle dark mode notification.</jl-alert>
+      </div>
+      <jl-code>&lt;jl-alert theme="dark" variant="flat" dismissible="true"&gt;This is a subtle dark mode notification.&lt;/jl-alert&gt;</jl-code>
+    </div>
+
+
+    <h2>Code Blocks</h2>
+
+    <div class="snippet-card">
+      <h3 class="snippet-title">1. Standard macOS Window</h3>
+      <div class="demo-area">
+        <jl-code theme="dark" variant="flat" mac-frame="true" language="js">const x = 42;</jl-code>
+      </div>
+      <jl-code>&lt;jl-code theme="dark" variant="flat" mac-frame="true" language="js"&gt;const x = 42;&lt;/jl-code&gt;</jl-code>
+    </div>
+
+    <div class="snippet-card">
+      <h3 class="snippet-title">2. Plain Flat Block</h3>
+      <div class="demo-area">
+        <jl-code theme="dark" variant="flat" mac-frame="false">echo "Hello World"</jl-code>
+      </div>
+      <jl-code>&lt;jl-code theme="dark" variant="flat" mac-frame="false"&gt;echo "Hello World"&lt;/jl-code&gt;</jl-code>
+    </div>
+
+    <div class="snippet-card">
+      <h3 class="snippet-title">3. Soft Neumorphic Dark</h3>
+      <div class="demo-area">
+        <jl-code theme="dark" variant="soft" mac-frame="true" language="python">print("Neumorphic code block")</jl-code>
+      </div>
+      <jl-code>&lt;jl-code theme="dark" variant="soft" mac-frame="true" language="python"&gt;print("Neumorphic code block")&lt;/jl-code&gt;</jl-code>
+    </div>
+
+    <div class="snippet-card">
+      <h3 class="snippet-title">4. Light Theme Code</h3>
+      <div class="demo-area">
+        <jl-code theme="primary" variant="flat" mac-frame="true" language="css">body { color: blue; }</jl-code>
+      </div>
+      <jl-code>&lt;jl-code theme="primary" variant="flat" mac-frame="true" language="css"&gt;body { color: blue; }&lt;/jl-code&gt;</jl-code>
+    </div>
+
+    <div class="snippet-card">
+      <h3 class="snippet-title">5. 3D Beveled Code Window</h3>
+      <div class="demo-area">
+        <jl-code theme="dark" variant="3d" mac-frame="true" language="html">&lt;div class="box"&gt;&lt;/div&gt;</jl-code>
+      </div>
+      <jl-code>&lt;jl-code theme="dark" variant="3d" mac-frame="true" language="html"&gt;&amp;lt;div class="box"&amp;gt;&amp;lt;/div&amp;gt;&lt;/jl-code&gt;</jl-code>
+    </div>
+
+
+    <h2>Popups (Modals)</h2>
+
+    <div class="snippet-card">
+      <h3 class="snippet-title">1. Standard Primary Popup</h3>
+      <div class="demo-area">
+        <jl-button onclick="document.getElementById('p1').setAttribute('open', 'true')">Open Popup</jl-button>
+        <jl-popup id="p1" theme="primary" variant="flat">
+          <h2>Hello</h2><p>This is a standard flat popup.</p>
+        </jl-popup>
+      </div>
+      <jl-code>&lt;jl-button onclick="..."&gt;Open&lt;/jl-button&gt;
+&lt;jl-popup id="p1" theme="primary" variant="flat"&gt;...&lt;/jl-popup&gt;</jl-code>
+    </div>
+
+    <div class="snippet-card">
+      <h3 class="snippet-title">2. Dark Mode 3D Modal</h3>
+      <div class="demo-area">
+        <jl-button onclick="document.getElementById('p2').setAttribute('open', 'true')" theme="dark" variant="3d">Open 3D Modal</jl-button>
+        <jl-popup id="p2" theme="dark" variant="3d">
+          <h2>Confirm</h2><p>Are you sure you want to proceed?</p>
+        </jl-popup>
+      </div>
+      <jl-code>&lt;jl-popup theme="dark" variant="3d"&gt;...&lt;/jl-popup&gt;</jl-code>
+    </div>
+
+    <div class="snippet-card">
+      <h3 class="snippet-title">3. Alert Error Dialog</h3>
+      <div class="demo-area">
+        <jl-button onclick="document.getElementById('p3').setAttribute('open', 'true')" theme="alert" variant="rounded">Show Error</jl-button>
+        <jl-popup id="p3" theme="alert" variant="rounded">
+          <h2>Fatal Error</h2><p>Something went terribly wrong.</p>
+        </jl-popup>
+      </div>
+      <jl-code>&lt;jl-popup theme="alert" variant="rounded"&gt;...&lt;/jl-popup&gt;</jl-code>
+    </div>
+
+    <div class="snippet-card">
+      <h3 class="snippet-title">4. Soft Neumorphic Dialog</h3>
+      <div class="demo-area">
+        <jl-button onclick="document.getElementById('p4').setAttribute('open', 'true')" theme="secondary" variant="soft">Open Soft Modal</jl-button>
+        <jl-popup id="p4" theme="secondary" variant="soft">
+          <h2>Soft Modal</h2><p>This is a soft neumorphic styled popup.</p>
+        </jl-popup>
+      </div>
+      <jl-code>&lt;jl-popup theme="secondary" variant="soft"&gt;...&lt;/jl-popup&gt;</jl-code>
+    </div>
+
+    <div class="snippet-card">
+      <h3 class="snippet-title">5. Custom Rainbow Modal</h3>
+      <div class="demo-area">
+        <jl-button onclick="document.getElementById('p5').setAttribute('open', 'true')" theme="rainbow" variant="3d">Rainbow Dialog</jl-button>
+        <jl-popup id="p5" theme="rainbow" variant="3d">
+          <h2>Winner!</h2><p>You have won the prize.</p>
+        </jl-popup>
+      </div>
+      <jl-code>&lt;jl-popup theme="rainbow" variant="3d"&gt;...&lt;/jl-popup&gt;</jl-code>
+    </div>
+
+  </main>
+
+  <script type="module" src="./src/script.js"></script>
 </body>
 </html>
