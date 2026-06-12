@@ -1,10 +1,18 @@
 # JLDN : Elements
 
-[![CDN](https://img.shields.io/badge/CDN-jsDelivr-ff69b4.svg?style=flat-square)](https://www.jsdelivr.com/)
-[![Version](https://img.shields.io/badge/Version-1.0.19-blue.svg?style=flat-square)](https://github.com/JLDesignNetwork/Elements/releases)
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
+![GitHub issues](https://img.shields.io/github/issues/JLDesignNetwork/Elements?style=flat-square)
+![GitHub forks](https://img.shields.io/github/forks/JLDesignNetwork/Elements?style=flat-square)
+![GitHub stars](https://img.shields.io/github/stars/JLDesignNetwork/Elements?style=flat-square)
+![GitHub license](https://img.shields.io/github/license/JLDesignNetwork/Elements?style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/JLDesignNetwork/Elements?style=flat-square)
+![GitHub all releases](https://img.shields.io/github/downloads/JLDesignNetwork/Elements/total?style=flat-square)
 
-**JLDN : Elements** is a premium, lightweight client-side UI component engine powered by jQuery and SASS. It scans your markup at runtime, translating simple HTML elements into rich, animated components. 
+## Table of Contents
+- [Key Features](#key-features)
+- [Architecture & Performance](#architecture--performance)
+- [Installation](#installation)
+
+**JLDN : Elements** is a premium, lightweight client-side UI component engine powered by jQuery and SASS. It scans your markup at runtime, translating simple HTML elements into rich, animated components.
 
 The library features a sophisticated **multi-layer rendering architecture** that supports both flat modern styling and advanced 3D convex extrusion aesthetics with dynamic light-source casting.
 

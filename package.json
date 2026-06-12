@@ -1,6 +1,6 @@
 {
-    "name": "elements",
-    "version": "1.0.20",
+    "name": "jldn/elements",
+    "version": "1.0.21",
     "description": "",
     "main": "index.js",
     "scripts": {

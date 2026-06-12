@@ -2,3 +2,7 @@
 ._*
 **/._*
 *.css.map
+
+# Symlinked Agent Blueprints
+ANTIGRAVITY.md
+GOLD_STANDARD.md

@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.21] - 2026-06-12
+### Housekeeping
+- Applied **ANTIGRAVITY.md** and **GOLD_STANDARD.md** standardization blueprints (injected JSDoc versioning into `src/script.js` and `src/style.sass`, overhauled `README.md` badges to `flat-square`, updated `package.json` metadata, deleted `package-lock.json` in favor of `pnpm`, and untracked agent blueprints).
+
 ## [1.0.20] - 2026-06-11
 - Release v1.0.20
 - feat(animation): add support for pausing and speed variations on candy-stripes

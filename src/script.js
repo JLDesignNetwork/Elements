@@ -1,3 +1,7 @@
+/**
+ * @since 1.0.20
+ * @version 1.0.20
+ */
 import { registerElement } from './modules/core.js';
 import { JLMeter } from './modules/meter.js';
 import { JLButton } from './modules/button.js';
