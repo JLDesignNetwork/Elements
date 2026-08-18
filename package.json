@@ -1,28 +1,43 @@
 {
-    "name": "jldn/elements",
-    "version": "1.0.21",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "vite",
-        "build": "vite build",
-        "preinstall": "npx only-allow pnpm"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/JLDesignNetwork/Elements.git"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "type": "module",
-    "bugs": {
-        "url": "https://github.com/JLDesignNetwork/Elements/issues"
-    },
-    "homepage": "https://github.com/JLDesignNetwork/Elements#readme",
-    "devDependencies": {
-        "sass": "^1.100.0",
-        "vite": "^8.0.16"
-    }
+  "name": "@jldn/elements",
+  "version": "2412.2.0-s",
+  "description": "Modular, multi-layered customizable UI component suite with 28 themes.",
+  "main": "src/script.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preinstall": "pnpm dlx only-allow pnpm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JLDesignNetwork/Elements.git"
+  },
+  "keywords": [
+    "ui-components",
+    "design-system",
+    "css",
+    "javascript",
+    "sass",
+    "vite",
+    "buttons",
+    "meters",
+    "code-snippet",
+    "gvs",
+    "jldn"
+  ],
+  "author": "Jeff Langdon (JL Design Network) <jldesignnetwork@icloud.com>",
+  "contributors": [
+    "Jeffgl77"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JLDesignNetwork/Elements/issues"
+  },
+  "homepage": "https://github.com/JLDesignNetwork/Elements#readme",
+  "devDependencies": {
+    "sass": "^1.100.0",
+    "vite": "^8.0.16"
+  },
+  "packageManager": "pnpm@11.8.0"
 }

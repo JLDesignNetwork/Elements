@@ -1,0 +1,36 @@
+name: "Component Defect Report"
+description: "File a styling defect, animation bug, or rendering issue in JLDN Elements."
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a component defect in JLDN Elements!
+  - type: dropdown
+    id: module
+    attributes:
+      label: Affected Component Module
+      options:
+        - Button (button.js)
+        - Meter (meter.js)
+        - Code (code.js)
+        - Alert (alert.js)
+        - Popup (popup.js)
+        - Core / Loader (core.js)
+        - Themes (themes.sass)
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Defect Description
+      description: What is rendering incorrectly?
+    validations:
+      required: true
+  - type: textarea
+    id: sample
+    attributes:
+      label: HTML / JS Reproduction Code
+      description: Provide the code reproducing the issue.
+      render: html

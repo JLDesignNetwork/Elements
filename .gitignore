@@ -1,8 +1,33 @@
+# Operating System & Resource Fork Files
 .DS_Store
+.DS_Store?
 ._*
-**/._*
-*.css.map
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-# Symlinked Agent Blueprints
-ANTIGRAVITY.md
-GOLD_STANDARD.md
+# IDE & Editor Workspaces
+.cursor/
+.vscode/
+.idea/
+.junie/
+.nova/
+.zed/
+.ai/
+.antigravitycli/
+_[*]/
+
+# Ephemeral Scratch & Temporary Files
+.agents/scratch/*
+!.agents/scratch/.gitkeep
+scratch/
+tmp/
+*.tmp
+*.log*
+
+# Node & Build Artifacts
+node_modules/
+dist/
+build/
+.cache/

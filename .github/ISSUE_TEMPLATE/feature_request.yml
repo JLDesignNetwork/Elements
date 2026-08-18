@@ -1,0 +1,23 @@
+name: "Module / Theme Proposal"
+description: "Propose a new component module, theme palette, or API feature."
+title: "[PROPOSAL]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for submitting a proposal for JLDN Elements!
+  - type: textarea
+    id: problem
+    attributes:
+      label: Concept & Motivation
+      description: What visual effect or component requirement does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Detailed Proposal
+      description: Describe the proposed theme tokens, JavaScript API, or component structure.
+    validations:
+      required: true
