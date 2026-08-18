@@ -789,7 +789,7 @@ var t = class extends HTMLElement {
         <div class="stripe-layer"></div>
         <div class="alert-inner">
           <div class="content">
-            ${n ? `<span class="title">${n}</span>` : ""}
+            ${n ? `<span class="title">${n.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;")}</span>` : ""}
             <div class="message"><slot></slot></div>
           </div>
           ${r ? "<button class=\"close-btn\">&times;</button>" : ""}

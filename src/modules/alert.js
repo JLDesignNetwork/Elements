@@ -154,7 +154,7 @@ export class JLAlert extends HTMLElement {
         <div class="stripe-layer"></div>
         <div class="alert-inner">
           <div class="content">
-            ${title ? `<span class="title">${title}</span>` : ''}
+            ${title ? `<span class="title">${title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')}</span>` : ''}
             <div class="message"><slot></slot></div>
           </div>
           ${dismissible ? `<button class="close-btn">&times;</button>` : ''}
