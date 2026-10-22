@@ -37,7 +37,7 @@
   "homepage": "https://github.com/JLDesignNetwork/Elements#readme",
   "devDependencies": {
     "sass": "^1.100.0",
-    "vite": "^8.0.16"
+    "vite": "^8.1.6"
   },
   "packageManager": "pnpm@11.8.0"
 }
